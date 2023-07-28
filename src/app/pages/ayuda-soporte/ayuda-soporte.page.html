@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar [color]="color">
+    <ion-title>{{'SUPPORT.TITLE' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelar()">{{'SUPPORT.CANCEL' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card color="light">
+    <ion-card-header>      
+      <ion-card-title>{{'SUPPORT.SUBTITLE' | translate}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="soporteForm" (ngSubmit)="soporte()">
+        <ion-item color="light">          
+          <ion-select placeholder="{{'SUPPORT.TTPE' | translate}}" formControlName="tipo">
+            <ion-select-option value="Tipo 1">{{'SUPPORT.TYPE1' | translate}}</ion-select-option>
+            <ion-select-option value="Tipo 2">{{'SUPPORT.TYPE2' | translate}}</ion-select-option>
+            <ion-select-option value="Tipo 3">{{'SUPPORT.TYPE3' | translate}}</ion-select-option>
+            <ion-select-option value="Tipo 4">{{'SUPPORT.TYPE4' | translate}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item color="light">
+          <ion-input type="text" placeholder="{{'SUPPORT.SUBJECT' | translate}}" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label position="floating">{{'SUPPORT.MESSAGE' | translate}}</ion-label>
+          <ion-textarea formControlName="message"></ion-textarea>
+        </ion-item>
+        <ion-button block color="primary" type="submit" [disabled]="soporteForm.invalid">
+          {{'SUPPORT.SEND' | translate}}
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

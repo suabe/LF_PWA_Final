@@ -1,0 +1,40 @@
+<app-header titulo="{{'COMMISSIONS.TITLE' | translate}}" color="azul"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{'COMMISSIONS.CALLSTOTAL' | translate}}</ion-card-title>
+      <ion-card-subtitle>{{ totalComision/100 | currency: 'MXN' }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <!-- <ion-select #mes mode="ios" placeholder="Año" cancelText="Cancelar" interface="action-sheet" (ionChange) ="eligeMes(mes.value)">
+        <ion-select-option value="2020">2021</ion-select-option>
+        <ion-select-option value="2021">2022</ion-select-option>
+      </ion-select> -->
+    </ion-card-content>
+    <table class="table table-striped table-responsive">
+      <thead>
+        <tr>
+          <th>{{'COMMISSIONS.CALLSPERIOD' |translate}}</th>
+          <th>{{'COMMISSIONS.CALLSMONT' | translate}}</th>
+          <th>{{'COMMISSIONS.CALLSMINUTES' |translate}}</th>
+          <th>{{'COMMISSIONS.CALLSREALMIN' | translate}}</th>
+          <th>{{'COMMISSIONS.CALLSPAYS' | translate}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!hayComision">
+          <td colspan="5">{{'COMMISSIONS.NOCALLS' | translate}}</td>
+        </tr>
+        <tr *ngFor="let comission of comissions">
+          <td>{{comission.periodo.seconds*1000 | date}}</td>
+          <td>{{comission.calls}}</td>
+          <td>{{comission.calls*10}}</td>
+          <td>{{comission.minutes}}</td>
+          <td>{{comission.trasnsaccion.amount/100 | currency: 'MXN'}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+  </ion-card>
+</ion-content>

@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="naranja">
+    <ion-title>{{'INVOICE.TITLE' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelar()">{{'INVOICE.CANCEL' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-card color="light">
+    <ion-card-header>      
+      <ion-card-title>{{'INVOICE.TITLE' | translate}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="facturaForm" (ngSubmit)="factura()">
+        <ion-item color="ligth">
+          <ion-select multiple="false" placeholder="{{'INVOICE.PAYMENTS' | translate}}" mode="ios" interface="action-sheet" formControlName="pago">
+            <ion-select-option *ngFor="let pago of pagos" [value]="pago.id">
+              <!-- <p *ngIf="pago?.plan == 'price_1IiLcPFjLGC5FmHqDAZZskyw'">Fluency 10/3-{{'INVOICE.LANGUEAGE' | translate}}: {{pago.lang | uppercase}}-{{'INVOICE.AMOUNT' | translate}}: {{pago.pagado/100 | currency: 'MXN'}}</p>
+              <p *ngIf="pago?.plan == 'price_1IiLr3FjLGC5FmHq8Z2z8pnq'">+Fluency-{{'INVOICE.LANGUEAGE' | translate}}: {{pago.lang | uppercase}}-{{'INVOICE.AMOUNT' | translate}}:{{pago.pagado/100 | currency: 'MXN'}}</p> -->
+              <p>{{pago.type}}-{{'INVOICE.LANGUEAGE' | translate}}: {{pago.lang | uppercase}}-{{'INVOICE.AMOUNT' | translate}}:{{pago.pagado/100 | currency: 'MXN'}}</p>
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item color="light">
+          <ion-input type="text" placeholder="{{'INVOICE.RASONSOCIAL' | translate}}" formControlName="name"></ion-input>
+        </ion-item>
+        <ion-item color="light">
+          <ion-input formControlName="rfc" type="text" placeholder="{{'INVOICE.RFC' | translate}}"></ion-input>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label position="floating">{{'INVOICE.ADDRESS' | translate}}</ion-label>
+          <ion-textarea formControlName="address"></ion-textarea>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label position="floating">{{'INVOICE.EMAIL' | translate}}</ion-label>
+          <ion-textarea formControlName="email"></ion-textarea>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label position="floating">{{'INVOICE.MESSAGE' | translate}}</ion-label>
+          <ion-textarea formControlName="message"></ion-textarea>
+        </ion-item>
+        <ion-button block color="primary" type="submit" [disabled]="facturaForm.invalid">
+          {{'INVOICE.SEND' | translate}}
+        </ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,13 @@
+<ion-list>
+  <ion-item *ngFor="let item of items; let  i = index;"
+            (click)="onClick(i+1)"
+            >
+            <ion-thumbnail slot="start">
+              <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+            </ion-thumbnail>
+    <ion-label>
+      <h2>Notificación {{ i + 1 }}</h2>
+      <p>2 hrs</p>
+    </ion-label>
+  </ion-item>
+</ion-list>

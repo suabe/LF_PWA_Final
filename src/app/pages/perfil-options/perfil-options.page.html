@@ -1,0 +1,80 @@
+<ion-header class="ion-no-border"  translucent>
+  <ion-toolbar [color]="color">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">{{'PERFIL.TITLE' | translate}}</ion-title>
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="vertical-padding">
+      
+    <ion-grid fixed>
+      <ion-row>
+        <!-- <ion-col size="8" class="ion-no-padding position-relative">
+          <div class="ion-text-left">
+            <p>{{'PERFIL.HELLO' | translate}}</p>
+            <h4>{{userPerfil?.name}} {{userPerfil?.lastName}}</h4>
+          </div>         
+        </ion-col> -->
+        <ion-col size="4" offset="4">   
+          <div class="profileImg">                        
+            <div *ngIf="userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(' + userPerfil?.foto + ')'}" ></div>
+            <div *ngIf="!userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(/assets/boy.png)'}"></div>
+          </div>
+        </ion-col>
+        <!-- <ion-col size="4" class="ion-no-padding position-relative">
+          <ion-button fill="clear" class="button-vertical-align button-right">
+            <ion-icon slot="icon-only" name="call"></ion-icon>
+          </ion-button> 
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+  
+  </div>
+  <ion-list mode="ios" id="listaMenu" *ngIf="_user.dataUser.role === 'conversador'">
+    <!-- <ion-item routerLink="/perfil-bank">
+      <ion-label>Editar Cuenta Bancaria</ion-label>
+    </ion-item> -->
+    <ion-item detail="false"  routerLink="/perfil-password">
+      <ion-label>{{'PERFIL.EDITPWS' | translate}}</ion-label>
+    </ion-item>
+    <ion-item button detail="false" (click)="editarPerfil()">
+      <ion-label>{{'PERFIL.EDITPERFIL' | translate}}</ion-label>
+    </ion-item>
+    <!-- <ion-item detail="false" routerLink="/perfil-suspend">
+      <ion-label>{{'PERFIL.SUSPEND' | translate}}</ion-label>
+    </ion-item>
+    <ion-item detail="false" routerLink="/perfil-delete">
+      <ion-label>{{'PERFIL.CANCELED' | translate}}</ion-label>
+    </ion-item> -->
+  </ion-list>
+  <ion-list mode="ios" id="listaMenuImp" *ngIf="_user.dataUser.role === 'cliente'">
+    <!-- <ion-item routerLink="/perfil-bank">
+      <ion-label>Editar Cuenta Bancaria</ion-label>
+    </ion-item> -->
+    <ion-item detail="false"  routerLink="/perfil-password">
+      <ion-label>{{'PERFIL.EDITPWS' | translate}}</ion-label>
+    </ion-item>
+    <ion-item button detail="false" (click)="editarPerfil()">
+      <ion-label>{{'PERFIL.EDITPERFIL' | translate}}</ion-label>
+    </ion-item>
+    <!-- <ion-item detail="false" routerLink="/perfil-suspend">
+      <ion-label>{{'PERFIL.SUSPEND' | translate}}</ion-label>
+    </ion-item>
+    <ion-item detail="false" routerLink="/perfil-delete">
+      <ion-label>{{'PERFIL.CANCELED' | translate}}</ion-label>
+    </ion-item> -->
+  </ion-list>
+</ion-content>
+<ion-footer >
+  <ion-toolbar [color]="color">
+    <ion-buttons slot="end">
+      <ion-button (click)="chageAcount($event)">
+        <ion-icon slot="icon-only" ios="ellipsis-vertical" md="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

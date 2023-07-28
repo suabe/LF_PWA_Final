@@ -1,0 +1,139 @@
+<ion-header class="ion-no-border"  translucent>
+  <ion-toolbar [color]="color">
+    
+    <ion-title class="ion-text-capitalize">{{'EDITPERFIL.TITLE' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">{{'EDITPERFIL.CLOSE' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+  <ion-grid fixed>
+    <ion-row class="ion-padding">
+      <ion-col size="12" *ngIf="_user.dataUser.role === 'conversador'">
+        <form [formGroup]="registroForm" (ngSubmit)="actualizaSP()" novalidate>
+          <ion-item color="light">
+            <ion-icon slot="start" name="person-outline" color="azul"></ion-icon>
+            <!-- <ion-label >Nombre</ion-label> -->
+            <ion-input type="text" [placeholder]="'REGISTRO.NOMBRE' | translate" [formControl]="$any(registroForm).controls.name" required></ion-input>
+          </ion-item>
+          <ion-item color="light">
+            <ion-icon slot="start" name="person-add-outline" color="azul"></ion-icon>
+            <!-- <ion-label >Apellidos</ion-label> -->
+            <ion-input type="text" [placeholder]="'REGISTRO.APELLIDOS' | translate" [formControl]="$any(registroForm).controls.lastName" required></ion-input>
+          </ion-item>
+          <ion-item color="light">
+            <ion-icon slot="start" name="male-female-outline" color="azul"></ion-icon>
+            <!-- <ion-label>Género</ion-label> -->
+            <ion-select cancelText="Cancelar" multiple="false" [placeholder]="'REGISTRO.GENERO' | translate" interface="action-sheet" [formControl]="$any(registroForm).controls.gender" required>
+              <ion-select-option value="hombre">{{'REGISTRO.GENDERMALE' | translate}}</ion-select-option>
+              <ion-select-option value="mujer">{{'REGISTRO.GENDERFEMALE' | translate}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item color="light">
+            <ion-icon slot="start" name="calendar-outline" color="azul" ngbTooltip="{{'REGISTRO.CUMPLEANOS' | translate}}" placement="end"></ion-icon>
+            <input
+              type="date"
+              [formControl]="$any(registroForm).controls.birthDate"
+              required="required" 
+            />
+            <span></span>
+            <!-- <ion-label >Cumpleaños</ion-label> -->
+            <!-- <ion-datetime placeholder="Cumpleaños" display-format="YYYY-MMMM-DD" cancelText="Cancelar" done-text="Elegir" mode="ios" min="1970" max="2010" [formControl]="$any(registroForm).controls.birthDate" required></ion-datetime> -->
+          </ion-item>
+          <!-- <ion-item color="light">
+            <ion-icon slot="start" name="mail-outline" color="azul"></ion-icon>            
+            <ion-input placeholder="E-mail" type="text" [formControl]="$any(registroForm).controls.email"></ion-input>
+          </ion-item> -->
+          <ion-item id="" color="light">
+            <ion-icon slot="start" name="male-female-outline" color="azul"></ion-icon>
+            <!-- <ion-label>Idioma</ion-label> -->
+            <ion-select cancelText="Cancelar" multiple="true" [placeholder]="'REGISTRO.IDIOMAS' | translate" interface="action-sheet" [formControl]="$any(registroForm).controls.idioma" required>
+              <ion-select-option value="es">Español</ion-select-option>
+              <ion-select-option value="en">Ingles</ion-select-option>
+              <ion-select-option value="fr">Frances</ion-select-option>
+              <ion-select-option value="cn">Chino</ion-select-option>
+            </ion-select>
+          </ion-item>          
+          <ion-item color="light">
+            <ion-icon slot="start" name="call-outline" color="azul"></ion-icon>
+            <!-- <ion-label >Teléfono</ion-label> -->
+            <ion-intl-tel-input    
+              [formControl]="$any(registroForm).controls.phone" >
+            </ion-intl-tel-input>
+          </ion-item>
+          
+          
+      
+      
+          <ion-row>
+            <ion-col>
+            <ion-button type="submit"  expand="block" [disabled]="registroForm.invalid">{{'EDITPERFIL.BUTTON' | translate}}</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+      <ion-col size="12" *ngIf="_user.dataUser.role === 'cliente'"> 
+        <form [formGroup]="improForm" (ngSubmit)="actualiza()" novalidate>
+          <ion-item color="light">
+                <ion-icon slot="start" name="person-outline" color="naranja"></ion-icon>
+                <!-- <ion-label >Nombre</ion-label> -->
+                <ion-input type="text" [placeholder]="'REGISTRO.NOMBRE' | translate" [formControl]="$any(improForm).controls.name"></ion-input>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="start" name="person-add-outline" color="naranja"></ion-icon>
+                <!-- <ion-label >Apellidos</ion-label> -->
+                <ion-input type="text" [placeholder]="'REGISTRO.APELLIDOS' | translate" [formControl]="$any(improForm).controls.lastName"></ion-input>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="start" name="male-female-outline" color="naranja"></ion-icon>
+                <!-- <ion-label>Género</ion-label> -->
+                <ion-select cancelText="Cancelar" multiple="false" [placeholder]="'REGISTRO.GENERO' | translate" interface="action-sheet" [formControl]="$any(improForm).controls.gender">
+                  <ion-select-option value="hombre">{{'REGISTRO.GENDERMALE' | translate}}</ion-select-option>
+                  <ion-select-option value="mujer">{{'REGISTRO.GENDERFEMALE' | translate}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="start" name="calendar-outline" color="naranja" ngbTooltip="{{'REGISTRO.CUMPLEANOS' | translate}}" placement="end"></ion-icon>
+                <input
+                  type="date"
+                  [formControl]="$any(improForm).controls.birthDate"
+                  required="required"
+                />
+                <span [attr.your-custom]="'EDITPERFIL.DATEPLACEHOLDER' | translate"></span>
+                <!-- <ion-label >Cumpleaños</ion-label> -->
+                <!-- <ion-datetime placeholder="Cumpleaños" display-format="YYYY-MMMM-DD" cancelText="Cancelar" done-text="Elegir" mode="ios" min="1970" max="2010" [formControl]="$any(improForm).controls.birthDate"></ion-datetime> -->
+              </ion-item>
+
+              <ion-item color="light">
+                <ion-icon slot="start" name="call-outline" color="naranja"></ion-icon>
+                <!-- <ion-label >Teléfono</ion-label> -->
+                <ion-intl-tel-input    
+                  [formControl]="$any(improForm).controls.phone" >
+                </ion-intl-tel-input>
+              </ion-item>
+
+              <ion-item color="light">
+                <ion-icon slot="start" name="id-card-outline" color="naranja" ngbTooltip="{{'REGISTRO.INTERESES' | translate}}" placement="end"></ion-icon>
+                <ion-textarea [placeholder]="'REGISTRO.INTERESES' | translate" inputmode="text" [formControl]="$any(improForm).controls.bio"></ion-textarea>
+              </ion-item>
+
+              <ion-item color="light">
+                <ion-icon slot="start" name="time-outline" color="naranja"></ion-icon>
+                <ng-moment-timezone-picker class="timeZone" customPlaceholderText="Select TimeZone" [config]="timezoneConfig" [formControl]="$any(improForm).controls.timezone">
+                </ng-moment-timezone-picker>
+              </ion-item>
+              
+              
+              <ion-row>
+                <ion-col>
+                <ion-button type="submit"  expand="block" color="naranja" [disabled]="improForm.invalid">{{'EDITPERFIL.BUTTON' | translate}}</ion-button>
+                </ion-col>
+              </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-content>

@@ -1,0 +1,195 @@
+<app-header titulo="{{'HELP.TITLE' | translate}}" [color]="color"></app-header>
+
+<ion-content class="ion-padding">
+  
+    <ngb-accordion  [closeOthers]="true" >
+        <ngb-panel title="{{'HELP.FAQ' | translate}}" color="naranja">
+          <ng-template ngbPanelContent>
+            <ngb-accordion [closeOthers]="true" >
+              <ngb-panel *ngFor="let faq of questions" title="{{faq.question}}" >
+                <ng-template ngbPanelContent>
+                  <div [innerHTML]="faq.answer"></div>                    
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+
+          </ng-template>
+          
+          
+          <ng-template ngbPanelContent *ngIf="current == 'fr'">
+            <ngb-accordion [closeOthers]="true">
+              <ngb-panel title="¿Quien es LF?">
+                <ng-template ngbPanelContent>
+                  <p>Language Fluency es una plataforma tecnológica que te permite conversar en distintos idiomas con personas de todo el mundo. ¡Lo más importante es que lo único que tienes que hacer es hablar!</p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Que es un IMPROVER?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Hablas otro idioma pero no lo dominas o necesitas práctica? El IMPROVER aprovecha su tiempo libre y mejoras sus habilidades conversando. ¡REGISTRATE!
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Que es un SPEAKER?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Dominas un idioma y quieres ganar dinero mientras hablas? EL SPEAKER solo tiene que conversar para ganar dinero ¡REGISTRATE COMO SPEAKER LF!
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Como funciona?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Te registras y comienzas a hablar, así de fácil.<br>
+                    IMROVER – Regístrate, realiza tu pago y comienza a recibir llamadas<br>
+                    SPEAKER – Regístrate, espera por tu entrevista, recibes tu aprobación LF y comienza a llamar a los IMPROVERS para empezar a generar dinero<br>                  
+                    ** Si eres usuario, pídele a tus amigos que cuando se registren incluyan tu número LF y así de simple ganas dinero
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Con LF puedo aprender un nuevo idioma?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    LF no es una escuela de idiomas. Es una plataforma diseñada para mejorar, practicar y mantener tu conversación en cualquier idioma de tu elección.
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Que idiomas puedo practicar?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    En este momento puedes practicar Ingles, Español, Francés y Mandarín.
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Que nivel necesito para empezar a practicar un idioma?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Solo necesitas conocer el idioma a un nivel en el que puedas empezar a conversar.
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Cuanto idiomas puedo practicar al mismo tiempo en LF?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Todos los que están incluidos en LF
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Puedo elegir el horario que quiera?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Se elige el horario de tu preferencia y LF intentará marcarte siempre en ese horario, esto no quiere decir que LF no te pueda marcar en otro horario
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Como me puedo inscribir?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Solo ingresa a la plataforma y regístrate es muy sencillo. <br>
+                    Pulsa en el botón registro, llena el formulario y listo.
+                  </p>                  
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Todos los profesores son Nativos?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    En LF nos encanta la autenticidad, por lo tanto fomentamos que SPEAKERS e IMPROVERS sean de cualquier nacionalidad, sexo, nivel social, edad, raza, etc. Con esto nos lleva a buscar una diversidad social y originadora de libertad y bienestar al saber que todos pueden realizar las mismas actividades.
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Como puedo ganar dinero?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Regístrate como SPEAKER y realiza llamadas para generar dinero. <br>
+                    Refiere a un amigo y recibe dinero cada vez que éste realice sus pagos.
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Cuantos referidos puedo tener?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Es ilimitado, refiera a tantos como puedas.
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Quien puede ser IMPROVER?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Todo aquel que quiera practicar un idioma
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Quien puede ser un SPEAKER?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Todo aquel que domine un idioma y quiera generar ganancias conversando.
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Existe alguna edad límite para inscribirse?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    ¡NO existe un limite! <br>
+                    En LF nos encanta la autenticidad, por lo tanto, fomentamos que SPEAKERS e IMPROVERS sean de cualquier nacionalidad, sexo, nivel social, edad, raza, etc. Esto nos lleva a tener una diversidad social originadora de liberta y bienestar al saber que todos pueden realizar las mismas actividades.
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Puedo pagar con diferentes tarjetas de crédito?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Si, cada idioma se puede pagar con diferente tarjeta
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Como descargo mis llamadas?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    Solo entra a tu perfil en la sección de llamadas y descargarlas
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <ngb-panel title="¿Cuanto tiempo están mis llamadas en mi perfil?">
+                <ng-template ngbPanelContent>
+                  <p>
+                    1 mes
+                  </p>
+                </ng-template>                
+              </ngb-panel>
+              <!-- <ngb-panel title="Inside">
+                <ng-template ngbPanelContent>
+                  <p>
+                    
+                  </p>
+                </ng-template>                
+              </ngb-panel> -->
+            </ngb-accordion>
+                         
+          </ng-template>
+          
+        </ngb-panel>
+        
+        <ngb-panel title="{{'HELP.SUPPORT' | translate}}">
+          <ng-template ngbPanelContent>
+            <p>{{'HELP.SUPLABEL' | translate}}</p>
+            <ion-button (click)="soporte()" expand="block" [color]="color">
+              {{'HELP.SUPBUTTON' | translate}}
+            </ion-button>
+          </ng-template>
+        </ngb-panel>
+
+        <ngb-panel title="{{'HELP.INVOICE' | translate}}" *ngIf="_user.dataUser.role === 'cliente'">
+          <ng-template ngbPanelContent *ngIf="hayPagos">
+            <p>{{'HELP.INVLABEL' | translate}}</p>
+            <ion-button (click)="factura()" expand="block" [color]="color">
+              {{'HELP.INVBUTTON' | translate}}
+            </ion-button>
+          </ng-template>
+          <ng-template ngbPanelContent *ngIf="!hayPagos" >
+            <p>{{'HELP.NOPAGOS' | translate}}</p>
+            <ion-button  expand="block" [color]="color">
+              {{'HELP.NOPAGOSBUTTON' | translate}}
+            </ion-button>
+          </ng-template>            
+        </ngb-panel>        
+    </ngb-accordion>
+</ion-content>

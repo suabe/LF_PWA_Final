@@ -1,0 +1,30 @@
+ion-item {
+    border-radius: 30px;
+    margin-bottom: 5px;
+}
+
+
+input {
+    color: #000;
+    background: transparent;
+    border:none;
+}
+input[type=date]:invalid+span:after {
+    content: attr(your-custom);
+    position:absolute;
+    left:5px;
+    top:10px;
+    color: #7a7b7c;
+  }
+  
+  input[type=date]:focus:invalid+span:after {
+    display:none;
+  }
+  
+  input:not(:focus):invalid {
+    color:transparent;
+  }
+  
+  label.wrapper {
+      position:relative;
+  }

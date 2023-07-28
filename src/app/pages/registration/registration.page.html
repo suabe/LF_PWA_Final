@@ -1,0 +1,657 @@
+<ion-header>
+  <ion-toolbar [color]="fillUser">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"><ion-icon slot="icon-only" name="add"></ion-icon></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{"REGISTRO.TITLE" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [scrollEvents]="true">
+  <ion-slides mode="ios" scrollbar="ios" class="mainSlide" #sliderRegistro>
+    <ion-slide > <!--Seleccion de registro-->
+      <ion-grid>
+        <ion-row >
+          <ion-col size="12" size-lg="3" size-md="4" size-sm="6" offset-md="4">
+            <ion-item color="darck" lines="none">
+              <ion-img src="/assets/logo-login.png"></ion-img>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-padding">          
+          <ion-col size="12" size-lg="3" size-md="4" size-sm="6" offsetMd="4">
+            <ion-row>
+              <ion-col><h2 class="ion-text-center">{{"REGISTRO.SUBTITLE" | translate}}</h2></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-button routerLink="/registro-improver"  expand="block"  shape="round" color="naranja">
+                  {{"REGISTRO.COOMOIMPROVER" | translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                <ion-button routerLink="/registro-speaker"  expand="block"  shape="round" color="azul">
+                  {{"REGISTRO.COMOSPEAKER" | translate}}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide><!--Registro Cliente-->
+      <ion-grid>
+        <ion-row class="ion-padding">
+          <ion-col size="6" offset="3" size-lg="3" size-md="4" size-sm="6" offset-md="4">
+            <ion-img src="/assets/logo-login.png"></ion-img>
+          </ion-col>
+          <ion-col size="12" size-lg="4" size-md="6" size-sm="6" offsetMd="3" offsetLg="4">
+            <form [formGroup]="registroForm" (ngSubmit)="registro('cliente')" novalidate>
+              <aw-wizard navBarLocation="bottom">
+                <aw-wizard-step stepTitle="" [canExit]="registroForm.valid">
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="person-outline" color="naranja" ngbTooltip="{{'REGISTRO.NOMBRE' | translate}}" placement="end"></ion-icon>
+                    <!-- <ion-label >Nombre</ion-label> -->
+                    <ion-input type="text" [placeholder]="'REGISTRO.NOMBRE' | translate" [formControl]="$any(registroForm).controls.name"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!registroForm.controls.name.valid && registroForm.controls.name.dirty">
+                    <ion-label color="danger">{{'REGISTRO.NOMBRE' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="person-add-outline" color="naranja"></ion-icon>
+                    <!-- <ion-label >Apellidos</ion-label> -->
+                    <ion-input type="text" [placeholder]="'REGISTRO.APELLIDOS' | translate" [formControl]="$any(registroForm).controls.lastName"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!registroForm.controls.lastName.valid && registroForm.controls.lastName.dirty">
+                    <ion-label color="danger">{{'REGISTRO.APELLIDOS' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="male-female-outline" color="naranja"></ion-icon>
+                    <!-- <ion-label>Género</ion-label> -->
+                    <ion-select cancelText="{{'REGISTRO.GENDERCANCEL' | translate}}" multiple="false" [placeholder]="'REGISTRO.GENERO' | translate" interface="action-sheet" [formControl]="$any(registroForm).controls.gender">
+                      <ion-select-option value="hombre">{{'REGISTRO.GENDERMALE' | translate}}</ion-select-option>
+                      <ion-select-option value="mujer">{{'REGISTRO.GENDERFEMALE' | translate}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item *ngIf="!registroForm.controls.gender.valid && registroForm.controls.gender.touched">
+                    <ion-label color="danger">{{'REGISTRO.GENERO' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="calendar-outline" color="naranja"  ngbTooltip="{{'REGISTRO.CUMPLEANOS' | translate}}" placement="end"></ion-icon>
+                    <!-- <ion-label >Cumpleaños</ion-label> -->
+                    <input
+                      type="date"
+                      [formControl]="$any(registroForm).controls.birthDate"
+                      required="required" 
+                    />
+                    <span [attr.your-custom]="'REGISTRO.DATEPLACEHOLDER' | translate"></span>
+                  </ion-item>
+                  <!-- <ion-item>
+                    <input class="form-control" placeholder="dd-mm-yyyy" name="dp"  [formControl]="$any(registroForm).controls.birthDate" ngbDatepicker #d="ngbDatepicker">
+                    <ion-button (click)="d.toggle()" color="light">
+                      <ion-icon name="calendar-outline" color="naranja"></ion-icon>
+                    </ion-button>
+                    <ion-datetime mode="ios" [placeholder]="'REGISTRO.CUMPLEANOS'| translate" display-format="YYYY-MMMM-DD" cancelText="{{'REGISTRO.BIRTHCANCEL' | translate}}" doneText="{{'REGISTRO.BIRTHDONE' | translate}}" min="1950" max="2010" [formControl]="$any(registroForm).controls.birthDate"></ion-datetime>
+                  </ion-item> -->
+                  <ion-item *ngIf="!registroForm.controls.birthDate.valid && registroForm.controls.birthDate.touched">
+                    <ion-label color="danger">{{'REGISTRO.CUMPLEANOS' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="call-outline" color="naranja"></ion-icon>
+                    <!-- <ion-label >Teléfono</ion-label> -->
+                    <ion-intl-tel-input
+                    
+                      [formControl]="$any(registroForm).controls.phone" >
+                    </ion-intl-tel-input>
+                    <!-- <input type="tel" ionicTelInput [ionicTelInputOptions]="{initialCountry: 'mx',onlyCountries:['mx','ar','us','ca','du','fr','es']}"
+                    (countryChange)="onCountryChange($event)"
+                    (intlTelInputObject)="telInputObject($event)"
+                    (hasError)="hasError($event)"
+                    (ionicTelOutput)="getNumber($event)"
+                    [placeholder]="'REGISTRO.TELEFONO' | translate" name="registroForm" 
+                    [formControl]="$any(registroForm).controls.phone"> -->
+                  </ion-item>
+                  <ion-item *ngIf="!registroForm.controls.phone.valid && registroForm.controls.phone.touched">
+                    <ion-label color="danger" *ngIf="!registroForm.controls.phone.errors.reqired">{{'REGISTRO.TELEFONO' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="id-card-outline" color="naranja" ngbTooltip="{{'REGISTRO.INTERESES' | translate}}" placement="end"></ion-icon>
+                    <ion-textarea [placeholder]="'REGISTRO.INTERESES' | translate" inputmode="text" [formControl]="$any(registroForm).controls.bio"></ion-textarea>
+                  </ion-item>
+                  <ion-item *ngIf="!registroForm.controls.bio.valid && registroForm.controls.bio.dirty">
+                    <ion-label color="danger">{{'REGISTRO.INTERESES' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="mail-outline" color="naranja"></ion-icon>
+                    <!-- <ion-label >Email</ion-label> -->
+                    <ion-input [placeholder]="'REGISTRO.EMAIL' | translate" type="email" [formControl]="$any(registroForm).controls.email"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!registroForm.controls.email.valid && registroForm.controls.email.dirty">
+                    <ion-label color="danger">{{'REGISTRO.EMAIL' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="key-outline" color="naranja"></ion-icon>
+                    <!-- <ion-label >Contraseña</ion-label> -->
+                    <ion-input [placeholder]="'REGISTRO.CONTRASENA' | translate" type="password" [formControl]="$any(registroForm).controls.password"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!registroForm.controls.password.valid && registroForm.controls.password.dirty">
+                    <!-- <ion-label color="danger" *ngIf="!registroForm.controls.password.errors.reqired">{{'REGISTRO.CONTRASENA' | translate}} is required</ion-label> -->
+                    <ion-label color="danger" *ngIf="!registroForm.controls.password.errors.minLength">{{'REGISTRO.CONTRASENA' | translate}} minimum of 6 characters</ion-label>
+                  </ion-item>
+                  <ion-item (click)="openModal(term)" color="light" class="ion-margin-top item-term" >
+                    <ion-label>{{'ADDPLANS.TERMCONDI' |  translate}}</ion-label>
+                    <ion-checkbox  formControlName="termCond" ></ion-checkbox>
+                  </ion-item>
+                  <ion-item (click)="openModal(priv)" color="light" class="item-term" >
+                    <ion-label>{{'ADDPLANS.PRIVACY' |  translate}}</ion-label>
+                    <ion-checkbox  formControlName="privacidad" ></ion-checkbox>
+                  </ion-item>
+
+                  <ion-button (click)="mostraMenu()" color="danger">
+                    {{"REGISTRO.CANCELAR" | translate}}
+                  </ion-button>
+                  <!-- <ion-button  awNextStep>
+                    {{"REGISTRO.SIGUIENTE" | translate}}
+                  </ion-button> -->
+                  <ion-button type="submit"  [disabled]="registroForm.invalid">{{"REGISTRO.REGISTRAR" | translate}}</ion-button>
+                </aw-wizard-step>
+                <!-- <aw-wizard-step stepTitle="">
+                  <ion-label color="naranja" class="titulo">Preferencia de horario</ion-label>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="time-outline" color="naranja"></ion-icon>                     
+                    <ion-datetime placeholder="De" display-format="HH:mm" cancelText="Cancelar" done-text="Elegir" mode="ios" [formControl]="$any(registroForm).controls.horario" required></ion-datetime>
+                    <ion-datetime slot="end" placeholder="Hasta" display-format="HH:mm" cancelText="Cancelar" done-text="Elegir" mode="ios" [formControl]="$any(registroForm).controls.horario2" required></ion-datetime>
+                  </ion-item>
+                  <ion-label >"El horario introducido nos servirá como una referencia, las llamadas pueden ocurrir fuera de su preferencia."</ion-label><br><br>
+                  <ion-label class="ion-margin-bottom titulo" color="naranja" >{{"REGISTRO.LABELREFERIDO" | translate}}</ion-label>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="people-circle-outline" color="naranja"></ion-icon>
+                    <ion-label >Nombre</ion-label>
+                    <ion-input type="text" [placeholder]="'REGISTRO.REFERIDO' | translate" [formControl]="$any(registroForm).controls.idref"></ion-input>
+                  </ion-item>
+                  <ion-item (click)="openModal(term)" class="ion-margin-top">
+                    <ion-label>Acepto términos y condiciones</ion-label>
+                    <ion-checkbox checked="true"  [formControl]="$any(registroForm).controls.termCond"></ion-checkbox>
+                  </ion-item>
+                  <ion-item (click)="openModal(priv)">
+                    <ion-label>He leído el aviso de privacidad</ion-label>
+                    <ion-checkbox checked="true"  [formControl]="$any(registroForm).controls.privacidad"></ion-checkbox>
+                  </ion-item>
+                  <ion-row>
+                    <ion-col>
+                      <ion-button color="naranja" awPreviousStep>
+                        {{"REGISTRO.REGRESAR" | translate}}
+                      </ion-button>
+                    </ion-col>
+                    <ion-col>
+                      <ion-button type="submit"  [disabled]="registroForm.invalid">{{"REGISTRO.REGISTRAR" | translate}}</ion-button>
+                    </ion-col>
+                  </ion-row>
+                </aw-wizard-step> -->
+                
+              </aw-wizard>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+    <ion-slide><!--Registro Conversador-->
+      <ion-grid>
+        <ion-row class="ion-padding">
+          <ion-col size="6" offset="3" size-lg="3" size-md="4" size-sm="6" offset-md="4">
+            <ion-img src="/assets/logo-login.png"></ion-img>
+          </ion-col>
+          <ion-col size="12" size-lg="4" size-md="6" size-sm="6" offsetMd="3" offsetLg="4">
+            <form [formGroup]="registroSPForm" (ngSubmit)="registroSpeaker()" novalidate>
+              <aw-wizard navBarLocation="bottom">
+                <aw-wizard-step stepTitle="{{'REGISTRO.DATASTEP' | translate}}">
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="person-outline" color="azul"></ion-icon>
+                    <!-- <ion-label >Nombre</ion-label> -->
+                    <ion-input type="text" [placeholder]="'REGISTRO.NOMBRE' | translate" [formControl]="$any(registroSPForm).controls.name" required></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!registroSPForm.controls.name.valid && registroSPForm.controls.name.dirty">
+                    <ion-label color="danger">{{'REGISTRO.NOMBRE' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="person-add-outline" color="azul"></ion-icon>
+                    <!-- <ion-label >Apellidos</ion-label> -->
+                    <ion-input type="text" [placeholder]="'REGISTRO.APELLIDOS' | translate" [formControl]="$any(registroSPForm).controls.lastName" required></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!registroSPForm.controls.lastName.valid && registroSPForm.controls.lastName.dirty">
+                    <ion-label color="danger">{{'REGISTRO.APELLIDOS' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="male-female-outline" color="azul"></ion-icon>
+                    <!-- <ion-label>Género</ion-label> -->
+                    <ion-select cancelText="{{'REGISTRO.GENDERCANCEL' | translate}}" multiple="false" [placeholder]="'REGISTRO.GENERO' | translate" interface="action-sheet" [formControl]="$any(registroSPForm).controls.gender" required>
+                      <ion-select-option value="hombre">{{'REGISTRO.GENDERMALE' | translate}}</ion-select-option>
+                      <ion-select-option value="mujer">{{'REGISTRO.GENDERFEMALE' | translate}}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item *ngIf="!registroSPForm.controls.gender.valid && registroSPForm.controls.gender.touched">
+                    <ion-label color="danger">{{'REGISTRO.GENERO' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="calendar-outline" color="azul" ngbTooltip="{{'REGISTRO.CUMPLEANOS' | translate}}" placement="end"></ion-icon>
+                    <!-- <ion-label >Cumpleaños</ion-label> -->
+                    <input
+                      type="date"
+                      [formControl]="$any(registroSPForm).controls.birthDate"
+                      required="required" 
+                    />
+                    <span [attr.your-custom]="'REGISTRO.DATEPLACEHOLDER' | translate"></span>
+                    <!-- <ion-datetime  [placeholder]="'REGISTRO.CUMPLEANOS' | translate" display-format="YYYY-MMMM-DD" cancelText="{{'REGISTRO.BIRTHCANCEL' | translate}}" doneText="{{'REGISTRO.BIRTHDONE' | translate}}"  mode="ios" min="1970" max="2010" [formControl]="$any(registroSPForm).controls.birthDate" required></ion-datetime> -->
+                  </ion-item>
+                  <ion-item *ngIf="!registroSPForm.controls.birthDate.valid && registroSPForm.controls.birthDate.touched">
+                    <ion-label color="danger">{{'REGISTRO.CUMPLEANOS' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="mail-outline" color="azul"></ion-icon>
+                    <!-- <ion-label >Email</ion-label> -->
+                    <ion-input [placeholder]="'REGISTRO.EMAIL' | translate" type="text" [formControl]="$any(registroSPForm).controls.email"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!registroSPForm.controls.email.valid && registroSPForm.controls.email.dirty">
+                    <ion-label color="danger">{{'REGISTRO.EMAIL' | translate}} is required</ion-label>
+                  </ion-item>
+                  <!-- <ion-item color="light">
+                    <ion-icon slot="start" name="id-card-outline" color="azul"></ion-icon>
+                    <ion-textarea placeholder="Mis intereses" inputmode="text" [formControl]="$any(registroSPForm).controls.bio"></ion-textarea>
+                  </ion-item> -->
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="call-outline" color="azul"></ion-icon>
+                    <!-- <ion-label >Teléfono</ion-label> -->
+                    <ion-intl-tel-input 
+                      formControlName="phone" >
+                    </ion-intl-tel-input>
+                    <!-- <input type="tel" ionicTelInput [ionicTelInputOptions]="{initialCountry: 'mx',onlyCountries:['mx','ar','us','ca','du','fr','es']}"
+                    (countryChange)="onCountryChange($event)"
+                    (intlTelInputObject)="telInputObject($event)"
+                    (hasError)="hasError($event)"
+                    (ionicTelOutput)="getNumber($event)"
+                    [placeholder]="'REGISTRO.TELEFONO' | translate" name="registroSPForm" [formControl]="$any(registroSPForm).controls.phone" required> -->
+                  </ion-item>
+                  <ion-item *ngIf="!registroSPForm.controls.phone.valid && registroSPForm.controls.phone.touched">
+                    <ion-label color="danger" *ngIf="!registroSPForm.controls.phone.errors.reqired">{{'REGISTRO.TELEFONO' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item color="light">
+                    <ion-icon slot="start" name="key-outline" color="azul"></ion-icon>
+                    <!-- <ion-label >Contraseña</ion-label> -->
+                    <ion-input [placeholder]="'REGISTRO.CONTRASENA' | translate" type="password" [formControl]="$any(registroSPForm).controls.password"></ion-input>
+                  </ion-item>
+                  <ion-item *ngIf="!registroSPForm.controls.password.valid && registroSPForm.controls.password.dirty">
+                    <!-- <ion-label color="danger" *ngIf="!registroSPForm.controls.password.errors.reqired">{{'REGISTRO.CONTRASENA' | translate}} is required</ion-label> -->
+                    <ion-label color="danger" *ngIf="!registroSPForm.controls.password.errors.minLength">{{'REGISTRO.CONTRASENA' | translate}} minimum of 6 characters</ion-label>
+                  </ion-item>
+                  <!-- <ion-item color="light">
+                    <ion-icon slot="start" name="card-outline" color="naranja"></ion-icon>
+                     <ion-label >Apellidos</ion-label>
+                    <ion-input type="text" placeholder="SPEI" [formControl]="$any(registroSPForm).controls.spei" required></ion-input>
+                  </ion-item> -->
+                  <!-- <button type="button" awNextStep>Next Step</button> -->
+                  <ion-button (click)="mostraMenu()" color="danger">
+                    {{"REGISTRO.CANCELAR" | translate}}
+                  </ion-button>
+                  <ion-button  awNextStep>
+                    {{"REGISTRO.SIGUIENTE" | translate}}
+                  </ion-button>
+                </aw-wizard-step>
+
+                <aw-wizard-step stepTitle="{{'REGISTRO.LANGSTEP' | translate}}">
+                  <!-- <ion-item color="light">
+                    <ion-icon slot="start" name="time-outline" color="azul"></ion-icon>
+                     <ion-label>Awesome Label</ion-label>
+                    <ion-datetime placeholder="De" display-format="HH:mm" cancelText="Cancelar" done-text="Elegir" mode="ios" [formControl]="$any(registroSPForm).controls.horario" required></ion-datetime>
+                    <ion-datetime slot="end" placeholder="Hasta" display-format="HH:mm" cancelText="Cancelar" done-text="Elegir" mode="ios" [formControl]="$any(registroSPForm).controls.horario2" required></ion-datetime>
+                  </ion-item> -->
+                  <!-- <ion-label >"El horario introducido nos servirá como una referencia, las llamadas pueden ocurrir fuera de su preferencia."</ion-label> -->
+                  <ion-label class="ion-margin-bottom titulo" color="naranja" >{{"REGISTRO.LABELIDIOMAS" | translate}}</ion-label>
+                  <ion-item id="" color="light">
+                    <ion-icon slot="start" name="male-female-outline" color="azul"></ion-icon>
+                    <!-- <ion-label>Idioma</ion-label> -->
+                    <ion-select cancelText="Cancelar" multiple="true" [placeholder]="'REGISTRO.IDIOMAS' | translate" interface="action-sheet" [formControl]="$any(registroSPForm).controls.idioma" required>
+                      <ion-select-option value="es">Español</ion-select-option>
+                      <ion-select-option value="en">Ingles</ion-select-option>
+                      <ion-select-option value="fr">Frances</ion-select-option>
+                      <ion-select-option value="cn">Chino</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-item *ngIf="!registroSPForm.controls.idioma.valid && registroSPForm.controls.idioma.touched">
+                    <ion-label color="danger">{{'REGISTRO.IDIOMAS' | translate}} is required</ion-label>
+                  </ion-item>
+                  <ion-item (click)="openModal(term)">
+                    <ion-label>{{"REGISTRO.TERMINOS" | translate}}</ion-label>
+                    <ion-checkbox   formControlName="termCond"></ion-checkbox>
+                    <!-- <ion-checkbox slot="end" [formControl]="$any(registroSPForm).controls.termCond" required></ion-checkbox> -->
+                  </ion-item>
+                  <ion-item (click)="openModal(priv)">
+                    <ion-label>{{"REGISTRO.PRIVACIDAD" | translate}}</ion-label>
+                    <ion-checkbox  formControlName="privacidad"></ion-checkbox>
+                    <!-- <ion-checkbox slot="end" [formControl]="$any(registroSPForm).controls.privacidad" required></ion-checkbox> -->
+                  </ion-item>
+                  
+                  
+                  <!-- <button type="button" awPreviousStep>Previous Step</button> -->
+                  <ion-row>
+                    <ion-col>
+                      <ion-button color="naranja" awPreviousStep>
+                        {{"REGISTRO.REGRESAR" | translate}}
+                      </ion-button>
+                    </ion-col>
+                    <ion-col>
+                      <ion-button type="submit" [disabled]="registroSPForm.invalid">{{"REGISTRO.REGISTRAR" | translate}}</ion-button>
+                    </ion-col>
+                  </ion-row>
+                </aw-wizard-step>
+              </aw-wizard>
+            </form>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+<ng-template #term >
+  <div class="modal-header" color="azul">
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="current == 'es'">Términos y condiciones</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="current == 'en'">Terms and conditions</h4>
+  </div>
+  <div class="modal-body"  *ngIf="current == 'es'"  appCustomScroll #appScrollElement="appCustomScroll" #scroll>
+    
+    <p ngbAutofocus ><strong>Aviso legal:</strong></p>
+
+    <h4>Uso del Sitio</h4>
+    <p>Estos Términos de uso (estos "Términos") rigen su acceso y uso del sitio web (el "Sitio") propiedad u operado por LANGUAGE FLUENCY y sus afiliados (colectivamente, "LF"), los cuales se vincula a estos Términos, así como su uso de cualquier contenido e información disponible en o a través del Sitio.  AL UTILIZAR EL SITIO, USTED DECLARA QUE HA LEÍDO Y ENTENDIDO, Y ACEPTA ESTAR SUJETO A ESTOS TÉRMINOS.  Si no está de acuerdo con estos Términos, debe cesar inmediatamente el uso del Sitio y dejar de usar toda la información y los materiales que obtuvo a través del Sitio. "Usted" se refiere a cualquier persona, compañía o entidad legal que acceda y use el Sitio, y cualquier funcionario, director, socio, personal, empleados, agentes o contratistas que usen el sitio a través de esa compañía o entidad legal, ya sea que dicho uso esté autorizado o no. "Nosotros" o "nosotros" se refiere a LF.</p>
+
+    <h4>Actualizaciones del Sitio y Términos</h4>
+    <p>LF se reserva el derecho, a su entera discreción, de cambiar, modificar, agregar o eliminar todo o parte del Sitio o estos Términos en cualquier momento. Su uso continuado del Sitio después de dichos cambios constituye su aceptación de los nuevos Términos. Si no acepta cumplir con estos o cualquier Términos futuros, no acceda ni use (o continúe accediendo o usando) el Sitio. Usted acepta que podemos utilizar cualquier información que obtengamos sobre usted del Sitio de acuerdo con las disposiciones de nuestra Política de privacidad, que se puede encontrar en (la "Política de privacidad"). Estos Términos incorporan por referencia los términos y condiciones de la Política de Privacidad.</p>
+
+    <h4>Uso autorizado</h4>
+    <p>Al acceder o utilizar el Sitio, usted acepta no: (a) usar el Sitio en violación de estos Términos o cualquier estatuto, regulación, orden, regla u otra ley; (b) interferir, interrumpir o violar la seguridad del Sitio o de cualquier red o equipo utilizado por LF; (c) acceder a datos o información no destinados a usted; (d) tergiversar su identidad o proporcionar información falsa o inexacta; (e) utilizar el Sitio para cometer fraude o participar en otras actividades engañosas o engañosas; (f) eliminar cualquier aviso, advertencia, descargo de responsabilidad, etiqueta, anotación o instrucción de cualquier parte del Sitio o material relacionado; (g) realizar ingeniería inversa, descompilar o desensamblar el Sitio o cualquier software subyacente al Sitio (excepto en la medida en que esta restricción esté prohibida por la ley aplicable); (h) transmitir cualquier material publicitario o promocional no solicitado o no autorizado; o (i) transmitir cualquier material que contenga adware, malware, spyware, virus de software o cualquier otro código dañino o malicioso.</p>
+
+    <h4>Titularidad de los Contenidos y Sitios Enlazados</h4>
+    <p>Todo el contenido en o disponible a través del Sitio, incluidos, entre otros, informes, documentos, diseños, texto, imágenes, gráficos, logotipos, marcas comerciales, imagen comercial, imágenes, video, audio, información, aplicaciones y software, es propiedad de LF. Solo puede utilizar el Sitio y cualquier contenido del Sitio para fines comerciales legítimos que surjan de su relación con LF. No puede modificar, copiar, distribuir, enmarcar, reproducir, volver a publicar, crear trabajos derivados, descargar, mostrar, realizar, publicar, transmitir, transferir, licenciar o vender, en cualquier forma o por cualquier medio, en su totalidad o en parte, dicho contenido sin el permiso previo por escrito de LF a menos que se indique lo contrario. LF no ha revisado ninguno de los sitios vinculados a este Sitio, y no es responsable del contenido de las páginas fuera del sitio o cualquier otro sitio vinculado o vinculado al Sitio. Su enlace a cualquier página fuera del sitio u otros sitios es bajo su propio riesgo.</p>
+
+    <h4>Reglas generales Speakers</h4>
+    <p>1.- No compartir información personal</p>
+    <p>2.- No pedir información personal</p>
+    <p>3.- Ser cortes en todo momento</p>
+    <p>4.- No cortar las llamadas de manera intencional, el sistema las corta automáticamente</p>
+    <p>5.- Se pagan las llamadas a partir de los 9 minutos de tiempo total, en caso contrario se tendrá que complementar los minutos faltantes</p>
+    <ul>
+      <li>Tu tiempo de llamada contará con el tiempo neto de la administración de LF  (todas las llamadas se deducen el tiempo muerto entre que se conecta al Speaker y al Improver)</li>
+      <li>El tiempo por llamada se cuenta con el tiempo efectivo que un Improver habla</li>
+    </ul>
+    <p>6.- Reportar cualquier conflicto que se tenga con un Improver</p>
+    <p>7.- Toda la información contenida en la plataforma es para uso exclusivo de LF y queda estrictamente prohibido compartir cualquier dato externamente</p>
+    <p>8.- Seguir el manual de usuario en todo momento</p>
+
+    <h4>Reglas generales Improvers</h4>
+    <p>1.- No compartir información personal</p>
+    <p>2.- No pedir información personal</p>
+    <p>3.- Ser cortes en todo momento</p>
+    <p>4.- No cortar las llamadas de manera intencional</p>
+    <p>5.- Las preferencias de horario solo serán una guía, las llamadas se podrán hacer a cualquier hora</p>
+    <p>6.- Reportar cualquier conflicto que se tenga con un Speaker</p>
+    <p>7.- Toda la información contenida en la plataforma es para uso exclusivo de LF y queda estrictamente prohibido compartir cualquier dato externamente</p>
+
+    <h4>Referenciados</h4>
+    <p>Los referenciados solo se podrán agregar al momento de la suscripción</p>
+    <p>Todos los pagos de acuerdo con la gente referenciada se harán después de confirmar el pago</p>
+    <p>Las comisiones por referencia se podrán cambiar por LF en cualquier momento.</p>
+
+    <h4>Cobros y pagos </h4>
+    <p>Todos los cobros y/o pagos que se hagan a través o en relación con los servicios de la plataforma, serán netos de impuestos y de comisiones bancarias o de plataformas electrónicas, queriendo decir que se le restarán los impuestos aplicables para la región en la que se encuentren o los impuestos aplicables en México, las comisiones bancarias por traspasos o uso de cuenta y las comisiones bancarias por uso de plataforma. LF no se hace responsable por los impuestos que tengan que pagar los usuarios directamente en su región.</p>
+    <p>Los pagos se harán de manera quincenal, sin embargo, LF podrá cambiar el esquema de pagos en cualquier momento</p>
+    <p>Todos los reembolsos se harán netos de comisiones por Referenciados (si aplica), cobros y pagos y gastos de administración.</p>
+
+    <h4>Precisión no asegurada. </h4>
+    <p>La información y las opiniones contenidas en este Sitio han sido compiladas u obtenidas de buena fe sobre la base de información obtenida de fuentes que se creen confiables. Sin embargo, dicha información no ha sido verificada de forma independiente y no se hace ninguna garantía, representación o garantía, expresa o implícita, en cuanto a su exactitud, integridad o corrección. Toda esta información y opiniones están sujetas a cambios sin previo aviso. Las descripciones de las entidades y valores mencionados en este documento no pretenden ser completas. El contenido del Sitio se presenta solo a partir de la fecha publicada o indicada y puede ser reemplazado por eventos posteriores. LF no asume ninguna obligación de actualizar públicamente o revisar cualquier información en el Sitio, ya sea como resultado de nueva información, desarrollos futuros o de otra manera. Las opiniones y cualquier otro contenido en los Sitios están sujetos a cambios sin previo aviso.</p>
+
+
+    <h4>Sin garantía; Limitaciones de responsabilidad. </h4>
+    <p>Al utilizar el Sitio, usted acepta expresamente que dicho uso es bajo su propio riesgo. Los materiales proporcionados en este Sitio se proporcionan "tal cual", sin garantía de ningún tipo, ya sea expresa o implícita, en la máxima medida permitida de conformidad con la ley aplicable, incluidas, entre otras, las garantías implícitas de comerciabilidad o idoneidad para un propósito particular o no infracción. LF  además no asume ninguna responsabilidad y no garantiza que las funciones contenidas en este sitio serán ininterrumpidas o libres de errores, que los defectos serán corregidos, o que el Sitio o el servidor que lo hace disponible estará libre de virus u otros componentes dañinos. LF NO SERÁ RESPONSABLE de ningún daño, virus que puedan infectar, o servicios, reparaciones o correcciones que deban realizarse en su computadora u otra propiedad debido a su acceso o uso de este Sitio. Tenga en cuenta que algunas jurisdicciones no permiten la exclusión de garantías implícitas, por lo que algunas o todas las exclusiones anteriores pueden no aplicarse a usted.</p>
+    <p>En la máxima medida permitida por la ley aplicable, en ningún caso LF o cualquiera de sus funcionarios, directores, empleados, agentes, GERENTES, MIEMBROS, ACCIONISTAS, SOCIOS o AFILIADOS serán responsables bajo ninguna teoría de responsabilidad (ya sea por contrato, agravio, NEGLIGENCIA, RESPONSABILIDAD ESTRICTA o de otro modo) por daños directos, indirectos, incidentales, especiales, consecuentes, punitivos o ejemplares.  SIN EMBARGO, SI SE DESCUBRE QUE LF O CUALQUIERA DE LAS PERSONAS ANTERIORES SON RESPONSABLES ANTE USTED O CUALQUIER TERCERO RELACIONADO CON EL SITIO O CUALQUIER CONTENIDO EN ÉL, DICHA RESPONSABILIDAD NO EXCEDERÁ LOS $ 100.00 en total.</p>
+
+    <h4>Exclusiones y limitaciones. </h4>
+    <p>Algunas jurisdicciones no permiten la exclusión de ciertas garantías o la limitación o exclusión de responsabilidad por daños incidentales o consecuentes. En consecuencia, algunas de las limitaciones y exenciones de responsabilidad anteriores pueden no aplicarse a usted. En la medida en que no podamos, como cuestión de ley aplicable, renunciar a cualquier garantía implícita o limitar nuestras responsabilidades, el alcance y la duración de dicha garantía y el alcance de nuestra responsabilidad serán el mínimo permitido por dicha ley aplicable.</p>
+
+    <h4>Derechos Reservados.</h4>
+    <p>Nos reservamos el derecho de rechazar el acceso, cancelar cuentas, eliminar o cambiar contenido, servicios o funcionalidad, o modificar o interrumpir cualquier parte del Sitio a nuestra entera discreción. Podemos terminar, suspender o modificar su acceso a todo o parte del Sitio, sin previo aviso, si viola estos Términos o si participa en cualquier conducta que nosotros, a nuestra entera y absoluta discreción, creamos que viola cualquier ley aplicable o es perjudicial para los intereses de nosotros, cualquier otro usuario del Sitio,  o cualquier tercero. Nos reservamos el derecho de establecer prácticas y / o límites en relación con su uso del Sitio.</p>
+
+    <h4>Ley aplicable.</h4>
+    <p>El Sitio está regulado por las leyes de México. Si elige acceder al Sitio desde ubicaciones fuera de México, lo hace por su propia iniciativa y riesgo, y es responsable del cumplimiento de todos los estatutos, tratados, regulaciones, reglas, órdenes y otras leyes locales, estatales, federales, nacionales, provinciales, extranjeras e internacionales aplicables. Al acceder o utilizar el Sitio, usted acepta que las leyes de México, sin tener en cuenta los principios de conflicto de leyes, regirán estos Términos y cualquier disputa de cualquier tipo que pueda surgir entre usted y LF. TODAS Y CADA UNA DE LAS RECLAMACIONES DEBEN PRESENTARSE A TÍTULO INDIVIDUAL DE LAS PARTES, Y NO COMO DEMANDANTE O MIEMBRO DE LA CLASE EN CUALQUIER SUPUESTO PROCEDIMIENTO COLECTIVO O REPRESENTATIVO. USTED ACEPTA QUE, AL CELEBRAR ESTOS TÉRMINOS, USTED Y LF RENUNCIA AL DERECHO A UN JUICIO POR JURADO O A PARTICIPAR EN UNA DEMANDA COLECTIVA.</p>
+
+    <h4>Aviso de Comunicaciones Electrónicas. </h4>
+    <p>Cuando utiliza el Sitio o nos envía correos electrónicos, se está comunicando con nosotros electrónicamente. Usted acepta recibir comunicaciones de nosotros electrónicamente. Podemos comunicarnos con usted por correo electrónico o presentando avisos en las partes aplicables del Sitio. Puede actualizar su información para fines de notificación iniciando sesión en su cuenta. Usted acepta que todos los acuerdos y otras comunicaciones que le proporcionamos electrónicamente satisfacen cualquier requisito legal de que dichas comunicaciones sean por escrito. Si desea retirar su consentimiento para que nos comuniquemos con usted electrónicamente, debe cancelar su cuenta (si corresponde) y no puede usar el Sitio.</p>
+
+    <h4>Contactando con nosotros.</h4>
+    <p>Si tiene alguna pregunta sobre estos Términos, puede comunicarse con nosotros en info@lflanguagefluency.com.</p>
+
+    <p><strong>Última actualización de estos Términos: 22 de abril de 2022.</strong></p>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('term')" *ngIf="current == 'es'" >Aceptar</button>
+  </div>
+  <div class="modal-body" *ngIf="current == 'en'">
+    <p ngbAutofocus><strong>Legal:</strong></p>
+
+    <h4>Use of the Site</h4>
+    <p>These Terms of Use (these “Terms”) govern your access and use of the website (the “Site”) owned or operated by LANGUAGE FLUENCY and its affiliates (collectively, “LF”), each of which links to these Terms, as well as your use of any content and information available on or through the Site.  BY USING THE SITE, YOU ARE STATING THAT YOU HAVE READ AND UNDERSTAND, AND AGREE TO BE BOUND BY, THESE TERMS.  If you do not agree to these Terms, you should immediately cease use of the Site and cease use of all information and materials you obtained through the Site. “You” refers to any person, company or legal entity that accesses and uses the Site, and any officers, directors, partners, personnel, employees, agents or contractors that use the site through that company or legal entity, whether or not such use is authorized.</p>
+
+    <h4>Updates to the Site and Terms</h4>
+    <p>LF reserves the right, at its sole discretion, to change, modify, add, or delete all, or portions of, the Site or these Terms at any time. Your continued use of the Site after any such changes constitutes your acceptance of the new Terms. If you do not agree to abide by these or any future Terms, do not access or use (or continue to access or use) the Site. You agree that we may use any information we obtain about you from the Site in accordance with the provisions of our Privacy Policy, which may be found at (the “Privacy Policy”). These Terms incorporate by reference the terms and conditions of the Privacy Policy.</p>
+
+    <h4>Authorized Use</h4>
+    <p>In accessing or using the Site, you agree not to: (a) use the Site in violation of these Terms or any statute, regulation, order, rule, or other law; (b) interfere with, disrupt, or violate the security of the Site or any networks or equipment used by LF; (c) access data or information not intended for you; (d) misrepresent your identity or provide untruthful or inaccurate information; (e) use the Site to commit fraud or engage in other misleading or deceptive activities; (f) remove any notices, warnings, disclaimers, labels, annotations, or instructions from any portion of the Site or related material; (g) reverse engineer, decompile, or disassemble the Site or any software underlying the Site  (except to the extent this restriction is prohibited by applicable law); (h) transmit any unsolicited or unauthorized advertising or promotional materials; or (i) transmit any material that contains adware, malware, spyware, software viruses, or any other harmful or malicious code.</p>
+
+    <h4>Ownership of Content and Linked Sites</h4>
+    <p>All content on or available through the Site, including but not limited to reports, documents, designs, text, images, graphics, logos, trademarks, trade dress, pictures, video, audio, information, applications, and software, is the proprietary property of LF. You may only use the Site and any content on the Site for legitimate business purposes arising from your relationship with LF. You may not modify, copy, distribute, frame, reproduce, republish, create derivative works from, download, display, perform, post, transmit, transfer, license, or sell, in any form or by any means, in whole or in part, any such content without LF’s prior written permission unless otherwise noted. LF has not reviewed any of the sites linked to this Site and is not responsible for the content of off-site pages or any other site linked or linking to the Site. Your linking to any off-site pages or other sites is at your own risk.</p>
+
+    <h4>General Rules Speakers</h4>
+    <p>1.- Do not share personal information</p>
+    <p>2.- Do not ask for personal information</p>
+    <p>3.- Be gentle all the time</p>
+    <p>4.- Do not end the calls, the system cuts automatically</p>
+    <p>5.- Call payments are after 9 minutes call, otherwise, you need to fulfill the lack minutes</p>
+    <ul>
+      <li>Your time per call will be counted with LF administration net time (every call must be deducted from dead minutes between connecting Speaker and Improver)</li>
+      <li>Time per calls will be counted with the effectively time Improvers speak</li>
+    </ul>
+    <p>6.- Report any conflict with an Improver</p>
+    <p>7.- All the information in the platform is exclusive for LF’s use. It is strictly prohibited to share any information outside de platform</p>
+    <p>8.- Follow the user manual every time</p>
+
+    <h4>General Rules Improvers</h4>
+    <p>1.- Do not share personal information</p>
+    <p>2.- Do not ask for personal information</p>
+    <p>3.- Be gentle all the time</p>
+    <p>4.- Do not end the calls, the system cuts automatically</p>
+    <p>5.- The Schedule preference are only a guide, the calls may be done at any hour</p>
+    <p>6.- Report any conflict with an Improver</p>
+    <p>7.- All the information in the platform is exclusive for LF’s use. It is strictly prohibited to share any information outside de platform</p>
+
+
+    <h4>Referenced</h4>
+    <p>Referenced people can be added only in the subscription.</p>
+    <p>All payments done according to the referenced people will be done after the payment is confirmed.</p>
+    <p>Referenced commissions can be changed by LF at any time</p>
+
+
+    <h4>Charges and Payments </h4>
+    <p>All charges and/or payments done through o regarding the use of the platform, will be net of taxes, bank fees and commissions and internet platforms commissions, meaning that all the charges ang payments will be deducted by the applicable regional taxes or Mexican taxes, bank fees and commissions due to electronic transactions or account charges and banc commissions due to electronic or internet platform use. LF will not be responsible of any direct tax users must paid in their region.</p>
+    <p>The payments must be done fortnightly. Nevertheless, payments schedule can be changed by LF at any time.</p>
+    <p>All reimbursements will be done deducting Referenced commissions (if applicable), al Charges and Payments and administration costs</p>
+
+    <h4>Accuracy not Assured</h4>
+    <p>The information and opinions contained in this Site have been compiled or arrived at in good faith based upon information obtained from sources believed to be reliable. However, such information has not been independently verified and no guarantee, representation or warranty, express or implied, is made as to its accuracy, completeness or correctness. All such information and opinions are subject to change without notice. Descriptions of entities and securities mentioned herein are not intended to be complete. The content on the Site is presented only as of the date published or indicated and may be superseded by subsequent events. LF undertakes no obligation to update publicly or revise any information on the Site, whether as a result of new information, future developments, or otherwise. Opinions and any other content on the Sites are subject to change without notice.</p>
+
+    <h4>Informational Purposes Only / No Investment Advice</h4>
+    <p>LF is not utilizing the Site to provide investment or other advice. Also, no information, content or other materials contained on the Site should be construed or relied upon as investment, legal, accounting, tax, or other professional advice or in connection with any offer.</p>
+
+    <h4>No Warranty; Limitations of Liability</h4>
+    <p>By using the Site, you expressly agree that such use is at your sole risk. The materials provided in this Site are provided on an “as is” basis, without warranty of any kind, either express or implied, to the fullest extent permissible pursuant to applicable law, including but not limited to the implied warranties of merchantability or fitness for a particular purpose or non-infringement. LF further assumes no responsibility for, and makes no warranties that, functions contained at this site will be uninterrupted or error-free, that defects will be corrected, or that the Site or the server that makes it available will be free of viruses or other harmful components. LF shall not be liable for any damages to, viruses that may infect, or services, repairs or corrections that must be performed on your computer or other property on account of your accessing or use of this Site. Please note that some jurisdictions do not allow the exclusion of implied warranties, so some or all of the above exclusions may not apply to you.</p>
+    <p>To the fullest extent permitted under applicable law, in no event will LF or any of its officers, directors, employees, agents, MANAGERS, MEMBERS, SHAREHOLDERS, PARTNERS, or AFFILIATES be liable under any theory of liability (whether in contract, tort, NEGLIGENCE, STRICT LIABILITY, or otherwise) for any direct, indirect, incidental, special, consequential, punitive, or exemplary damages.  Should LF OR ANY OF THE ABOVE PERSONS NEVERTHELESS BE FOUND TO BE LIABLE TO YOU OR ANY THIRD PARTY RELATING TO THE SITE OR ANY CONTENT ON IT, SUCH LIABILITY WILL NOT EXCEED $100.00 in the aggregate.</p>
+
+    <h4>Exclusions and Limitations</h4>
+    <p>Some jurisdictions do not allow the exclusion of certain warranties or the limitation or exclusion of liability for incidental or consequential damages. Accordingly, some of the above limitations and disclaimers may not apply to you. To the extent that we may not, as a matter of applicable law, disclaim any implied warranty or limit our liabilities, the scope and duration of such warranty and the extent of our liability will be the minimum permitted under such applicable law.</p>
+
+    <h4>Reserved Rights</h4>
+    <p>We reserve the right to refuse access, terminate accounts, remove or change content, services, or functionality, or modify or discontinue any portion of the Site in our sole discretion. We may terminate, suspend, or modify your access to all or part of the Site, without notice, if you violate these Terms or you engage in any conduct that we, in our sole and absolute discretion, believe is in violation of any applicable law or is otherwise harmful to the interests of us, any other user of the Site, or any third party. We reserve the right to establish practices and/or limits in connection with your use of the Site.</p>
+
+    <h4>Governing Law</h4>
+    <p>The Site is ruled by Mexico laws. If you choose to access the Site from locations outside Mexico, you do so at your own initiative and risk, and are responsible for compliance with all applicable local, state, federal, national, provincial, foreign, and international statutes, treaties, regulations, rules, orders, and other laws. By accessing or using the Site, you agree that the laws of Mexico, without regard to principles of conflict of laws, will govern these Terms and any dispute of any sort that might arise between you and LF. ANY AND ALL CLAIMS MUST BE BROUGHT IN THE PARTIES’ INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING. YOU AGREE THAT, BY ENTERING INTO THESE TERMS, YOU AND LF ARE EACH WAIVING THE RIGHT TO A TRIAL BY JURY OR TO PARTICIPATE IN A CLASS ACTION.</p>
+
+    <h4>Electronic Communications Notice</h4>
+    <p>When you use the Site or send emails to us, you are communicating with us electronically. You consent to receiving communications from us electronically. We may communicate with you by email or posing notices on the applicable portions of the Site. You may update your information for notice purposes by logging in to your account. You agree that all agreements and other communications that we provide to you electronically satisfy any legal requirement that such communications be in writing. If you wish to withdraw your consent for us to communicate with you electronically, you must terminate your account (if any) and you may not use the Site.</p>
+
+    <h4>Contacting Us</h4>
+    <p>If you have any questions about these Terms, you may contact us at info@lflanguagefluecy.com</p>
+
+    <p><strong>Last Update of these Terms:  Apr 22, 2022.</strong></p>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('term')" *ngIf="current == 'en'">Acept</button>
+  </div>
+  <!-- <div class="modal-footer">
+    
+    
+  </div> -->
+</ng-template>
+
+<ng-template #priv>
+  <div class="modal-header" color="azul">
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="current == 'es'">Aviso de privacidad</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="current == 'en'">This privacy policy</h4>
+  </div>
+  <div class="modal-body" *ngIf="current == 'es'">
+    <h2 ngbAutofocus >Privacidad:</h2>
+
+    <p>Esta política de privacidad (esta "Política de privacidad") describe cómo LANGUAGE FLUENCY y sus afiliados (colectivamente, "LF"), recopilan, manejan, usan y comparten la información que recopilamos a través de los sitios web propiedad u operados por o en nombre de compañías dentro de LF, incluidos https://lflanguagefluency.com (nuestro "Sitio"). Usted" se refiere a cualquier persona, compañía o entidad legal que acceda y use el Sitio, y cualquier funcionario, director, socio, personal, empleados, agentes o contratistas que usen el sitio a través de esa compañía o entidad legal, ya sea que dicho uso esté autorizado o no. "Nosotros" o "nosotros" se refiere a LF.</p>
+    <p>Esta Política de privacidad debe leerse junto con cualquier otra política, término y condición aplicable entre usted y LF. Su uso del Sitio indica su acuerdo y su consentimiento para el uso de su información de acuerdo con las prácticas descritas en esta Política de privacidad. Por favor, no utilice el Sitio si no está de acuerdo con esta Política de Privacidad.</p>
+
+    <h4>Actualizaciones de esta Política</h4>
+    <p>Nos reservamos el derecho de cambiar la totalidad o parte de esta Política de privacidad en cualquier momento. Si realizamos un cambio sustancial en la Política de privacidad, publicaremos un aviso a tal efecto en nuestro Sitio cuando publiquemos la Política revisada. Su uso continuado del Sitio después de que se realice un cambio constituye su acuerdo con la Política de privacidad revisada.</p>
+
+    <h4>Recopilación de su información. </h4>
+    <p>Recopilamos información de usted ("Su Información") cuando usted nos la proporciona voluntariamente a través del Sitio, así como automáticamente a través de sus visitas al Sitio. La información que se recopila puede incluir: nombre y apellido, dirección de correo electrónico, número de teléfono, dirección postal, credenciales de inicio de sesión, contraseña, una respuesta a una pregunta de seguridad, intereses, la dirección IP de su computadora, el navegador de Internet y el sistema operativo que está utilizando, la cantidad de tiempo dedicado a navegar por las páginas del Sitio y los sitios web a los que accedió inmediatamente antes y después de su visita al Sitio.</p>
+    <p>Puede proporcionar voluntariamente Su Información a través del Sitio de varias maneras, incluyendo: (a) cuando inicia sesión en su cuenta o realiza actualizaciones a la información de su cuenta; (b) cuando completa un formulario en el Sitio; y (c) cuando se pone en contacto con nosotros para solicitarnos información. Como se señaló, el Sitio también recopila automáticamente Su Información relacionada con su uso del Sitio. Podemos usar "cookies" (pequeños archivos de texto colocados en la memoria de su dispositivo) o tecnologías similares para retener información sobre usted y su uso del Sitio, y podemos contratar a terceros para que nos ayuden en la recopilación de Su Información. Estas tecnologías pueden recopilar automáticamente información relacionada con el hardware y el software que utiliza para visitar el Sitio y qué páginas ha visitado. Podemos vincular su información que el Sitio recopila automáticamente a su información que recopilamos de otras fuentes o que usted nos proporciona. Podemos utilizar su información que se ha recopilado automáticamente para ayudar a autenticarlo, almacenar y reconocer su configuración y atributos de usuario, facilitar la navegación por el Sitio y personalizar la información que se le ofrece en el Sitio. Usted es libre de rechazar nuestras cookies si su navegador le permite deshabilitarlas, pero si lo hace, es posible que algunas partes del Sitio no funcionen correctamente.</p>
+
+    <h4>Grabaciones autorizadas</h4>
+    <p>Las funciones del sitio y sus servicios incluyen grabaciones de todas las llamadas, por lo tanto, usted autoriza en este momento que todas y cada una de las llamadas se graben y puedan ser utilizadas a discreción total de LF, tanto para actividades de marketing, mejora de servicios, investigaciones internas o externas y cualquier cosa que a juicio de LF sea necesarias.</p>
+    <p>Todas las grabaciones estarán disponibles para descargar en la plataforma un tiempo determinado por LF.</p>
+
+    <h4>Uso de su información</h4>
+    <p>Podemos utilizar su información para proporcionarle información y servicios, para enviarle avisos (por ejemplo, en forma de mensajes de correo electrónico o correos postales) y para responder a sus solicitudes. También podemos utilizar su Información para mejorar el funcionamiento del Sitio y los servicios e información ofrecidos, para proporcionarle características personalizadas, en nuestros esfuerzos de marketing y promoción en el Sitio y en otros lugares, en el análisis estadístico del uso del Sitio (tanto de forma individual como en conjunto), para actualizar y mejorar nuestros registros,  mantener y mejorar el Sitio, y para otros fines identificados en las partes relevantes del Sitio donde se recopila su Información. También podemos usar su información para comunicarnos con usted con respecto a nosotros o al Sitio, resolver disputas, solucionar problemas y hacer cumplir e investigar su cumplimiento de nuestros acuerdos con usted, incluidos nuestros Términos de uso y esta Política de privacidad. También podemos usar, compilar y analizar Su Información para conocer: su uso del Sitio, cuántas personas visitan el Sitio, cuáles son las partes más visitadas del Sitio y las tendencias en el comportamiento del usuario.</p>
+
+    <h4>Intercambio de su información</h4>
+    <p>Podemos compartir su información con entidades afiliadas dentro de LF. También podemos compartir su información con ciertos terceros no afiliados en algunas circunstancias, incluidas las siguientes:</p>
+
+    <ul>
+      <li>Vendedores y Proveedores. Podemos compartir su información con vendedores no afiliados, proveedores, representantes autorizados, proveedores de servicios y agentes para que puedan ayudarnos a mantener el Sitio, almacenar su información, cumplir con sus solicitudes o proporcionar servicios o apoyar el negocio de LF.</li>
+      <li>Agencias Gubernamentales / Aplicación de la Ley. En ciertas circunstancias, LF podría ser llamado a divulgar su información en respuesta a una orden judicial, citación, orden de registro, ley o regulación. LF planea cooperar para responder a dichas solicitudes, tomando las medidas apropiadas para garantizar que la parte solicitante entienda la naturaleza sensible de Su Información que puede recibir. LF también se reserva el derecho de divulgar Su Información en caso de que tengamos razones para creer que alguien está causando o amenazando con causar daño o interferencia con nuestros derechos o propiedad, los derechos o la propiedad de otros, el funcionamiento del Sitio, cualquier usuario del Sitio o cualquier otra persona que pueda ser perjudicada por tales actividades o si alguien está participando en un comportamiento que de otra manera es ilegal o perjudicial para los demás.</li>
+      <li>Transacciones Corporativas. Si LF vende todo o parte de su negocio o realiza una venta o transferencia de activos o está involucrado de otra manera en una fusión, transferencia comercial u otro tipo de evento de liquidez, LF puede, a su entera discreción, transferir, vender o asignar Su Información a la entidad adquirente como parte de o en conexión con esa transacción. En dicha transferencia, venta, cesión u otro evento de liquidez, el cesionario, cesionario, sucesor o parte adquirente puede usar Su Información de acuerdo con esta Política de privacidad o según lo permita la ley o regulación aplicable.</li>
+    </ul>
+
+    <p>También podemos compartir datos anónimos agregados sobre nuestros usuarios con servicios analíticos de terceros, socios comerciales y otras personas interesadas en cómo se utiliza el Sitio. No compartimos su información con terceros no relacionados para sus propios fines de marketing directo.</p>
+
+    <h4>Seguridad</h4>
+    <p>Hacemos todos los esfuerzos razonables para mantener salvaguardas físicas, electrónicas y de procedimiento para proteger la confidencialidad e integridad de su información. Sin embargo, ningún sistema de seguridad es infalible y no podemos eliminar completamente los riesgos de seguridad con respecto a su información. Le recomendamos que no nos envíe su información a través de métodos de correspondencia no seguros, incluso a través de canales de comunicación electrónica públicos, como el correo electrónico de Internet, que generalmente no son seguros.</p>
+
+    <h4>Otros Sitios o Servicios</h4>
+    <p>El Sitio puede contener enlaces a otros sitios web o puede permitirle usar o acceder a servicios de terceros. No somos responsables de las prácticas de privacidad de ningún otro sitio web u otros proveedores de servicios.</p>
+    <p>La información que envíe a esos sitios web y proveedores de servicios está sujeta a las políticas de privacidad de esos otros sitios web y proveedores de servicios, no a esta Política de privacidad. Le recomendamos que revise las políticas de privacidad de estos otros sitios web y proveedores de servicios antes de enviarles cualquier información.</p>
+
+    <h4>Sus opciones</h4>
+    <p>Puede optar por no recibir correos electrónicos promocionales de nuestra parte actualizando sus preferencias en la configuración de su cuenta o siguiendo las instrucciones proporcionadas en los correos electrónicos. Incluso si solicita optar por no recibir correos electrónicos promocionales de nuestra parte, podemos usar su información de contacto para enviarle otros tipos de correos electrónicos.</p>
+
+    <h4>Actualización o eliminación de su información</h4>
+    <p>Por lo general, puede actualizar su información que se encuentra en su cuenta con nosotros siguiendo los procedimientos descritos en las partes del Sitio donde puede iniciar sesión en la cuenta. En algunos casos, sin embargo, es posible que deba comunicarse con nosotros por teléfono para actualizar su información.</p>
+
+    <p>Utilizaremos nuestros esfuerzos comercialmente razonables para cumplir con su solicitud de manera oportuna. Podemos mantener un registro de toda la información que se elimina, y podemos determinar qué se puede eliminar. Por ejemplo, si se nos exige que conservemos cierta información con fines reglamentarios, es posible que se nos impida eliminar esa información. Además, incluso si eliminamos su información de nuestra base de datos "activa", aún puede almacenarse en otras bases de datos (incluidas las que se mantienen con fines de archivo). No somos responsables de eliminar información sobre usted de las bases de datos de terceros.</p>
+
+    <h4>Usuarios internacionales</h4>
+    <p>EL SITIO ESTÁ REGULADO POR LAS LEYES DE MÉXICO. SI ACCEDE AL SITIO DESDE FUERA DE MÉXICO, ACEPTA EXPRESAMENTE QUE PROCESEMOS SU INFORMACIÓN PERSONAL, DE ACUERDO CON ESTA POLÍTICA DE PRIVACIDAD, ENTENDIENDO QUE LAS LEYES DE LOS ESTADOS UNIDOS MEXICANOS CON RESPECTO AL PROCESAMIENTO DE SU INFORMACIÓN PERSONAL PUEDEN SER MÁS O MENOS ESTRICTAS QUE LAS LEYES DEL PAÍS DESDE EL QUE ACCEDE A LOS SITIOS.</p>
+
+    <h4>Organizaciones</h4>
+    <p>SI REPRESENTA A UNA ORGANIZACIÓN, DEBE ASEGURARSE DE QUE CADA MIEMBRO DE SU ORGANIZACIÓN (INCLUIDOS LOS EMPLEADOS Y CONTRATISTAS) SOBRE LOS QUE SE NOS PUEDE PROPORCIONAR INFORMACIÓN PERSONAL HAYA DADO SU CONSENTIMIENTO EXPRESO PARA QUE PROCESEMOS DICHA INFORMACIÓN PERSONAL DE ACUERDO CON LOS TÉRMINOS DE ESTA POLÍTICA DE PRIVACIDAD.</p>
+
+    <h4>Contactando con nosotros</h4>
+    <p>Si tiene alguna pregunta sobre esta Política de privacidad, puede comunicarse con nosotros en info@lflanguagefluency.com.</p>
+
+    <p><strong>Última actualización de esta Política de Privacidad: 22 de abril de 2022.</strong></p>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('priv')">Aceptar</button>
+  </div>
+  <div class="modal-body" *ngIf="current == 'en'">
+    <h2 ngbAutofocus >Privacy:</h2>
+
+    <p>This privacy policy (this “Privacy Policy”) describes how LANGUAGE FLUENCY and its affiliates (collectively, “LF”), collect, handle, use, and share information we collect through the websites owned or operated by or on behalf of companies within LF, including https://lflanguagefluency.com (our “Site”). “You” refers to any person, company or legal entity that accesses and uses the Site, and any officers, directors, partners, personnel, employees, agents or contractors that use the site through that company or legal entity, whether or not such use is authorized. “LF” or “we” refers to LF.</p>
+    <p>This Privacy Policy should be read in conjunction with any other applicable policies, terms, and conditions in place between you and LF. Your use of the Site indicates your agreement with, and your consent to the use of your information in accordance with, the practices described in this Privacy Policy. Please do not use the Site if you do not agree with this Privacy Policy.</p>
+
+    <h4>Updates to this Policy</h4>
+    <p>We reserve the right to change all or portions of this Privacy Policy at any time. If we make a material change to the Privacy Policy, we will post notice to that effect on our Site when we post the revised Policy. Your continued use of the Site after a change is made constitutes your agreement with the revised Privacy Policy.</p>
+
+    <h4>Collection of Your Information</h4>
+    <p>We collect information from you (“Your Information”) when you voluntarily provide it to us through the Site, as well as automatically through your visits to the Site. The information that is collected may include: first and last name, email address, telephone number, mailing address, login credentials, password, a response to a security question, interests, your computer’s IP address, the Internet browser and operating system you are using, the length of time spent browsing pages of the Site, and the websites you accessed immediately before and after your visit to the Site.</p>
+
+    <p>You may voluntarily provide Your Information through the Site in a number of ways, including: (a) when you login to your account or make updates to your account information; (b) when you fill out a form on the Site; and (c) when you contact us to request information from us. As noted, the Site also automatically gathers Your Information related to your use of the Site. We may use “cookies” (small text files placed in the memory of your device) or similar technologies to retain information about you and your use of the Site, and we may engage third parties to assist us in the collection of Your Information. These technologies can automatically collect information relating to the hardware and software you use to visit the Site and what pages you have visited. We may tie Your Information that is automatically gathered by the Site to Your Information that we collect from other sources or that you provide to us. We may use Your Information that has been automatically gathered to help authenticate you, store and recognize your configuration and user attributes, facilitate navigation of the Site, and customize information made available on the Site to you. You are free to decline our cookies if your browser permits you to disable them, but if you do, some portions of the Site may not operate properly.</p>
+
+    <h4>Authorized recording</h4>
+    <p>LF services and functionality includes recording of every call, therefore, you are accepting and authorizing to record every call and giving LF total authorization to use every record at LF’s total discretion for every activity LF considers necessary without limitation as marketing, customer service, internal and external investigations. Every record will be available for download in the platform with limited time for download at LF’s total discretion.</p>
+
+    <h4>Use of Your Information</h4>
+    <p>We may use Your Information to provide you with information and services, to send you notices (for example, in the form of email messages or mailings), and otherwise to respond to your requests. We may also use Your Information to enhance the operation of the Site and the services and information offered, to provide you with personalized features, in our marketing and promotional efforts on the Site and elsewhere, in statistical analysis of use of the Site (both on an individual basis and in the aggregate), to update and enhance our records, maintain and improve the Site, and for other purposes identified on the relevant portions of the Site where Your Information is collected. We may also use Your Information to contact you regarding us or the Site, resolve disputes, troubleshoot problems, and enforce and investigate your compliance with our agreements with you, including our Terms of Use and this Privacy Policy. We may also use, compile, and analyze Your Information to learn about: your use of the Site, how many people are visiting the Site, what are the most visited portions of the Site, and trends in user behavior.</p>
+
+    <h4>Sharing of Your Information</h4>
+    <p>We may share Your Information with affiliated entities within LF. We may also share Your Information with certain unaffiliated third parties in some circumstances, including the following:</p>
+
+    <ul>
+      <li>Vendors and Suppliers. We may share Your Information with unaffiliated vendors, suppliers, authorized representatives, service providers, and agents so that they may help us to maintain the Site, store Your Information, fulfill your requests, or otherwise provide services or support LF’s business.</li>
+      <li>Government Agencies / Law Enforcement. In certain circumstances, LF might be called upon to release Your Information in response to a court order, subpoena, search warrant, law, or regulation. LF plans to cooperate in responding to such requests, taking appropriate measures to ensure that the requesting party understands the sensitive nature of Your Information that they may receive. LF also reserves the right to disclose Your Information in the event that we have reason to believe that someone is causing or threatening to cause injury to or interference with our rights or property, the rights or property of others, the operation of the Site, any user of the Site, or anyone else that could be harmed by such activities or if someone is otherwise engaging in behavior that is otherwise illegal or harmful to others.</li>
+      <li>Corporate Transactions. If LF sells all or part of its business or makes a sale or transfer of assets or is otherwise involved in a merger, business transfer, or other type of liquidity event, LF may, in its sole discretion, transfer, sell, or assign Your Information to the acquiring entity as part of or in connection with that transaction. Upon such transfer, sale, assignment, or other liquidity event, the transferee, assignee, successor, or acquiring party may use Your Information in accordance with this Privacy Policy or as otherwise permitted by applicable law or regulation.</li>
+    </ul>
+
+    <p>We may also share aggregated anonymous data concerning our users with third party analytic services, business partners, and others interested in how the Site is used. We do not share Your Information with unrelated third parties for their own direct marketing purposes.</p>
+
+    <h4>Security</h4>
+    <p>We use reasonable efforts to maintain physical, electronic, and procedural safeguards to protect the confidentiality and integrity of Your Information. However, no security system is foolproof and we cannot fully eliminate security risks with respect to Your Information. We recommend that you do not send us any of Your Information via non-secure methods of correspondence, including via public electronic communication channels, such as Internet e-mail, which are generally not secure.</p>
+
+    <h4>Other Sites or Services</h4>
+    <p>The Site may contain links to other websites or may allow you to use or access third party services. We are not responsible for the privacy practices of any other websites or other service providers.</p>
+    <p>Information you submit to those websites and service providers is subject to the privacy policies of those other websites and service providers, not this Privacy Policy. We encourage you to review the privacy policies of these other websites and service providers before you submit any information to them.</p>
+
+    <h4>Your Choices</h4>
+    <p>You may opt out of receiving promotional emails from us by updating your preferences in your account settings or by following instructions provided in the emails. Even if you request to opt out of receiving promotional emails from us, we may use your contact information to send you other types of emails.</p>
+
+    <h4>Updating or Deleting Your Information</h4>
+    <p>You generally may update Your Information that is in your account with us by following the procedures described on those portions of the Site where you may log in to the account. In some cases, however, you may need to contact us by phone or email to update Your Information.</p>
+
+    <p>We will use our commercially reasonable efforts to fulfill your request in a timely manner. We may keep a record of all information that is deleted, and we may determine what may be deleted. For example, if we are required to keep certain information for regulatory purposes, we may be prevented from deleting that information. Further, even if we delete Your Information from our “live” database, it may still be stored on other databases (including those kept for archival purposes). We are not responsible for deleting information about you from the databases of any third parties.</p>
+
+    <h4>International Users</h4>
+    <p>THE SITE IS RULED BY MEXICO LAWS. IF YOU ACCESS THE SITE FROM OUTSIDE MEXICO, YOU EXPRESSLY CONSENT TO OUR PROCESSING OF YOUR PERSONAL INFORMATION IN MEXICO AND ACCORDING TO THIS PRIVACY POLICY, UNDERSTANDING THAT MEXICO LAWS REGARDING PROCESSING OF YOUR PERSONAL INFORMATION MAY BE MORE OR LESS STRINGENT THAT THE LAWS OF THE COUNTRY FROM WHICH YOU ACCESS THE SITES.</p>
+
+    <h4>Organizations</h4>
+    <p>IF YOU REPRESENT AN ORGANIZATION, YOU MUST ENSURE THAT EACH MEMBER OF YOUR ORGANIZATION (INCLUDING EMPLOYEES AND CONTRACTORS) ABOUT WHOM PERSONAL INFORMATION MAY BE PROVIDED TO US HAS GIVEN EXPRESS CONSENT TO OUR PROCESSING OF SUCH PERSONAL INFORMATION ACCORDING TO THE TERMS OF THIS PRIVACY POLICY.</p>
+
+    <h4>Contacting Us</h4>
+    <p>If you have any questions about this Privacy Policy, you may contact us at info@lflanguagefluency.com</p>
+
+    <p><strong>Last Update of this Privacy Policy:  Apr 22, 2022.</strong></p>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('priv')">Acept</button>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('priv')" *ngIf="current == 'es'">Aceptar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('priv')" *ngIf="current == 'en'">Acept</button>
+  </div> -->
+</ng-template>
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="azul">
+    <ion-item slot="start" color="azul">
+      <!-- <ion-label>Language</ion-label> -->
+      <ion-select [value]="current" name="lang" interface="popover" (ionChange)="setLanguage($event)" placeholder="{{'MENU.LANGUAGE' | translate}}">
+        <ion-select-option *ngFor="let item of listLang"
+        [value]="item.lang">
+        {{item.text}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-title class="ion-text-right" size="small" id="footerTitle">Language Fluency SAPI</ion-title>
+  </ion-toolbar>
+</ion-footer>

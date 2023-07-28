@@ -1,0 +1,42 @@
+<ion-content class="ion-padding">
+  <ion-card color="light">
+    <ion-header>
+      <ion-toolbar  color="naranja">
+        <ion-title >Fluency 10/3</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-card-content>
+      <form [formGroup]="addplanForm">
+        <ion-item color="light">
+          <ion-label>{{'ADDPLANS.LANGUAGE' |  translate}}</ion-label>
+          <ion-select mode="ios" placeholder="Select language" formControlName="language">
+            <ion-select-option value="es" [disabled]='selc_es'>{{'ADDPLANS.SPANISH' |  translate}}</ion-select-option>
+            <ion-select-option value="en" [disabled]='selc_en'>{{'ADDPLANS.ENGLISH' |  translate}}</ion-select-option>
+            <ion-select-option value="fr" [disabled]='selc_fr'>{{'ADDPLANS.FRENCH' |  translate}}</ion-select-option>
+            <ion-select-option value="cn" [disabled]='selc_cn'>{{'ADDPLANS.CHINESE' |  translate}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item color="light">
+          <ion-label>{{'ADDPLANS.SCHEDULE' |  translate}}</ion-label>
+          <ion-select placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="schedule">
+            <ion-select-option value="8">8:00 - 11:00</ion-select-option>
+            <ion-select-option value="11">11:00 - 14:00</ion-select-option>
+            <ion-select-option value="14">14:00 - 17:00</ion-select-option>
+            <ion-select-option value="17">17:00 - 20:00</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-label class="ion-margin-bottom titulo" color="naranja" >{{"ADDPLANS.LABELREFERIDO" | translate}}</ion-label>
+        <ion-item color="light">
+          <ion-label>{{"ADDPLANS.REFERIDO" | translate}}</ion-label>
+          <ion-input placeholder="LFId" formControlName="idref"></ion-input>
+        </ion-item>
+      </form>
+      <ion-text color="danger" class="ion-margin">
+        <h4 class="hidden" id="payPalMsg">Error, you are missing some data</h4>
+      </ion-text>
+      <div id="paypal-button-container-P-3J268263FT404650SMOCRMSY"></div>
+      
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

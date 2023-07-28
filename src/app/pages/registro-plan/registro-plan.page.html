@@ -1,0 +1,174 @@
+
+<ion-header class="ion-no-border"  translucent>
+  <ion-toolbar color="naranja">
+    <ion-buttons slot="end">
+      <ion-button routerLink="/inicio">
+        <!-- <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon> -->
+        Omitir
+      </ion-button>
+      <!-- <ion-back-button defaultHref="/plans" ></ion-back-button> -->
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">{{'ADDPLANS.TITLE' |  translate}}</ion-title>
+    <ion-avatar slot="end">
+      <img src="assets/logo-toolbar.png" />
+    </ion-avatar>
+  </ion-toolbar>
+</ion-header>
+
+  <ion-content class="ion-padding" >
+    <form [formGroup]="addPlans" (ngSubmit)="contrata()">
+      <table class="table table-striped table-responsive" size="6" size-lg="3" size-md="4" size-sm="6">
+        <thead class="ion-text-center">
+          <tr>
+            <th>{{'ADDPLANS.LANGUAGE' |  translate}}</th>
+            <th>
+              <span placement="bottom" ngbTooltip="{{'ADDPLANS.PLANTOOLTIP' | translate}}">
+                {{'ADDPLANS.PLAN' |  translate}} <ion-icon slot="end" name="help-circle"></ion-icon>
+              </span>
+            </th>
+            <th>
+              <span placement="bottom" ngbTooltip="{{'ADDPLANS.SHEDULETOOLTIP' | translate}}">
+                {{'ADDPLANS.SCHEDULE' |  translate}} <ion-icon slot="end" name="help-circle"></ion-icon>
+              </span>
+            </th>
+          </tr>
+        </thead>
+        <tbody formGroupName="planes">
+          <tr formGroupName="es">
+            <td>
+              <ion-item color="light">
+                <ion-checkbox slot="start" color="naranja" name="idioma" value="es" mode="ios" formControlName="ln" ></ion-checkbox>
+                <ion-label> {{'ADDPLANS.SPANISH' |  translate}}</ion-label>
+              </ion-item>
+            </td>
+            <td>
+              <ion-item color="light">
+                <ion-select  placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="plan" [value]="planSelect" >
+                  <!-- <ion-select-option value="price_1IiLcPFjLGC5FmHqDAZZskyw">Fluency 10/3</ion-select-option>
+                  <ion-select-option value="price_1IiLr3FjLGC5FmHq8Z2z8pnq">+ Fluency</ion-select-option> -->
+                  <ion-select-option *ngFor="let precio of precios" [value]="precio.price">{{precio.type}} {{precio.mount | currency:precio.currency:false}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </td>
+            <td>
+              <ion-item color="light">
+                <ion-select placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="schedule" >
+                  <ion-select-option value="8">8:00 - 11:00</ion-select-option>
+                  <ion-select-option value="11">11:00 - 14:00</ion-select-option>
+                  <ion-select-option value="14">14:00 - 17:00</ion-select-option>
+                  <ion-select-option value="17">17:00 - 20:00</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </td>
+          </tr>
+          <tr formGroupName="en">
+            <td>
+              <ion-item color="light">
+                <ion-checkbox slot="start" color="naranja" name="idioma" value="en" mode="ios" formControlName="ln"></ion-checkbox>
+                <ion-label> {{'ADDPLANS.ENGLISH' |  translate}}</ion-label>
+              </ion-item>
+            </td>
+            <td>
+              <ion-item color="light">
+                <ion-select  placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="plan" [value]="planSelect">
+                  <ion-select-option *ngFor="let precio of precios" [value]="precio.price">{{precio.type}} {{precio.mount | currency:precio.currency:false}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </td>
+            <td>
+              <ion-item color="light">
+                <ion-select placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="schedule">
+                  <ion-select-option value="8">8:00 - 11:00</ion-select-option>
+                  <ion-select-option value="11">11:00 - 14:00</ion-select-option>
+                  <ion-select-option value="14">14:00 - 17:00</ion-select-option>
+                  <ion-select-option value="17">17:00 - 20:00</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </td>
+          </tr>
+          <tr formGroupName="fr">
+            <td>
+              <ion-item color="light">
+                <ion-checkbox slot="start" color="naranja" name="idioma" value="en" mode="ios" formControlName="ln"></ion-checkbox>
+                <ion-label> {{'ADDPLANS.FRENCH' |  translate}}</ion-label>
+              </ion-item>
+            </td>
+            <td>
+              <ion-item color="light">
+                <ion-select  placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="plan" [value]="planSelect">
+                  <ion-select-option *ngFor="let precio of precios" [value]="precio.price">{{precio.type}} {{precio.mount | currency:precio.currency:false}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </td>
+            <td>
+              <ion-item color="light">
+                <ion-select placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="schedule">
+                  <ion-select-option value="8">8:00 - 11:00</ion-select-option>
+                  <ion-select-option value="11">11:00 - 14:00</ion-select-option>
+                  <ion-select-option value="14">14:00 - 17:00</ion-select-option>
+                  <ion-select-option value="17">17:00 - 20:00</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </td>
+          </tr>
+          <tr formGroupName="cn">
+            <td>
+              <ion-item color="light">
+                <ion-checkbox slot="start" color="naranja" name="idioma" value="en" mode="ios" formControlName="ln"></ion-checkbox>
+                <ion-label> {{'ADDPLANS.CHINESE' |  translate}}</ion-label>
+              </ion-item>
+            </td>
+            <td>
+              <ion-item color="light">
+                <ion-select  placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="plan" [value]="planSelect">
+                  <ion-select-option *ngFor="let precio of precios" [value]="precio.price">{{precio.type}} {{precio.mount | currency:precio.currency:false}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </td>
+            <td>
+              <ion-item color="light">
+                <ion-select placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="schedule">
+                  <ion-select-option value="8">8:00 - 11:00</ion-select-option>
+                  <ion-select-option value="11">11:00 - 14:00</ion-select-option>
+                  <ion-select-option value="14">14:00 - 17:00</ion-select-option>
+                  <ion-select-option value="17">17:00 - 20:00</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <ion-item color="light">
+                <ion-select cancelText="Cancelar" mode="ios" placeholder="Tarjeta" interface="action-sheet" [formControl]="$any(addPlans).controls.tarjeta"  required>
+                    <ion-select-option *ngFor="let item of wallet" [value]="item.customer">{{item.card.brand}} {{item?.card.last4}} - Expira {{item?.card.exp_month}}/{{item?.card.exp_year}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-button (click)="addCard()" expand="block" color="naranja" shape="round">
+                {{'ADDPLANS.ADDCARD' |  translate}}
+              </ion-button>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">
+              <ion-label class="ion-margin-bottom titulo" color="naranja" >{{"ADDPLANS.LABELREFERIDO" | translate}}</ion-label>
+                <ion-item color="light">
+                  <ion-icon slot="start" name="people-circle-outline" color="naranja"></ion-icon>
+                  <!-- <ion-label >Nombre</ion-label> -->
+                  <ion-input type="text" [placeholder]="'ADDPLANS.REFERIDO' | translate" [formControl]="$any(addPlans).controls.idref"></ion-input>
+                  <div *ngIf="!$any(addPlans).controls.idref.hasError('lfidExists')" class="invalid-feedback">Error</div>
+                  <div *ngIf="addPlans.get('idref').hasError('lfidExists')" class="invalid-feedback">
+                    <span>valio</span>
+                    <span *ngIf="addPlans.get('idref').hasError('lfidExists')">El LFId no existe</span>
+                  </div>
+                </ion-item>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      
+      
+      <ion-button type="submit"  expand="block" color="azul" shape="round" class="ion-margin-top" [disabled]="addPlans.invalid">
+        {{'ADDPLANS.HIRE' |  translate}}
+      </ion-button>
+    </form>
+  </ion-content>

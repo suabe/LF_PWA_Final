@@ -1,0 +1,34 @@
+#califica, ngb-rating {
+    background-color: #ffffff;
+}
+
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem;
+    color: #d3d3d3;
+  }
+  .full {
+    color: #0076ed;
+  }
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: #0076ed;
+    z-index: 10;
+  }
+  .filled{
+    font-size: 2rem;
+    color: #0076ed;
+}
+
+.notfilled{
+    font-size: 2rem;
+    color:#d3d3d3;
+}
+
+#iconAVG {
+    font-size: 2rem;
+    color: #0076ed;
+}

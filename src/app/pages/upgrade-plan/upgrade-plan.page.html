@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="naranja">
+    <ion-title>Upgrade Plan</ion-title>    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card color="light">
+    <ion-header>
+      <ion-toolbar color="azul">
+        <ion-title>+Fluency</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-card-content>
+      <ion-item color="light">
+        <ion-label>
+          <h2 *ngIf="idioma == 'es'">{{'ADDPLANS.LANGUAGE' |  translate}}: {{'ADDPLANS.SPANISH' |  translate}}</h2>
+          <h2 *ngIf="idioma == 'en'">{{'ADDPLANS.LANGUAGE' |  translate}}: {{'ADDPLANS.ENGLISH' |  translate}}</h2>
+          <h2 *ngIf="idioma == 'fr'">{{'ADDPLANS.LANGUAGE' |  translate}}: {{'ADDPLANS.FRENCH' |  translate}}</h2>
+          <h2 *ngIf="idioma == 'cn'">{{'ADDPLANS.LANGUAGE' |  translate}}: {{'ADDPLANS.CHINESE' |  translate}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item color="light">
+        <ion-label>
+          <h2 *ngIf="schedule == 8">{{'PLANS.SCHEDULE' | translate}}:  08:00 - 11:00 hrs.</h2>
+          <h2 *ngIf="schedule == 11">{{'PLANS.SCHEDULE' | translate}}:  11:00 - 14:00 hrs.</h2>
+          <h2 *ngIf="schedule == 14">{{'PLANS.SCHEDULE' | translate}}:  14:00 - 17:00 hrs.</h2>
+          <h2 *ngIf="schedule == 17">{{'PLANS.SCHEDULE' | translate}}:  17:00 - 20:00 hrs.</h2>
+        </ion-label>
+      </ion-item>
+      <ion-item color="light" *ngIf="idref">
+        <ion-label>
+          <h2>{{"ADDPLANS.REFERIDO" | translate}}: {{idref}}</h2>
+        </ion-label>
+      </ion-item>
+      <div id="paypal-button-container-P-8LD78680P96382408MOCRTYY"></div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

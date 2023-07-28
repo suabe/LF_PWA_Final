@@ -1,0 +1,335 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar [color]="color">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">{{'PERFIL.TITLE' | translate}}</ion-title>
+    <ion-avatar slot="end">
+      <img src="assets/logo-toolbar.png" />
+    </ion-avatar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding" *ngIf="_user.dataUser.role === 'cliente'">
+  <div class="vertical-padding bg-white">      
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="8" class="ion-no-padding position-relative">
+          <div class="ion-text-left">
+            <h6>{{'HOME.HELLO' | translate}}</h6>
+            <h4>{{userPerfil?.name |titlecase}} {{userPerfil?.lastName | titlecase}}</h4>
+            <p><span class="text-primary">{{'HOME.TOPICS' | translate}} </span>  <br> {{userPerfil?.bio | titlecase}}</p>
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div class="profileImg">
+            <ion-button (click)="subirImgPerfil()" fill="solid" color="light" size="small" class="profilebutton">
+              <ion-icon name="camera"></ion-icon>
+            </ion-button>
+            
+            <div *ngIf="userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(' + userPerfil?.foto + ')'}" ></div>
+            <div *ngIf="!userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(/assets/boy.png)'}"></div>
+          </div>
+          <input type="file" style="display: none;" #filePicker (change)="subirAlbum($event)">
+          <div class="ion-text-center">
+            <strong class="text-primary">LFId</strong> <br>
+            <small >{{userPerfil?.LFId}}</small>
+          </div>
+        </ion-col>        
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="ion-padding">
+      <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.GENDER' | translate}}</strong> <br>
+              <small *ngIf="userPerfil?.gender == 'hombre'">{{'HOME.HOMBRE' | translate}}</small>
+              <small *ngIf="userPerfil?.gender == 'mujer'">{{'HOME.MUJER' | translate}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.EMAIL' | translate}}</strong> <br>
+              <small >{{userPerfil?.email}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.TELEPHONE' | translate}}</strong> <br>
+              <small >{{userPerfil?.phone}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.COUNTRY' | translate}}</strong> <br>
+              <small ><span class="ion-text-uppercase">{{userPerfil?.country}}</span> <span class="iti-flag {{userPerfil?.country}}"></span></small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.BIRTHDATE' | translate}}</strong> <br>
+              <small class="text-primary">{{'HOME.BIRTHLABEL' | translate}}</small> <br>
+              <small >{{userPerfil?.birthDate | date: 'dd-MM-YYYY'}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <!-- <strong class="text-primary">LFId</strong> <br>
+              <small >{{userPerfil.LFId}}</small> -->
+              <!-- <strong class="text-primary">{{'HOME.' | translate}}</strong> <br>
+              <small>{{userPerfil?.spei}}</small> -->
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4" offset="4">
+              <ion-button routerLink="/perfil-options" expand="block" color="naranja" >
+                {{'PERFIL.EDITBUTTON' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+    </ion-grid>
+  </div>
+  <hr>
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="_user.dataUser.role === 'conversador'">
+  <div class="vertical-padding bg-white">      
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="8" class="ion-no-padding position-relative">
+          <div class="ion-text-left">
+            <h6>{{'HOME.HELLO' | translate}}</h6>
+            <h4>{{userPerfil?.name |titlecase}} {{userPerfil?.lastName | titlecase}}</h4>
+            <!-- <p><span class="text-tertiary">{{'HOME.TOPICS' | translate}} </span>  <br> {{userPerfil?.bio | titlecase}}</p> -->
+          </div>
+        </ion-col>
+        <ion-col size="4">
+          <div class="profileImg">
+            <ion-button (click)="subirImgPerfil()" fill="solid" color="light" size="small" class="profilebutton">
+              <ion-icon name="camera"></ion-icon>
+            </ion-button>
+            
+            <div *ngIf="userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(' + userPerfil?.foto + ')'}" ></div>
+            <div *ngIf="!userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(/assets/boy.png)'}"></div>
+          </div>
+          <input type="file" style="display: none;" #filePicker (change)="subirAlbum($event)">
+          <div class="ion-text-center">
+            <strong class="text-tertiary">LFId</strong> <br>
+            <small >{{userPerfil?.LFId}}</small>
+          </div>
+        </ion-col>        
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="ion-padding">
+      <ion-row>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'HOME.GENDER' | translate}}</strong> <br>
+              <small *ngIf="userPerfil?.gender == 'hombre'">{{'HOME.HOMBRE' | translate}}</small>
+              <small *ngIf="userPerfil?.gender == 'mujer'">{{'HOME.MUJER' | translate}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'HOME.EMAIL' | translate}}</strong> <br>
+              <small >{{userPerfil?.email}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'HOME.TELEPHONE' | translate}}</strong> <br>
+              <small >{{userPerfil?.phone}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'HOME.COUNTRY' | translate}}</strong> <br>
+              <small ><span class="ion-text-uppercase">{{userPerfil?.country}}</span> <span class="iti-flag {{userPerfil?.country}}"></span></small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'HOME.BIRTHDATE' | translate}}</strong> <br>
+              <small class="text-tertiary">{{'HOME.BIRTHLABEL' | translate}}</small> <br>
+              <small >{{userPerfil?.birthDate | date: 'dd-MM-YYYY'}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-tertiary">Languages</strong> <br>
+              <small ><span *ngFor="let i of userPerfil.idioma">{{i | uppercase}} </span> </small>                            
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="4" offset="4">
+              <ion-button routerLink="/perfil-options" expand="block" color="azul" >
+                {{'PERFIL.EDITBUTTON' | translate}}
+              </ion-button>
+            </ion-col>
+          </ion-row>
+    </ion-grid>
+  </div>
+  <hr>
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="false">
+  <!-- <ion-item>
+    <ion-label>
+      <p>Hola</p>
+      <h2>{{userPerfil.name}} {{userPerfil.lastName}}</h2>
+    </ion-label>
+    <ion-thumbnail  slot="end">
+      <img *ngIf="userPerfil.foto" [src]="userPerfil.foto" >
+      <img *ngIf="!userPerfil.foto" src="https://image.flaticon.com/icons/svg/163/163801.svg" alt="">
+    </ion-thumbnail >
+  </ion-item> -->
+    <div class="vertical-padding">
+      
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="8" class="ion-no-padding position-relative">
+              <div class="ion-text-left">
+                <p>{{'PERFIL.HELLO' | translate}}</p>
+                <h4>{{userPerfil.name | titlecase}} {{userPerfil.lastName | titlecase}}</h4>
+              </div>
+              <!-- <div class="ion-text-center">
+                <span class="text-muted ion-no-margin text-job ion-text-capitalize">{{userPerfil.role}}</span>
+              </div> -->
+              <!-- <ion-button fill="clear" class="button-vertical-align button-left">
+                <ion-icon slot="icon-only" name="chatbubbles"></ion-icon>
+              </ion-button> -->
+            </ion-col>
+            <ion-col size="4">   
+              <!-- <img *ngIf="userPerfil.foto" [src]="userPerfil.foto" class="image-round border-tertiary margin-top">
+              <img *ngIf="!userPerfil.foto" src="/assets/boy.png" alt="" class="image-round border-tertiary margin-top"> -->
+              <div class="profileImg">
+                <div *ngIf="userPerfil.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(' + userPerfil.foto + ')'}" ></div>
+                <div *ngIf="!userPerfil.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(/assets/boy.png)'}"></div>
+              </div>
+            </ion-col>
+            <!-- <ion-col size="4" class="ion-no-padding position-relative">
+              <ion-button fill="clear" class="button-vertical-align button-right">
+                <ion-icon slot="icon-only" name="call"></ion-icon>
+              </ion-button> 
+            </ion-col> -->
+          </ion-row>
+        </ion-grid>
+      
+      </div>
+          
+      <div class="vertical-padding" *ngIf="_user.dataUser.role === 'cliente'">
+        <p class="ion-text-center text-profile">
+          {{userPerfil.bio | titlecase}}
+        </p>
+      </div>
+    
+      <div class="ion-padding">
+        <ion-grid class="ion-no-padding" *ngIf="_user.dataUser.role === 'conversador'">
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'PERFIL.GENDER' | translate}}</strong> <br>
+              <small >{{userPerfil.gender}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'PERFIL.EMAIL' | translate}}</strong> <br>
+              <small >{{userPerfil.email}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'PERFIL.TELEPHONE' | translate}}</strong> <br>
+              <small >{{userPerfil.phone}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'PERFIL.COUNTRY' | translate}}</strong> <br>
+              <small >México</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-tertiary">{{'PERFIL.BIRTHDATE' | translate}}</strong> <br>
+              <small >{{userPerfil.birthDate | date: 'dd-MM-YYYY'}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-tertiary">LFId</strong> <br>
+              <small >{{userPerfil.LFId}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <!-- <strong class="text-tertiary">Clave Interbancaria</strong> <br>
+              <small >{{userPerfil?.spei }}</small> -->
+            </ion-col>
+            <ion-col size="6">
+              <!-- <strong class="text-tertiary">LFId</strong> <br>
+              <small class="text-white">{{userPerfil.LFId}}</small> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid class="ion-no-padding" *ngIf="_user.dataUser.role === 'cliente'">
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'PERFIL.GENDER' | translate}}</strong> <br>
+              <small >{{userPerfil.gender}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-primary">{{'PERFIL.EMAIL' | translate}}</strong> <br>
+              <small >{{userPerfil.email}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'PERFIL.TELEPHONE' | translate}}</strong> <br>
+              <small >{{userPerfil.phone}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-primary">{{'PERFIL.COUNTRY' | translate}}</strong> <br>
+              <small ><span class="ion-text-uppercase">{{userPerfil.country}}</span> <span class="iti-flag {{userPerfil.country}}"></span></small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'PERFIL.BIRTHDATE' | translate}}</strong> <br>
+              <small >{{userPerfil.birthDate | date: 'dd-MM-YYYY'}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-primary">LFId</strong> <br>
+              <small >{{userPerfil.LFId}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <!-- <strong class="text-primary">Clave Interbancaria</strong> <br>
+              <small >{{userPerfil?.spei }}</small> -->
+            </ion-col>
+            <ion-col size="6">
+              <!-- <strong class="text-tertiary">LFId</strong> <br>
+              <small class="text-white">{{userPerfil.LFId}}</small> -->
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+
+      <!-- <div class="ion-padding">
+        <ion-row *ngIf="!userPerfil.spei">
+            <ion-col size="12">
+                <form [formGroup]="speiForm" (ngSubmit)="agregaSpei()" novalidate>
+                    <ion-item>
+                        <ion-label position="floating">SPEI <ion-text color="danger">*</ion-text></ion-label>
+                        <ion-input [formControl]="$any(speiForm).controls.spei" name="spei" type="text"></ion-input>
+                    </ion-item>
+    
+                    <ion-button block color="primary" type="submit" [disabled]="speiForm.invalid">
+                        Agregar
+                    </ion-button>
+                </form>
+            </ion-col>
+        </ion-row>
+      </div> -->
+
+      
+
+    
+      <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button [color]="color" size="small">
+          <ion-icon name="settings-outline"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="start">
+          <ion-fab-button color="naranja" routerLink="/perfil-options">
+            <ion-icon  name="person-add-outline"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button [color]="color" (click)="subirImgPerfil()">
+            <ion-icon  name="camera-outline"></ion-icon>
+            <input type="file" style="display: none;" #filePicker (change)="subirAlbum($event)">
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+</ion-content>
+
+

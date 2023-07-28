@@ -1,0 +1,42 @@
+.table {
+    border-radius: 10px;
+}
+
+.table td, .table th {
+    padding: .75rem 0rem;
+}
+
+thead th {
+    color: #FFFFFF;
+    background-color: var(--ion-color-naranja) !important;
+    border-color: var(--ion-color-naranja) !important;
+}
+
+tbody td {
+    color: black;
+    background-color: #FFFFFF;
+    border-bottom-color: var(--ion-color-naranja);
+}
+
+ion-item {
+    --inner-border-width: 0px;
+}
+
+ion-checkbox {
+    --background: #FFFFFF;
+    margin-right: 5px;
+}
+
+ion-select {
+    --padding-end: 0px;
+}
+
+.popPlans .popover-content {
+    --background: #FFFFFF;
+}
+
+.item-term {
+    border-radius: 30px;
+    margin-bottom: 5px;
+    border-color: var(--ion-color-naranja);
+}

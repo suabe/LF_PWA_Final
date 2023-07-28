@@ -1,0 +1,31 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="naranja">
+    <ion-title class="ion-text-capitalize">{{'ADDCARD.TITLE' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">{{'ADDCARD.CLOSE' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item color="light">
+      <ion-input placeholder="Nombre (requerido)" type="text" [(ngModel)]="name"></ion-input>
+    </ion-item>
+  
+    <ion-item color="light">
+      <ion-input placeholder="Email (requerido)" type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <form action="/" method="POST" id="payment-form">
+      <div id="card-element">
+        <!-- a Stripe Element will be inserted here. -->
+      </div>
+      <div id="card-errors" role="alert"></div>
+      <ion-button type="submit" expand="block" [disabled]="disabled">{{'ADDCARD.SAVE' | translate}} <ion-icon slot="end" name="card-outline"></ion-icon></ion-button>
+    </form>
+  </ion-list>
+  
+  <!--<ion-button (click)="guardar()" color="tertiary">
+    Guardar
+  </ion-button>-->
+</ion-content>

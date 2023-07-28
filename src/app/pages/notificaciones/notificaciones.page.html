@@ -1,0 +1,21 @@
+<app-header titulo="{{'NOTIFICATIONS.TITLE' | translate}}" [color]="color"></app-header>
+
+<ion-content class="ion-padding">
+    <ion-card color="light" *ngIf="!hayNotificaciones">
+        <ion-card-header>
+            <ion-card-title>{{'NOTIFICATIONS.NOTNOTI' | translate}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{'NOTIFICATIONS.NONOTOCONT' | translate}}
+        </ion-card-content>
+    </ion-card>
+    <ion-card color="light" *ngFor="let noti of notifications">
+        <ion-card-header>
+            <ion-card-title>{{noti?.title}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            {{noti?.message}} <br>
+            {{noti?.created | date}}
+        </ion-card-content>
+    </ion-card>
+</ion-content>

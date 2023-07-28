@@ -1,0 +1,231 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar [color]="color">
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main"  color="light"></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="changeTel()">
+        <ion-icon slot="" name="call"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-avatar slot="end">
+      <img src="assets/logo-toolbar.png" />
+    </ion-avatar>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" *ngIf="_user.dataUser.role === 'cliente'">
+  <div class="vertical-padding">
+    <ion-slides mode="ios" pager="ios" [options]="slideOptions" id="slideImpr">
+      <ion-slide *ngFor="let banner of banners" >
+        <img src="{{banner?.img}}" alt="" >
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div class="vertical-padding bg-white">      
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="8" class="ion-no-padding position-relative">
+          <div class="ion-text-left">
+            <h6>{{'HOME.HELLO' | translate}}</h6>
+            <h4>{{userPerfil?.name |titlecase}} {{userPerfil?.lastName | titlecase}}</h4>
+            <p><span class="text-primary">{{'HOME.TOPICS' | translate}} </span>  <br> {{userPerfil?.bio | titlecase}}</p>
+          </div>
+          <!-- <div class="ion-text-center">
+            <span class="text-muted ion-no-margin text-job ion-text-capitalize">{{userPerfil.role}}</span>
+          </div> -->
+          <!-- <ion-button fill="clear" class="button-vertical-align button-left">
+            <ion-icon slot="icon-only" name="chatbubbles"></ion-icon>
+          </ion-button> -->
+        </ion-col>
+        <ion-col size="4">
+          <div class="profileImg">
+            <ion-button (click)="subirImgPerfil()" fill="solid" color="light" size="small" class="profilebutton">
+              <ion-icon name="camera"></ion-icon>
+            </ion-button>
+            
+            <div *ngIf="userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(' + userPerfil?.foto + ')'}" ></div>
+            <div *ngIf="!userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(/assets/boy.png)'}"></div>
+          </div>
+          <input type="file" style="display: none;" #filePicker (change)="subirAlbum($event)">   
+          <!-- <img *ngIf="userPerfil?.foto" [src]="userPerfil?.foto" class="image-round border-tertiary margin-top">
+          <img *ngIf="!userPerfil?.foto" src="/assets/boy.png" alt="" class="image-round border-tertiary margin-top"> -->
+          <div class="ion-text-center">
+            <strong class="text-primary">LFId</strong> <br>
+            <small >{{userPerfil?.LFId}}</small>
+          </div>
+        </ion-col>
+        <!-- <ion-col size="4" class="ion-no-padding position-relative">
+          <ion-button fill="clear" class="button-vertical-align button-right">
+            <ion-icon slot="icon-only" name="call"></ion-icon>
+          </ion-button> 
+        </ion-col> -->
+      </ion-row>
+    </ion-grid>
+    <ion-grid class="ion-padding">
+      <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.GENDER' | translate}}</strong> <br>
+              <small >{{userPerfil?.gender}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.EMAIL' | translate}}</strong> <br>
+              <small >{{userPerfil?.email}}</small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.TELEPHONE' | translate}}</strong> <br>
+              <small >{{userPerfil?.phone}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.COUNTRY' | translate}}</strong> <br>
+              <small ><span class="ion-text-uppercase">{{userPerfil?.country}}</span> <span class="iti-flag {{userPerfil?.country}}"></span></small>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.BIRTHDATE' | translate}}</strong> <br>
+              <small class="text-primary">{{'HOME.BIRTHLABEL' | translate}}</small> <br>
+              <small >{{userPerfil?.birthDate | date: 'dd-MM-YYYY'}}</small>
+            </ion-col>
+            <ion-col size="6">
+              <strong class="text-primary">{{'HOME.PLANS' | translate}}</strong> <br>
+              <ion-button routerLink="/plans"  fill="solid" size="small" color="naranja">
+                {{'HOME.PLANSBTN' | translate}}
+              </ion-button>
+              <!-- <strong class="text-primary">{{'HOME.' | translate}}</strong> <br>
+              <small>{{userPerfil?.spei}}</small> -->
+            </ion-col>
+          </ion-row>
+    </ion-grid>
+  </div>
+  <hr>
+  <div class="vertical-padding bg-white" *ngIf="!_user.dataUser.csai">
+    <ion-grid fixed>
+      <ion-row class="ion-padding">
+        <ion-col size="12" size-lg="4" size-md="4" size-sm="6" offsetMd="4" offsetLg="4" class="ion-text-center">
+          <ion-label>{{'HOME.ACOUNTLINKTITLE' | translate}}</ion-label>          
+          <ion-button routerLink="/acount-link" expand="block" color="naranja" shape="round">
+            {{'HOME.CREATEACONTBUTON' | translate}}
+          </ion-button>
+          <br>
+          <!-- <ion-button (click)="getFile()" expand="block" fill="clear" shape="round">
+            {{'HOME.STRIPEMANUALBTN' | translate}}
+          </ion-button> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-card *ngIf="generaLink" color="light">
+    <ion-card-header>
+      <ion-card-subtitle>Stripe Acount Link</ion-card-subtitle>
+      <ion-card-title>{{'HOME.ACOUNTLINKTITLE' | translate}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{'HOME.ACOUNTLINKTEXT' | translate}}
+    </ion-card-content>
+    <ion-button routerLink="/acount-link" expand="block" color="naranja" >
+      {{'HOME.ACOUNTLINKBUTTON' | translate}}
+    </ion-button>
+    <br>
+    <ion-button (click)="getFile()" expand="block" fill="clear" shape="round">
+      {{'HOME.STRIPEMANUALBTN' | translate}}
+    </ion-button>
+  </ion-card>
+  
+  <hr>
+  <!-- <ion-card color="light">
+    <ion-card-content>
+      <p>{{'HOME.CHANGETELTXT' | translate}}</p>
+      <ion-button (click)="changeTel()" expand="block" color="azul" >
+        {{'HOME.CHANGETELBTN' | translate}}
+      </ion-button>
+    </ion-card-content>
+  </ion-card> -->
+  
+  
+</ion-content>
+<ion-content class="ion-padding" *ngIf="_user.dataUser.role === 'conversador'">
+  <ion-row>
+    <ion-col>
+      <ion-slides mode="ios" pager="ios" [options]="slideOptions" id="slideImpr">
+        <ion-slide *ngFor="let banner of banners">
+          <img src="{{banner?.img}}" alt="">
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-list-header color="azul" class="head-radius">
+      <ion-label>{{'CALLS.SUBTITLE' | translate}}</ion-label>
+    </ion-list-header>
+    <ion-item class="last-item" *ngIf="!puedeLlamar">
+      <ion-label>{{'HOME.CANNOTCALLS' | translate }}</ion-label>
+    </ion-item>
+    <div *ngIf="puedeLlamar">
+      <ion-item *ngFor="let user of filtrados; let i = index; let last = last" [ngClass]="{'last-item': last}" >
+        <ion-label >
+          <h2>{{user.name}}</h2>
+          <p>
+            <span *ngIf="user.gender == 'hombre'">{{'HOME.HOMBRE' | translate}}  </span>  
+            <span *ngIf="user.gender == 'mujer'">{{'HOME.MUJER' | translate}}  </span>  
+            <span class="flag-icon flag-icon-{{user.country}}"></span>  <span class="ion-text-uppercase">  {{user.country}}</span>
+          </p>
+          <p>{{'HOME.LANGUAGE' | translate}}: {{user.plan.idioma| uppercase}}</p>
+          <p>{{'HOME.SCHEDULE' | translate}}: {{user.inicio}} - {{user.fin}} Hrs</p>
+          <p>{{user.timezone.nameValue}} - {{user.timeActual}} </p>
+          <p>{{'HOME.BIO' | translate}}: {{user.bio}}</p>
+          <!-- <p>{{'HOME.MINUTES' | translate}}: {{user?.minutos/60 | number : '1.2-2'}}</p> -->
+          <!-- <p>Holdovers: {{user?.weeks[user.semana].minutesRemaining}} - Available minutes: {{user?.weeks[user.semana].availableMinutesPerWeek}}</p> -->
+        </ion-label>
+        <ion-button *ngIf="i == 0" (click)="llamarCliente(user)" slot="end"  color="azul">
+          <ion-icon slot="icon-only" name="call"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+    </div>
+  </ion-list>
+
+  <div class="vertical-padding bg-white" *ngIf="!_user.dataUser.csai">
+    <ion-grid fixed>
+      <ion-row class="ion-padding">
+        <ion-col size="12" size-lg="4" size-md="4" size-sm="6" offsetMd="4" offsetLg="4" class="ion-text-center">
+          <ion-label>{{'HOME.ACOUNTLINKTITLESP' | translate}}</ion-label>
+          
+          <ion-button routerLink="/acount-link" expand="block" color="naranja" shape="round">
+            {{'HOME.CREATEACONTBUTON' | translate}}
+          </ion-button>
+          <br>
+          <!-- <ion-button (click)="getFile()" expand="block" fill="clear" shape="round">
+            {{'HOME.STRIPEMANUALBTN' | translate}}
+          </ion-button> -->
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-card *ngIf="generaLink" color="light">
+    <ion-card-header>
+      <ion-card-subtitle>Stripe Acount Link</ion-card-subtitle>
+      <ion-card-title>{{'HOME.ACOUNTLINKTITLESP' | translate}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{'HOME.ACOUNTLINKTEXT' | translate}}
+    </ion-card-content>
+    <ion-button routerLink="/acount-link" expand="block" color="naranja" >
+      {{'HOME.ACOUNTLINKBUTTON' | translate}}
+    </ion-button>
+    <br>
+    <ion-button (click)="getFile()" expand="block" fill="clear" shape="round">
+      {{'HOME.STRIPEMANUALBTN' | translate}}
+    </ion-button>
+  </ion-card>
+  
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar [color]="color">
+    <ion-title class="ion-text-right" size="small" id="footerTitle">Language Fluency SAPI</ion-title>
+  </ion-toolbar>
+</ion-footer>

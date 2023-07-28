@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="naranja">
+    <ion-title>{{'CALLRATE.TITLE' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelar()">{{'CALLRATE.CANCEL' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding" id="califica">
+    <form [formGroup]="calificaForm" (ngSubmit)="calificar()" novalidate>
+      <ion-item color="light">
+        <ion-label slot="start">{{'CALLRATE.RATE' | translate}}</ion-label>
+        <ngb-rating formControlName="fluency"  [max]="5"  (rateChange)="changefl($event)">
+          <ng-template let-fill="fill">
+            <span [class.filled]="fill === 100" [class.notfilled]="fill === 0">
+              <ion-icon name="custom-icono-speaker"></ion-icon>
+            </span>
+          </ng-template>
+        </ngb-rating>
+      </ion-item>
+      <!-- <ion-item color="light">
+        <ion-label slot="start">Pronunciation</ion-label>
+        <ngb-rating  formControlName="pronunciation" [max]="5" (rateChange)="changepr($event)">
+          <ng-template let-fill="fill">
+            <span [class.filled]="fill === 100" [class.notfilled]="fill === 0">
+              <ion-icon name="custom-icono-speaker"></ion-icon>
+            </span>
+          </ng-template>
+        </ngb-rating>
+      </ion-item> -->
+      <!-- <ion-item color="light">
+        <ion-label slot="start">Grammar</ion-label>
+        <ngb-rating  formControlName="grammar" [max]="5" (rateChange)="changegr($event)">
+          <ng-template let-fill="fill">
+            <span [class.filled]="fill === 100" [class.notfilled]="fill === 0">
+              <ion-icon name="custom-icono-speaker"></ion-icon>
+            </span>
+          </ng-template>
+        </ngb-rating>
+      </ion-item> -->
+     
+      <ion-button type="submit" expand="block" color="azul" [disabled]="calificaForm.invalid">
+        {{'CALLRATE.BUTTON' | translate}}
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

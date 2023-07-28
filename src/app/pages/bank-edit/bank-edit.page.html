@@ -1,0 +1,22 @@
+<ion-header class="ion-no-border"  translucent>
+  <ion-toolbar [color]="color">
+    
+    <ion-title class="ion-text-capitalize">Editar Clave Interbancaria</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="editaBankForm" (ngSubmit)="editarBank()">
+    <ion-item color="light">
+      <ion-icon slot="start" name="person-outline" [color]="color"></ion-icon>
+      <!-- <ion-label >Nombre</ion-label> -->
+      <ion-input type="text" name="spei" id="spei" [formControl]="$any(editaBankForm).controls.spei" placeholder="Clave Interbancaria"></ion-input>
+    </ion-item>
+    <ion-button expand="block" [color]="color" type="submit" [disabled]="editaBankForm.invalid">
+      Editar
+    </ion-button>
+  </form>
+</ion-content>

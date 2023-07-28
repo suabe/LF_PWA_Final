@@ -1,0 +1,219 @@
+<ion-header>
+  <ion-toolbar color="azul">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/login"><ion-icon slot="icon-only" name="add"></ion-icon></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{"REGISTRO.TITLE" | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-padding">
+      <ion-col size="6" offset="3" size-lg="3" size-md="4" size-sm="6" offset-md="4">
+        <ion-img src="/assets/logo-login.png"></ion-img>
+      </ion-col>
+      <ion-col size="12" size-lg="4" size-md="6" size-sm="6" offsetMd="3" offsetLg="4">
+        <form [formGroup]="registroSPForm" (ngSubmit)="registroSpeaker()" novalidate>
+          <aw-wizard navBarLocation="bottom">
+            <aw-wizard-step stepTitle="{{'REGISTRO.DATASTEP' | translate}}">
+              <ion-item color="light">
+                <ion-icon slot="start" name="person-outline" color="azul"></ion-icon>
+                <!-- <ion-label >Nombre</ion-label> -->
+                <ion-input type="text" [placeholder]="'REGISTRO.NOMBRE' | translate" [formControl]="$any(registroSPForm).controls.name" required></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!registroSPForm.controls.name.valid && registroSPForm.controls.name.dirty">
+                <ion-label color="danger">{{'REGISTRO.NOMBRE' | translate}} is required</ion-label>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="start" name="person-add-outline" color="azul"></ion-icon>
+                <!-- <ion-label >Apellidos</ion-label> -->
+                <ion-input type="text" [placeholder]="'REGISTRO.APELLIDOS' | translate" [formControl]="$any(registroSPForm).controls.lastName" required></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!registroSPForm.controls.lastName.valid && registroSPForm.controls.lastName.dirty">
+                <ion-label color="danger">{{'REGISTRO.APELLIDOS' | translate}} is required</ion-label>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="start" name="male-female-outline" color="azul"></ion-icon>
+                <!-- <ion-label>Género</ion-label> -->
+                <ion-select cancelText="{{'REGISTRO.GENDERCANCEL' | translate}}" multiple="false" [placeholder]="'REGISTRO.GENERO' | translate" interface="action-sheet" [formControl]="$any(registroSPForm).controls.gender" required>
+                  <ion-select-option value="hombre">{{'REGISTRO.GENDERMALE' | translate}}</ion-select-option>
+                  <ion-select-option value="mujer">{{'REGISTRO.GENDERFEMALE' | translate}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="!registroSPForm.controls.gender.valid && registroSPForm.controls.gender.touched">
+                <ion-label color="danger">{{'REGISTRO.GENERO' | translate}} is required</ion-label>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="start" name="calendar-outline" color="azul" ngbTooltip="{{'REGISTRO.CUMPLEANOS' | translate}}" placement="end"></ion-icon>
+                <!-- <ion-label >Cumpleaños</ion-label> -->
+                <input
+                  type="date"
+                  [formControl]="$any(registroSPForm).controls.birthDate"
+                  required="required" 
+                />
+                <span [attr.your-custom]="'REGISTRO.DATEPLACEHOLDER' | translate"></span>
+                <!-- <ion-datetime  [placeholder]="'REGISTRO.CUMPLEANOS' | translate" display-format="YYYY-MMMM-DD" cancelText="{{'REGISTRO.BIRTHCANCEL' | translate}}" doneText="{{'REGISTRO.BIRTHDONE' | translate}}"  mode="ios" min="1970" max="2010" [formControl]="$any(registroSPForm).controls.birthDate" required></ion-datetime> -->
+              </ion-item>
+              <ion-item *ngIf="!registroSPForm.controls.birthDate.valid && registroSPForm.controls.birthDate.touched">
+                <ion-label color="danger">{{'REGISTRO.CUMPLEANOS' | translate}} is required</ion-label>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="start" name="mail-outline" color="azul"></ion-icon>
+                <!-- <ion-label >Email</ion-label> -->
+                <ion-input [placeholder]="'REGISTRO.EMAIL' | translate" type="text" [formControl]="$any(registroSPForm).controls.email"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!registroSPForm.controls.email.valid && registroSPForm.controls.email.dirty">
+                <ion-label color="danger">{{'REGISTRO.EMAIL' | translate}} is required</ion-label>
+              </ion-item>
+              <!-- <ion-item color="light">
+                <ion-icon slot="start" name="id-card-outline" color="azul"></ion-icon>
+                <ion-textarea placeholder="Mis intereses" inputmode="text" [formControl]="$any(registroSPForm).controls.bio"></ion-textarea>
+              </ion-item> -->
+              <ion-item color="light">
+                <ion-icon slot="start" name="call-outline" color="azul"></ion-icon>
+                <!-- <ion-label >Teléfono</ion-label> -->
+                <ion-intl-tel-input 
+                  formControlName="phone" >
+                </ion-intl-tel-input>
+                <!-- <input type="tel" ionicTelInput [ionicTelInputOptions]="{initialCountry: 'mx',onlyCountries:['mx','ar','us','ca','du','fr','es']}"
+                (countryChange)="onCountryChange($event)"
+                (intlTelInputObject)="telInputObject($event)"
+                (hasError)="hasError($event)"
+                (ionicTelOutput)="getNumber($event)"
+                [placeholder]="'REGISTRO.TELEFONO' | translate" name="registroSPForm" [formControl]="$any(registroSPForm).controls.phone" required> -->
+              </ion-item>
+              <ion-item *ngIf="!registroSPForm.controls.phone.valid && registroSPForm.controls.phone.touched">
+                <ion-label color="danger" *ngIf="!registroSPForm.controls.phone.errors.reqired">{{'REGISTRO.TELEFONO' | translate}} is required</ion-label>
+              </ion-item>
+              <ion-item color="light">
+                <ion-icon slot="start" name="key-outline" color="azul"></ion-icon>
+                <!-- <ion-label >Contraseña</ion-label> -->
+                <ion-input [placeholder]="'REGISTRO.CONTRASENA' | translate" type="password" [formControl]="$any(registroSPForm).controls.password"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!registroSPForm.controls.password.valid && registroSPForm.controls.password.dirty">
+                <!-- <ion-label color="danger" *ngIf="!registroSPForm.controls.password.errors.reqired">{{'REGISTRO.CONTRASENA' | translate}} is required</ion-label> -->
+                <ion-label color="danger" *ngIf="!registroSPForm.controls.password.errors.minLength">{{'REGISTRO.CONTRASENA' | translate}} minimum of 6 characters</ion-label>
+              </ion-item>
+              <!-- <ion-item color="light">
+                <ion-icon slot="start" name="card-outline" color="naranja"></ion-icon>
+                 <ion-label >Apellidos</ion-label>
+                <ion-input type="text" placeholder="SPEI" [formControl]="$any(registroSPForm).controls.spei" required></ion-input>
+              </ion-item> -->
+              <!-- <button type="button" awNextStep>Next Step</button> -->
+              <ion-button routerLink="/login" color="danger">
+                {{"REGISTRO.CANCELAR" | translate}}
+              </ion-button>
+              <ion-button  awNextStep>
+                {{"REGISTRO.SIGUIENTE" | translate}}
+              </ion-button>
+            </aw-wizard-step>
+
+            <aw-wizard-step stepTitle="{{'REGISTRO.LANGSTEP' | translate}}">
+              <!-- <ion-item color="light">
+                <ion-icon slot="start" name="time-outline" color="azul"></ion-icon>
+                 <ion-label>Awesome Label</ion-label>
+                <ion-datetime placeholder="De" display-format="HH:mm" cancelText="Cancelar" done-text="Elegir" mode="ios" [formControl]="$any(registroSPForm).controls.horario" required></ion-datetime>
+                <ion-datetime slot="end" placeholder="Hasta" display-format="HH:mm" cancelText="Cancelar" done-text="Elegir" mode="ios" [formControl]="$any(registroSPForm).controls.horario2" required></ion-datetime>
+              </ion-item> -->
+              <!-- <ion-label >"El horario introducido nos servirá como una referencia, las llamadas pueden ocurrir fuera de su preferencia."</ion-label> -->
+              <ion-label class="ion-margin-bottom titulo" color="naranja" >{{"REGISTRO.LABELIDIOMAS" | translate}}</ion-label>
+              <ion-item id="" color="light">
+                <ion-icon slot="start" name="male-female-outline" color="azul"></ion-icon>
+                <!-- <ion-label>Idioma</ion-label> -->
+                <ion-select cancelText="Cancelar" multiple="true" [placeholder]="'REGISTRO.IDIOMAS' | translate" interface="action-sheet" [formControl]="$any(registroSPForm).controls.idioma" required>
+                  <ion-select-option value="es">{{'ADDPLANS.SPANISH' |  translate}}</ion-select-option>
+                  <ion-select-option value="en">{{'ADDPLANS.ENGLISH' |  translate}}</ion-select-option>
+                  <ion-select-option value="fr">{{'ADDPLANS.FRENCH' |  translate}}</ion-select-option>
+                  <ion-select-option value="cn">{{'ADDPLANS.CHINESE' |  translate}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-item *ngIf="!registroSPForm.controls.idioma.valid && registroSPForm.controls.idioma.touched">
+                <ion-label color="danger">{{'REGISTRO.IDIOMAS' | translate}} is required</ion-label>
+              </ion-item>
+              <ion-item (click)="openModal(term)">
+                <ion-label>{{"REGISTRO.TERMINOS" | translate}}</ion-label>
+                <ion-checkbox   formControlName="termCond"></ion-checkbox>
+                <!-- <ion-checkbox slot="end" [formControl]="$any(registroSPForm).controls.termCond" required></ion-checkbox> -->
+              </ion-item>
+              <ion-item (click)="openModal(priv)">
+                <ion-label>{{"REGISTRO.PRIVACIDAD" | translate}}</ion-label>
+                <ion-checkbox  formControlName="privacidad"></ion-checkbox>
+                <!-- <ion-checkbox slot="end" [formControl]="$any(registroSPForm).controls.privacidad" required></ion-checkbox> -->
+              </ion-item>
+              
+              
+              <!-- <button type="button" awPreviousStep>Previous Step</button> -->
+              <ion-row>
+                <ion-col>
+                  <ion-button color="naranja" awPreviousStep>
+                    {{"REGISTRO.REGRESAR" | translate}}
+                  </ion-button>
+                </ion-col>
+                <ion-col>
+                  <ion-button type="submit" [disabled]="registroSPForm.invalid">{{"REGISTRO.REGISTRAR" | translate}}</ion-button>
+                </ion-col>
+              </ion-row>
+            </aw-wizard-step>
+          </aw-wizard>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ng-template #term >
+  <div class="modal-header" color="azul">
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="current == 'es'">Términos y condiciones</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="current == 'en'">Terms and conditions</h4>
+  </div>
+  <div class="modal-body"  *ngIf="current == 'es'"  >
+    <p ngbAutofocus ><strong>Aviso legal:</strong></p>
+    <div [innerHtml]=txtTerms.es></div>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('term')" *ngIf="current == 'es'" >Aceptar</button>
+  </div>
+  <div class="modal-body" *ngIf="current == 'en'">
+    <p ngbAutofocus><strong>Legal:</strong></p>
+    <div [innerHtml]=txtTerms.en></div>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('term')" *ngIf="current == 'en'">Acept</button>
+  </div>
+  <!-- <div class="modal-footer">
+    
+    
+  </div> -->
+</ng-template>
+
+<ng-template #priv>
+  <div class="modal-header" color="azul">
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="current == 'es'">Aviso de privacidad</h4>
+    <h4 class="modal-title" id="modal-basic-title" *ngIf="current == 'en'">This privacy policy</h4>
+  </div>
+  <div class="modal-body" *ngIf="current == 'es'">
+    <h2 ngbAutofocus >Privacidad:</h2>
+
+    <div [innerHtml]=txtPrivacy.es></div>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('priv')">Aceptar</button>
+  </div>
+  <div class="modal-body" *ngIf="current == 'en'">
+    <h2 ngbAutofocus >Privacy:</h2>
+
+    <div [innerHtml]=txtPrivacy.en></div>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('priv')">Acept</button>
+  </div>
+  <!-- <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('priv')" *ngIf="current == 'es'">Aceptar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal('priv')" *ngIf="current == 'en'">Acept</button>
+  </div> -->
+</ng-template>
+<ion-footer class="ion-no-border">
+  <ion-toolbar color="azul">
+    <ion-item slot="start" color="azul">
+      <!-- <ion-label>Language</ion-label> -->
+      <ion-select [value]="current" name="lang" interface="popover" (ionChange)="setLanguage($event)" placeholder="{{'MENU.LANGUAGE' | translate}}">
+        <ion-select-option *ngFor="let item of listLang"
+        [value]="item.lang">
+        {{item.text}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-title class="ion-text-right" size="small" id="footerTitle">Language Fluency SAPI</ion-title>
+  </ion-toolbar>
+</ion-footer>

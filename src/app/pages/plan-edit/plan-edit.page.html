@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="naranja">
+    <ion-title>{{'EDITPLAN.TITLE' | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cancelar()">{{'EDITPLAN.CLOSE' | translate}}</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-card color="light">
+    <ion-card-header>
+      <ion-card-subtitle>{{'EDITPLAN.CREATED' | translate}}: {{planData?.creadaDate.seconds*1000 | date}}</ion-card-subtitle>
+      <!-- <ion-card-title *ngIf="planData?.price == 'price_1IiLcPFjLGC5FmHqDAZZskyw'">Fluency 10/3</ion-card-title>
+      <ion-card-title *ngIf="planData?.price == 'price_1IiLr3FjLGC5FmHq8Z2z8pnq'">+Fluency</ion-card-title> -->
+      <ion-card-title>{{planData?.type}}</ion-card-title>
+      <ion-card-subtitle>{{'EDITPLAN.LANGUEAGE' | translate}} {{planData?.idioma |uppercase }}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+  <form [formGroup]="editaPlanForm" (ngSubmit)="editarPlan()">
+    <!-- <ion-item color="light">
+      <ion-label>{{'EDITPLAN.LABELCARD' | translate}}</ion-label>
+      <ion-select cancelText="Cancelar" mode="ios" placeholder="Tarjeta" interface="action-sheet" [formControl]="$any(editaPlanForm).controls.tarjeta"  required>
+        <ion-select-option *ngFor="let item of wallet" [value]="item.customer">{{item.card.brand}} {{item?.card.last4}} - {{'EDITPLAN.EXPIRATION' | translate}} {{item?.card.exp_month}}/{{item?.card.exp_year}}</ion-select-option>
+    </ion-select>
+    </ion-item> -->
+    <ion-item color="light">
+      <ion-label>{{'EDITPLAN.LABELSCHEDULE' | translate}}</ion-label>
+      <ion-select placeholder="Selecciona" mode="ios" [formControl]="$any(editaPlanForm).controls.schedule"  required>
+        <ion-select-option value="8">8:00 - 11:00</ion-select-option>
+        <ion-select-option value="11">11:00 - 14:00</ion-select-option>
+        <ion-select-option value="14">14:00 - 17:00</ion-select-option>
+        <ion-select-option value="17">17:00 - 20:00</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!-- <ion-button routerLink="/wallet-tarjetas" (click)="cancelar()" expand="full" fill="solid" shape="round">
+      {{'EDITPLAN.WALLET' | translate}}
+    </ion-button> -->
+    <ion-button block color="primary" type="submit" [disabled]="editaPlanForm.invalid">
+      {{'EDITPLAN.EDIT' | translate}}
+    </ion-button>
+  </form>
+</ion-content>

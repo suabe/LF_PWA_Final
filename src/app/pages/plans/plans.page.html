@@ -1,0 +1,92 @@
+<!-- <app-header titulo="Planes" color="naranja"></app-header> -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="naranja">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-capitalize">{{"PLANS.TITLE" | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/add-plans" strong="true">
+        <ion-icon slot="start" name="add"></ion-icon>
+        {{'PLANS.TOOLBARBUTTON' | translate}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-list-header color="naranja">
+      <ion-label>{{"PLANS.TITLE" | translate}}</ion-label>
+      <ion-button color="light" routerLink="/add-plans">
+        <ion-icon slot="start" name="add"></ion-icon>
+        {{'PLANS.TOOLBARBUTTON' | translate}}
+      </ion-button>
+    </ion-list-header>
+    <ion-item *ngIf="!hayPlanes" color="light" class="last-item">
+      <ion-label>{{'PLANS.NOPLANS' | translate}}</ion-label>
+    </ion-item>
+    <ion-item-sliding *ngFor="let plan of planes; let last = last" #slidingItem>
+      <ion-item color="light" [ngClass]="{'last-item': last}">
+        <ion-label>
+          <!-- <p>{{plan?.plan}}</p> -->
+          <!-- <h2 *ngIf="plan?.price == 'price_1IiLcPFjLGC5FmHqDAZZskyw'">Fluency 10/3</h2>
+          <h2 *ngIf="plan?.price == 'price_1IiLr3FjLGC5FmHq8Z2z8pnq'">+Fluency</h2> -->
+          <h2>{{plan.price}}</h2>
+          <h4>{{'PLANS.SCHEDULE' | translate}}: {{plan.inicio}}-{{plan.fin}} Hrs</h4>
+          <p *ngIf="plan?.activa">{{"PLANS.CREATED" | translate}} {{plan?.creadaDate.seconds*1000 | date}}</p>
+          <p *ngIf="!plan?.activa">{{"PLANS.CANCELLED" | translate}} {{plan?.canceled_at*1000 | date}}</p>
+          <p>{{"PLANS.LANGUAGE" | translate}}: {{plan?.idioma | uppercase}} </p>
+          <p>
+            <ion-badge color="success" mode="ios" *ngIf="plan?.activa">{{"PLANS.ACTIVE" | translate}}</ion-badge>
+            <ion-badge color="warning" mode="ios">{{ plan?.status }}</ion-badge>
+            <ion-badge color="danger" mode="ios" *ngIf="!plan?.activa">{{"PLANS.CANCELLED" | translate}}</ion-badge>
+          </p>
+        </ion-label>
+        <ion-button slot="end" color="primary" (click)="upgradePlan(plan)" *ngIf="plan?.price == 'Fluency 10/3'" ngbTooltip="{{'PLANS.UPGRADEBTN' | translate}}" placement="top">
+          <ion-icon slot="icon-only" name="star"></ion-icon>
+        </ion-button>
+        <ion-button slot="end" color="success" (click)="editar(plan)" ngbTooltip="{{'PLANS.EDITBTN' | translate}}" placement="top">
+          <ion-icon slot="icon-only" name="create"></ion-icon>
+        </ion-button>
+        <ion-button slot="end" color="danger" (click)="eliminar(plan)" ngbTooltip="{{'PLANS.DELETEBTN' | translate}}" placement="top">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <!-- <ion-item-options side="end" *ngIf="plan?.activa">
+        <ion-item-option (click)="eliminar(plan);slidingItem.close()" color="danger"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
+        <ion-item-option color="primary" (click)="editar(plan);slidingItem.close()" color="success"><ion-icon slot="icon-only" name="create"></ion-icon></ion-item-option>
+      </ion-item-options> -->
+  
+    </ion-item-sliding>
+    
+    
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="naranja" routerLink="/add-plans">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <!-- <ion-fab-list side="top">
+      <ion-fab-button color="azul"><ion-icon name="reader"></ion-icon></ion-fab-button>
+    </ion-fab-list> -->
+  </ion-fab>
+  <!-- <ion-slides mode="ios" pager="ios" scrollbar="ios" class="mainSlide">
+    <ion-slide>
+      <ion-card color="light">
+        <ion-card-header>
+          <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+          <ion-card-title>Awesome Title</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-slide>
+    <ion-slide>
+      <ion-card color="light">
+        <ion-card-header>
+          <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+          <ion-card-title>Awesome Title</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+    </ion-slide>
+  </ion-slides> -->
+</ion-content>

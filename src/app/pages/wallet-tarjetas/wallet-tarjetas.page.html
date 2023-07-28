@@ -1,0 +1,33 @@
+<app-header titulo="{{'WALLET.TITLE' | translate}}" color="naranja"></app-header>
+
+<ion-content class="ion-padding">
+      <ion-list>
+        <ion-list-header color="naranja" class="ion-text-center">
+          <ion-label>{{'WALLET.PAYMENTMETHOD' | translate}}</ion-label>
+        </ion-list-header>
+        <ion-item color="light" *ngFor="let item of wallet; let last = last" [ngClass]="{'last-item': last}">
+          <ion-icon slot="start" name="card-outline"></ion-icon>
+          <ion-label>
+            <!-- <h5>{{item.token}} </h5> -->
+            <p>{{'WALLET.CARD' | translate}} {{item?.card.last4}} - {{'WALLET.EXPIRATION' | translate}} {{item?.card.exp_month}}/{{item?.card.exp_year}}</p>
+            <p>{{item?.card.brand}}</p>
+          </ion-label>
+          <ion-button (click)="borraTarjeta(item)" slot="end">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+      <ion-button (click)="agregaTarjeta()" expand="full" shape="round" color="azul" >
+        {{'WALLET.ADDCARD' | translate}}
+      </ion-button>
+</ion-content>
+<ion-tab-bar slot="bottom,top" color="naranja">
+  <ion-tab-button routerLink="/plans">
+    <ion-icon name="card-outline"></ion-icon>
+    <ion-label>{{'PLANS.TITLE' | translate}}</ion-label>
+  </ion-tab-button>
+  <ion-tab-button routerLink="/wallet-tarjetas">
+    <ion-icon name="wallet-outline"></ion-icon>
+    <ion-label>{{'WALLET.PAYMENTMETHOD' | translate}}</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

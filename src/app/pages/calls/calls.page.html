@@ -1,0 +1,27 @@
+<app-header titulo="{{'CALLS.TITLE' | translate}}" color="azul"></app-header>
+
+<ion-content class="ion-padding">
+  <ion-row>
+    <ion-col>
+      <ion-slides mode="ios" pager="ios">
+        <ion-slide>
+          <img src="/assets/banner01.png" alt="">
+        </ion-slide>
+      </ion-slides>
+    </ion-col>
+  </ion-row>
+  <ion-list>
+    <ion-list-header color="azul">
+      <ion-label>{{'CALLS.SUBTITLE' | translate}}</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let user of userList; let i = index">
+      <ion-label>
+        <h2>{{user.name}} {{user.lastName}}</h2>
+        <p>{{user.bio}}</p>
+      </ion-label>
+      <ion-button *ngIf="i == 0" (click)="llamarCliente(user)" slot="end"  color="azul">
+        <ion-icon slot="icon-only" name="call"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

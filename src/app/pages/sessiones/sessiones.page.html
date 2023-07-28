@@ -1,0 +1,19 @@
+<app-header titulo="Sessiones"></app-header>
+
+<ion-content class="ion-padding">
+    <ion-list>
+        <ion-list-header color="naranja" class="ion-text-center">
+          <ion-label>Ultimas llamadas</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let item of [1,1,1,1,1,1,1,1]; let i = index">
+          <ion-label>
+            <h2>Usuario</h2>
+            <p>Intereses: Viajes, Deportes, Cine</p>
+            <p>Realizada: 15/Abril/2021 </p>
+          </ion-label>
+          <ion-button (click)="calificaCliente('1')" slot="end" *ngIf="i == 1"  color="azul">
+            <ion-icon slot="icon-only" name="checkmark-circle"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
+</ion-content>

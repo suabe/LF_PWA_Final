@@ -1,0 +1,56 @@
+<ion-content>
+  <ion-grid>
+    <ion-row >
+      <ion-col size="12" size-lg="4" size-md="4" size-sm="6" offset-md="4" offsetLg="4">
+        <ion-item color="darck" lines="none">
+          <ion-img src="/assets/logo-login.png"></ion-img>
+          
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" size-lg="4" size-md="4" size-sm="4" offsetMd="4" offsetLg="4"><h2 class="ion-text-center">Sign in</h2></ion-col>
+    </ion-row>
+    <ion-row class="ion-padding">
+      <ion-col size="12" size-lg="4" size-md="4" size-sm="6" offsetMd="4" offsetLg="4">
+        <form [formGroup]="loginform" (ngSubmit)="doLogin()" novalidate>    
+          <ion-item  color="light">
+            <ion-icon slot="start" name="mail-outline" color="naranja"></ion-icon>
+            
+            <ion-label >Email</ion-label>
+            <ion-input type="text" [formControl]="$any(loginform).controls.email"
+                       pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$"
+                       type="email" required></ion-input>
+            
+          </ion-item> 
+      
+          <ion-item color="light">
+            <ion-icon slot="start" name="key-outline" color="naranja"></ion-icon>
+            <ion-label >Password</ion-label>
+            <ion-input type="password" [formControl]="$any(loginform).controls.password" required></ion-input>
+          </ion-item>
+      
+          <ion-row>
+            <ion-col> 
+            <ion-button id="btn-login" type="submit"  expand="block"  [disabled]="loginform.invalid">Login</ion-button>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col> 
+            <ion-button routerLink="/recuperar" expand="block" color="azul" fill="clear" >Recover password</ion-button>
+            </ion-col>
+          </ion-row>
+          <span class="divider line one-line"></span>
+      
+          <ion-row>
+            <ion-col class="ion-text-center"> 
+              <ion-button id="btn-registro" expand="block" routerLink="/registration" >New user? Sign up</ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  
+</ion-content>

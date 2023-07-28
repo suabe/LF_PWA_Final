@@ -1,0 +1,46 @@
+ion-item {
+    --background: #fff;
+    --color: #000;
+    --inner-border-width: 0px;
+    --border-color: #fff;
+}
+
+ngb-rating {
+    background-color: #ffffff;
+}
+
+.audio-container {
+  margin: 0 auto; display: table;
+}
+
+.star {
+    position: relative;
+    display: inline-block;
+    font-size: 2rem;
+    color: #d3d3d3;
+  }
+  .full {
+    color: #0076ed;
+  }
+  .half {
+    position: absolute;
+    display: inline-block;
+    overflow: hidden;
+    color: #0076ed;
+    z-index: 10;
+  }
+  .filled{
+    font-size: 2rem;
+    color: #0076ed;
+}
+
+.notfilled{
+    font-size: 2rem;
+    color:#d3d3d3;
+}
+
+#iconAVG {
+  font-size: 2rem;
+  color: #0076ed;
+}
+
