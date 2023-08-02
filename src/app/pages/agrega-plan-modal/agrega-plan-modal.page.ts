@@ -54,7 +54,7 @@ export class AgregaPlanModalPage implements OnInit {
       spinner: 'bubbles'
     })
     this.loader.present()
-    this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/crearPlan', {
+    this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/crearPlan', {
       customer: this.contratarForm.get('tarjeta').value,
       priceId: this.precio
     }).subscribe( async (data: any) => {

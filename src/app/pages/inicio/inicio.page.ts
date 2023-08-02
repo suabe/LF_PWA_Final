@@ -170,7 +170,7 @@ export class InicioPage implements OnInit {
     this.loader.present()
     this.fbstore.collection('plans').doc(user.planID).update({enllamada: true})
     this.fbstore.collection('perfiles').doc(user.iUid).update({enllamada: true})
-    await this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/llamadaSaliente', {
+    await this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/llamadaSaliente', {
       source: this._user.dataUser.code.replace(/ /g, ""),//Numero del Speaker con codigo de pais
       speId: this._user.userID,//UID del speaker
       destination: user.imTel.replace(/ /g, ""),//Numero del Improver, con codigo de pais
@@ -442,7 +442,7 @@ export class InicioPage implements OnInit {
     })    
     
     this.loader.present();
-    this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/createAccount', {
+    this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/createAccount', {
       country: this._user.dataUser.country,
       email: this._user.dataUser.email
     }).subscribe( async (acount: any) => {

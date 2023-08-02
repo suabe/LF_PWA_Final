@@ -83,7 +83,7 @@ export class RegistroSpeakerPage implements OnInit {
     //this.slides.lockSwipes(true);
     this.menu.enable(false,'main');
     this.fbstore.collection('managerOptions').doc('privacy').get().subscribe(data => {
-      //console.log('privacidad',data.data());
+      console.log('privacidad',data.data());
       this.txtPrivacy = data.data();
     });
     this.fbstore.collection('managerOptions').doc('terms').get().subscribe(data => {

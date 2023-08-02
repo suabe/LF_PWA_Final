@@ -68,8 +68,8 @@ export class RegistroPlanPage implements OnInit {
     private lang: LanguageService,
     config: NgbModalConfig
   ) { 
-    //this.host = 'http://localhost:5001/ejemplocrud-e7eb1/us-central1/';
-    this.host = 'https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/';
+    //this.host = 'http://localhost:5001/pwa-lf/us-central1/';
+    this.host = 'https://us-central1-pwa-lf.cloudfunctions.net/';
    }
 
   ngOnInit() {

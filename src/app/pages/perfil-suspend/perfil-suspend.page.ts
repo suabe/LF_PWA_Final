@@ -75,7 +75,7 @@ export class PerfilSuspendPage implements OnInit {
         }
         this.fbstore.collection('perfiles').doc(this._user.userID).update({status: 'suspended'}).then(
           success => {
-            this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/sendAcountStatus',{
+            this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/sendAcountStatus',{
               userType: (this._user.dataUser.role == 'cliente')? 'improvers':'speakers',
               action: 'suspender',
               notas: 'Cuenta suspendida por el usuario',

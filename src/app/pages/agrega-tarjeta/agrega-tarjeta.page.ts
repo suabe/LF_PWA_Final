@@ -33,9 +33,9 @@ export class AgregaTarjetaPage implements OnInit {
     private translate: TranslateService
   ) {
     // this.stripe = new Stripe('pk_test_51IdzQvFjLGC5FmHqNEcCIDKir8SZhCPCKJe6Z9M07rfukQtstQfzllgTJktH7IkVHy0c8PTSIIPHEGDbO319mfOZ00DL0fDLYQ')
-    //this.host = 'http://localhost:5001/ejemplocrud-e7eb1/us-central1/';
+    //this.host = 'http://localhost:5001/pwa-lf/us-central1/';
     this.stripe = new Stripe('pk_live_51LVhdSEeGmiJ1g9DjMLCdYMefys2NdlW8T9WnaWB4Eut8SpTGeDCEFbKsl2yRUC27wSJ5XsAwY0NbNcp2IoSKT7O002TgmQ2t4')
-    this.host = 'https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/';
+    this.host = 'https://us-central1-pwa-lf.cloudfunctions.net/';
    }
 
   ngOnInit() {

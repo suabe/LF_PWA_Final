@@ -74,7 +74,7 @@ export class PerfilDeletePage implements OnInit {
         }
         this.fbstore.collection('perfiles').doc(this._user.userID).update({status: 'canceled'}).then(
           success => {
-            this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/sendAcountStatus',{
+            this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/sendAcountStatus',{
               userType: (this._user.dataUser.role == 'cliente')? 'improvers':'speakers',
               action: 'cancelar',
               notas: 'Cuenta cancelada por el usuario',

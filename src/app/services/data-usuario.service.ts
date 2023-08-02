@@ -68,7 +68,7 @@ export class DataUsuarioService {
   }
 
   createAccount() {
-    this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/createAccount', {
+    this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/createAccount', {
       country: this.dataUser.country,
       email: this.dataUser.email
     })

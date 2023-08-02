@@ -74,7 +74,7 @@ export class AcountLinkPage implements OnInit {
       mode: 'ios'
     })
     this.loader.present();
-    this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/accountLink', {
+    this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/accountLink', {
       id: this._user.dataUser.csai
     }).subscribe( async (link: any) => {
       this.loader.dismiss();
@@ -98,7 +98,7 @@ export class AcountLinkPage implements OnInit {
   }
 
   retrieveAccount() {
-    this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/retrieveAccount', {
+    this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/retrieveAccount', {
       id: this._user.dataUser.csai
     }).subscribe( acount => {
       return acount

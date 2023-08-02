@@ -81,7 +81,7 @@ export class WalletTarjetasPage implements OnInit {
               if (!plans.empty) {
                 plans.forEach(doc => {
                   console.log(doc.id, '=>', doc.data());
-                  this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/deletePlan',{
+                  this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/deletePlan',{
                     plan: doc.data()['plan']
                   }).subscribe( async (data:any) => {
                     if (data.id) {

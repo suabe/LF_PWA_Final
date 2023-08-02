@@ -69,7 +69,7 @@ export class CalificaLlamadaPage implements OnInit {
 
   async llamar() {
     this.fbstore.collection('plans').doc(this.planID).update({enllamada: true})
-   await this.http.post('https://us-central1-ejemplocrud-e7eb1.cloudfunctions.net/llamadaSaliente', {
+   await this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/llamadaSaliente', {
       source: this._user.dataUser.code.replace(/ /g, ""),//Numero del Speaker con codigo de pais
       speId: this._user.userID,//UID del speaker
       destination: this.imTel.replace(/ /g, ""),//Numero del Improver, con codigo de pais
