@@ -30,7 +30,7 @@ export class RecuperarPage implements OnInit {
       this.alerta();
     }).catch((error) => {
       this.toastService.showToast(error.message,3000);
-      console.log(error);
+      
       
     });
   }
@@ -45,7 +45,7 @@ export class RecuperarPage implements OnInit {
         {
           text: 'Ok',
           handler: (blah) => {
-            console.log('Boton Ok');
+            
             this.router.navigateRoot('login',{animated: true});
           }
         }

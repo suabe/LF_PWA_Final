@@ -29,9 +29,7 @@
     <ion-item-sliding *ngFor="let plan of planes; let last = last" #slidingItem>
       <ion-item color="light" [ngClass]="{'last-item': last}">
         <ion-label>
-          <!-- <p>{{plan?.plan}}</p> -->
-          <!-- <h2 *ngIf="plan?.price == 'price_1IiLcPFjLGC5FmHqDAZZskyw'">Fluency 10/3</h2>
-          <h2 *ngIf="plan?.price == 'price_1IiLr3FjLGC5FmHq8Z2z8pnq'">+Fluency</h2> -->
+          
           <h2>{{plan.price}}</h2>
           <h4>{{'PLANS.SCHEDULE' | translate}}: {{plan.inicio}}-{{plan.fin}} Hrs</h4>
           <p *ngIf="plan?.activa">{{"PLANS.CREATED" | translate}} {{plan?.creadaDate.seconds*1000 | date}}</p>
@@ -53,10 +51,7 @@
           <ion-icon slot="icon-only" name="trash"></ion-icon>
         </ion-button>
       </ion-item>
-      <!-- <ion-item-options side="end" *ngIf="plan?.activa">
-        <ion-item-option (click)="eliminar(plan);slidingItem.close()" color="danger"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-item-option>
-        <ion-item-option color="primary" (click)="editar(plan);slidingItem.close()" color="success"><ion-icon slot="icon-only" name="create"></ion-icon></ion-item-option>
-      </ion-item-options> -->
+      
   
     </ion-item-sliding>
     
@@ -67,26 +62,7 @@
     <ion-fab-button color="naranja" routerLink="/add-plans">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
-    <!-- <ion-fab-list side="top">
-      <ion-fab-button color="azul"><ion-icon name="reader"></ion-icon></ion-fab-button>
-    </ion-fab-list> -->
+    
   </ion-fab>
-  <!-- <ion-slides mode="ios" pager="ios" scrollbar="ios" class="mainSlide">
-    <ion-slide>
-      <ion-card color="light">
-        <ion-card-header>
-          <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
-          <ion-card-title>Awesome Title</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </ion-slide>
-    <ion-slide>
-      <ion-card color="light">
-        <ion-card-header>
-          <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
-          <ion-card-title>Awesome Title</ion-card-title>
-        </ion-card-header>
-      </ion-card>
-    </ion-slide>
-  </ion-slides> -->
+  
 </ion-content>

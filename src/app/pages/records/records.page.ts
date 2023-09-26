@@ -52,7 +52,7 @@ export class RecordsPage implements OnInit {
         if (this.callList.length > 0) {
           this.hayLlamadas = true
         }
-        // console.log(this.callList);
+        
       })
     } catch (error) {
       

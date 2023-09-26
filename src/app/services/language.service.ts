@@ -15,11 +15,11 @@ export class LanguageService {
     if (localStorage.getItem('lang')) {
       browserLang = localStorage.getItem('lang')
     } else {
-      //browserLang = translate.getBrowserLang();
+      
       browserLang = 'en'
     }
     translate.use(browserLang.match(/en|es/) ? browserLang : 'en');
-    //translate.use('en')
+    
     this.current = translate.currentLang
    }
 

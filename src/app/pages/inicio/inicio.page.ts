@@ -7,7 +7,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastService } from '../../services/toast.service';
 import { DataUsuarioService } from '../../services/data-usuario.service';
 import { CalificaLlamadaPage } from '../califica-llamada/califica-llamada.page';
-import { MessagingService } from '../../services/messaging.service';
 import { HttpClient } from '@angular/common/http';
 import { LanguageService } from 'src/app/services/language.service';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
@@ -32,8 +31,7 @@ export class InicioPage implements OnInit {
   userList = [];
   callList = [];
   filtrados = [];
-  userPerfil
-  //userPerfil = JSON.parse(localStorage.getItem('perfil'));
+  userPerfil  
   emailVerified: false;
   color = 'azul';
   banners: any;
@@ -53,7 +51,6 @@ export class InicioPage implements OnInit {
     private toastservice: ToastService,
     public _user: DataUsuarioService,
     private modalCtrl: ModalController,
-    public messagingService: MessagingService,
     public alertCtrl: AlertController,
     private loadingCtrl: LoadingController,
     private http: HttpClient,
@@ -61,8 +58,7 @@ export class InicioPage implements OnInit {
     private translate: TranslateService,
     private asControler: ActionSheetController,
     private fbstorage: AngularFireStorage
-  ) { 
-    this.listenForMessages();
+  ) {     
     this.cahngeLang();
   }
 
@@ -83,9 +79,7 @@ export class InicioPage implements OnInit {
       this.califico();
     }
     this.getBanners(this._user.dataUser.role)
-    //this.verifica();
-    this.menu.enable(true,'main');
-    //this.requestPermission();
+    this.menu.enable(true,'main');    
     this.langSelect = 'en';
     if (this._user.dataUser.csai) {
       this.acountData = true
@@ -97,7 +91,6 @@ export class InicioPage implements OnInit {
 
   cahngeLang() {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      //console.log('cambio lang', event);
       this.getBanners(this._user.dataUser.role)
     })
   }
@@ -116,10 +109,7 @@ export class InicioPage implements OnInit {
           app: result.payload.doc.data()['location']
         }
       })
-      this.banners.filter(banner => banner.app == applocation)
-
-      //console.log(this.banners);
-      
+      this.banners.filter(banner => banner.app == applocation);      
     })
     } else {
       const applocation = 'appspk'
@@ -134,13 +124,9 @@ export class InicioPage implements OnInit {
           app: result.payload.doc.data()['location']
         }
       })
-      this.banners.filter(banner => banner.app == applocation)
-      //console.log(this.banners);
-      
+      this.banners.filter(banner => banner.app == applocation);      
     })
     }
-
-    
   }
 
 
@@ -154,14 +140,11 @@ export class InicioPage implements OnInit {
     
     await popover.present();
     
-    //const {data} = await popover.onDidDismiss();
     const {data} = await popover.onWillDismiss();
-    //console.log('Padre:', data);
-    
+        
   }
   
-  async llamarCliente(user) {
-    //this.toastservice.showToast('Llamando...',5000)
+  async llamarCliente(user) {    
     this.loader = await this.loadingCtrl.create({
       message: 'Llamando...',
       mode: 'ios',
@@ -177,8 +160,7 @@ export class InicioPage implements OnInit {
       impId: user.iUid,//UID del Improver
       planId: user.planID
     }).subscribe( async (data: any) => {
-      if ( data.sid) {
-        console.log('callid =>',data);
+      if ( data.sid) {        
         
         this.loader.dismiss()
         const modal = await this.modalCtrl.create({
@@ -198,7 +180,7 @@ export class InicioPage implements OnInit {
             {
               text: 'Ok',
               handler: (blah) => {
-                console.log('Boton Ok');
+                
               }
             }
           ]
@@ -207,13 +189,6 @@ export class InicioPage implements OnInit {
       }            
     } )
     
-    // this.loader.dismiss()
-    // const modal = await this.modalCtrl.create({
-    //   component: CalificaLlamadaPage,
-    //   componentProps: {user, callId: 'CA62a22bc4a4edb40495dc8a31559f3a74'}
-    // });
-    // await modal.present();      
-    // console.log(user);
     
   }
   
@@ -232,45 +207,12 @@ export class InicioPage implements OnInit {
     }
   }
   
-  listenForMessages() {
-    this.messagingService.getMessages().subscribe(async (msg: any) => {
-      const alert = await this.alertCtrl.create({
-        header: msg.notification.title,
-        subHeader: msg.notification.body,
-        message: msg.data.info,
-        buttons: ['OK'],
-        mode: 'ios',
-        backdropDismiss: false,
-        animated: true
-      });
-      
-      await alert.present();
-    });
-  }
-  
-  
-  requestPermission() {
-    if (!this._user.dataUser.mtoken) {
-      this.messagingService.requestPermission().subscribe(
-        async token => {
-          this.toastservice.showToast('Got your token', 2000);
-          
-        },
-        async (err) => {
-          this.toastservice.showToast(err, 2000);
-        }
-        );  
-    }
-    
-  }
     
   async getClientes() {
     try {
       await this.fbstore.collection('perfiles', ref => ref.where('role', '==', 'cliente')).snapshotChanges()
-      .subscribe(data => {
-        //console.log(data);
-        this.userList = data.map( result => {
-          //console.log(result);
+      .subscribe(data => {        
+        this.userList = data.map( result => {          
           return {
             userId: result.payload.doc.id,
             userName: result.payload.doc.data()['name'],
@@ -294,13 +236,11 @@ export class InicioPage implements OnInit {
     await modal.present();
   }
   
-  async califico() {
-    console.log('lastCall', this._user.dataUser.lastCall);
+  async califico() {    
     if (this._user.dataUser.lastCall) {
       
       this.fbstore.collection('calls').doc(this._user.dataUser.lastCall).snapshotChanges().subscribe(call => {
-        if (!call.payload.data()['calificoImpr'] && call.payload.data()['CallStatus'] == 'completed') {
-          console.log('no puede llamar');
+        if (!call.payload.data()['calificoImpr'] && call.payload.data()['CallStatus'] == 'completed') {          
           this.puedeLlamar = false
         } else {
           this.puedeLlamar = true
@@ -316,12 +256,6 @@ export class InicioPage implements OnInit {
       let day = hoy.getDate()
       let month = hoy.getMonth() + 1
       let year = hoy.getFullYear()
-      
-      //console.log('fecha', year+'/'+month+'/'+day);
-      //console.log('timeImpro', timeImprover);
-      
-      
-      
       
       try {
         this.fbstore.collection('plans', ref => ref.where('activa', '==', true)
@@ -347,8 +281,7 @@ export class InicioPage implements OnInit {
               let zone = perfil.payload.data()['timezone'];
               setInterval(()=> {
                 let hora = new Date().toLocaleTimeString('en-US', {timeZone: zone.nameValue, hour12: false})
-                this.userList[index]['timeActual'] = hora
-                //console.log('hora=> ',hora);
+                this.userList[index]['timeActual'] = hora                
               },1000)
               this.userList[index]['name'] = perfil.payload.data()['name'];
               this.userList[index]['lastName'] = perfil.payload.data()['lastName'];
@@ -360,13 +293,7 @@ export class InicioPage implements OnInit {
               this.userList[index]['country'] = perfil.payload.data()['country'];
               this.userList[index]['enllamada'] = perfil.payload.data()['enllamada'];
               this.userList[index]['timezone'] = perfil.payload.data()['timezone'];
-              this.userList[index]['timeImprover'] = new Date().toLocaleTimeString('en-US', {timeZone: zone.nameValue, hour12: false});
-              
-              
-              //console.log('hora', new Date().toLocaleTimeString('en-US', {timeZone: zone.nameValue, hour12: false}));
-              
-              //console.log('mayor 8am', new Date().toLocaleTimeString('en-US', {timeZone: zone.nameValue, hour12: false}),new Date().toLocaleTimeString('en-US', {timeZone: zone.nameValue, hour12: false}) >= '08:00:00' );
-              
+              this.userList[index]['timeImprover'] = new Date().toLocaleTimeString('en-US', {timeZone: zone.nameValue, hour12: false});              
             })
             this.fbstore.collection('calls', ref => ref.where('create','>=',new Date(year+'/'+month+'/'+day)).where('planId','==',this.userList[index]['planID']).where('RecordingStatus','==','completed')).snapshotChanges().subscribe(calls => {
               let llamadas = calls.map(result => {
@@ -382,20 +309,15 @@ export class InicioPage implements OnInit {
                 this.userList[index]['minutos'] += element.minutos
               })
 
-              //Buscamos la semana del plan respecto al dia actual
-              //console.log('segundos => ', hoy.getTime()/1000);
-              
+                            
               let weeks = this.userList[index]['weeks']
               this.userList[index]['semana'] = weeks.findIndex(o => ( hoy.getTime()/1000 >= o.from.seconds && hoy.getTime()/1000 <= o.to.seconds ))
               
-              this.filtrados = this.userList.filter(user => user.timeImprover >= '08:00:00' && user.timeImprover <= '20:00:00' && user.minutos == 0 && Math.round(user.minutos/60) < user.weeks[this.userList[index]['semana']].availableMinutesPerWeek && user.enllamada == false)
-              console.log('filtrados =>', this.filtrados, this.hora);
-              this.filtrados.sort(function(){return 0.5 - Math.random()})
-              this.filtroHorario()
+              this.filtrados = this.userList.filter(user => user.timeImprover >= '08:00:00' && user.timeImprover <= '20:00:00' && user.minutos == 0 && Math.round(user.minutos/60) < user.weeks[this.userList[index]['semana']].availableMinutesPerWeek && user.enllamada == false)    
+              this.filtrados.sort(function(){return 0.5 - Math.random()})              
             })
             
-          }
-           console.log(this.userList);
+          }           
            
         });
         
@@ -404,10 +326,6 @@ export class InicioPage implements OnInit {
       }
   }
 
-  filtroHorario() {
-    console.log('filtrohorario');
-    
-  }
 
   async getCallsImp() {
     try {
@@ -426,8 +344,7 @@ export class InicioPage implements OnInit {
     var padLeft = n => "0000000".substring(0, "0000000".length - n.length) + n;
     try {
       this.fbstore.collection('perfiles', ref => ref.where('role', '==', 'cliente')).snapshotChanges().subscribe(data =>{
-        let contador = data.length
-        // console.log('Usuarios', 'I'+padLeft(contador + ""));
+        let contador = data.length        
         
       })
     } catch (error) {
@@ -446,7 +363,7 @@ export class InicioPage implements OnInit {
       country: this._user.dataUser.country,
       email: this._user.dataUser.email
     }).subscribe( async (acount: any) => {
-      console.log(acount);
+      
       if (acount.id) {
         this.fbstore.collection('perfiles').doc(this._user.userID).update({'csai': acount.id}).then(() => {
           setTimeout(() => {
@@ -465,7 +382,7 @@ export class InicioPage implements OnInit {
             {
               text: 'Ok',
               handler: (blah) => {
-                console.log('Boton Ok');
+                
               }
             }
           ]
@@ -501,7 +418,7 @@ export class InicioPage implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            
           }
         }
       ]
@@ -534,14 +451,13 @@ export class InicioPage implements OnInit {
     var blob = await imageUrl.blob();
     var st  = this.fbstorage.storage.ref('fotosPerfil/'+fileName).put(blob);
     st.on('state_changed', (snapshot) => {
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;      
       this.presentLoading('Guardando...');
     }, (error) => {
 
     }, () => {
       st.snapshot.ref.getDownloadURL().then( (downloadURL) => {
-        // console.log(downloadURL);
+        
         this.guardarFoto(downloadURL);
         
       });
@@ -555,20 +471,16 @@ export class InicioPage implements OnInit {
 
   async subirAlbum(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
-    const reader = new FileReader();
-    // var imageUrl = await fetch(image.webPath);
-    const fileName = new Date().getTime() + '.jpeg';
-    // var blob = await imageUrl.blob();
+    const reader = new FileReader();    
+    const fileName = new Date().getTime() + '.jpeg';    
     var st  = this.fbstorage.storage.ref('fotosPerfil/'+fileName).put(file);
     st.on('state_changed', (snapshot) => {
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;      
       this.presentLoading('Guardando...');
     }, (error) => {
 
     }, () => {
-      st.snapshot.ref.getDownloadURL().then( (downloadURL) => {
-        // console.log(downloadURL);
+      st.snapshot.ref.getDownloadURL().then( (downloadURL) => {        
         this.guardarFoto(downloadURL);
         
       });
@@ -577,7 +489,7 @@ export class InicioPage implements OnInit {
 
   async guardarFoto(url) {
     await this.fbstore.doc('perfiles/'+this._user.userID).update({foto: url}).then(() => {
-      // console.log(data);
+      
       window.location.reload();
       
     })
@@ -587,11 +499,9 @@ export class InicioPage implements OnInit {
     let url
     await this.fbstore.collection('managerOptions').doc('manual').get().subscribe(manual => {
       url = manual.data()['stripe']
-      console.log('URL=>',url);
+      
       this.http.request('GET', url, {responseType: 'arraybuffer',headers:{'Access-Control-Allow-Origin':'*'}}).subscribe(response => this.downLoadFile(response, "application/pdf"));
-      // this.http.get(url,{
-      //   responseType: 'arraybuffer'} 
-      //  ).subscribe(response => this.downLoadFile(response, "application/pdf"));
+      
     })
     
 

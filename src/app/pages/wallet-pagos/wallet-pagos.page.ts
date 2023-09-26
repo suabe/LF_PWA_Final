@@ -25,7 +25,7 @@ export class WalletPagosPage implements OnInit {
     await  this.afStore.collection('pagos', ref => ref.where('uid','==',this._user.userID)).snapshotChanges()
     .subscribe( data => {
       this.pagos = data.map( result => {
-        // console.log('Pagos=>',result);
+        
         return {
           id: result.payload.doc.id,
           invoice: result.payload.doc.data()['invoice'],
@@ -56,7 +56,7 @@ export class WalletPagosPage implements OnInit {
       if (this.pagos.length > 0) {
         this.hayPagos = true
       }
-      console.log(this.pagos);
+      
       
     } )
   }

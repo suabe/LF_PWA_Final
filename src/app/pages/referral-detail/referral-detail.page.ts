@@ -26,7 +26,7 @@ export class ReferralDetailPage implements OnInit {
             return result.payload.doc.data()
           })
         } )
-        console.log(this.referal);
+        
       })
     })
   }

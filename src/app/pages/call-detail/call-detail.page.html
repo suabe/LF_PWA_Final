@@ -20,8 +20,7 @@
         <p>{{complemento?.start_time | date: 'dd-MMM-YYYY'}}</p>
       </ion-label>
       <ion-label slot="end">
-        <!-- <h2>Intentos</h2>
-        <p>1</p> -->
+        
       </ion-label>
     </ion-item>
     <ion-item>
@@ -31,17 +30,14 @@
       </ion-label>
       <ion-icon *ngIf="call?.minutos/60 > 9" name="checkmark-circle-outline" color="success"></ion-icon>
       <ion-icon *ngIf="call?.minutos/60 < 9" name="ban-outline" color="danger"></ion-icon>
-      <!-- <ion-label slot="end">
-        <h2>10 min?</h2>
-        <p>Ok</p>
-      </ion-label> -->
+      
     </ion-item>
     <ion-list-header color="azul">
       <ion-label>{{'CALLDETAIL.SCORE' | translate}}</ion-label>
     </ion-list-header>
     <ion-item>
       <ion-label slot="start">
-        <!-- <h2>Fluency</h2> -->
+        
         <p>
           <ngb-rating [rate]="call?.calSpe" [max]="5" [readonly]="true">
             <ng-template let-fill="fill">
@@ -52,37 +48,7 @@
           </ngb-rating>
         </p>
       </ion-label>
-      <!-- <ion-label>
-        <h2>Pronunciation</h2>
-        <p>
-          <ngb-rating [rate]="call?.calSpe?.pr" [max]="5" [readonly]="true">
-            <ng-template let-fill="fill">
-              <span [class.filled]="fill === 100" [class.notfilled]="fill === 0">
-                <ion-icon name="custom-icono-speaker"></ion-icon>
-              </span>
-            </ng-template>
-          </ngb-rating>
-        </p>
-      </ion-label> -->
     </ion-item>
-    <!-- <ion-item class="last-item">
-      <ion-label slot="start">
-        <h2>Grammar</h2>
-        <p>
-          <ngb-rating [rate]="call?.calSpe?.gr" [max]="5" [readonly]="true">
-            <ng-template let-fill="fill">
-              <span [class.filled]="fill === 100" [class.notfilled]="fill === 0">
-                <ion-icon name="custom-icono-speaker"></ion-icon>
-              </span>
-            </ng-template>
-          </ngb-rating>
-        </p>
-      </ion-label>
-      <ion-label>
-        <h2>AVG</h2>
-        <p><span *ngIf="call?.calSpe?.avg > 0">{{call?.calSpe?.avg | number : '1.2-2'}}</span> <ion-icon *ngIf="call?.calSpe?.avg > 0" name="custom-icono-speaker" color="azul" id="iconAVG"></ion-icon></p>
-      </ion-label>
-    </ion-item> -->
   </ion-list>
   <ion-list>
     <ion-list-header color="azul">

@@ -29,7 +29,7 @@ export class PlansPage implements OnInit {
     private toast: ToastService,
     private translate: TranslateService
   ) { 
-    //this.host = 'http://localhost:5001/pwa-lf/us-central1/';
+    
     this.host = 'https://us-central1-pwa-lf.cloudfunctions.net/';
    }
 
@@ -50,27 +50,16 @@ export class PlansPage implements OnInit {
         this.planes.forEach((plan) => {
           plan.inicio = parseInt(plan.schedule),
           plan.fin = parseInt(plan.schedule)+3
-          // this.fbstore.collection('wallet', ref => ref.where('customer','==',plan.customer)).snapshotChanges().subscribe(cus => {
-          //   cus.map( result => {
-          //     plan.card = result.payload.doc.data()['card'],
-          //     plan.inicio = parseInt(plan.schedule),
-          //     plan.fin = parseInt(plan.schedule)+3
-          //   })
-          // })
-          // this.fbstore.collection('prices', ref => ref.where('price','==',plan.price)).snapshotChanges().subscribe(pri => {
-          //   pri.map( result => {
-          //     plan.type = result.payload.doc.data()['type']
-          //   })
-          // })
+         
         });
         if (this.planes.length > 0) {
           this.hayPlanes = true
         }
-        console.log(this.planes);
+       
         
       } )
     } catch (error) {
-      console.log('erro');
+      
       
     }
   }
@@ -91,7 +80,7 @@ export class PlansPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (cancel) => {
-            console.log('Cancelado');
+           
             
           }
         },{
@@ -129,7 +118,7 @@ export class PlansPage implements OnInit {
             }, async error => {
               this.loading.dismiss();
               this.toast.showToast('Error al eliminar', 3500);
-              //await modalUpgrade.present();
+              
             } )
           }
         }
@@ -139,7 +128,7 @@ export class PlansPage implements OnInit {
   }
 
   async eliminar(susc) {
-    console.log(susc);
+    
     
     const alert = await this.alert.create({
       header: 'Eliminar Plan',
@@ -159,7 +148,7 @@ export class PlansPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (cancel) => {
-            console.log('Cancelado');
+            
             
           }
         },
@@ -185,7 +174,7 @@ export class PlansPage implements OnInit {
                 })                
               }, error => {
                 this.loading.dismiss();
-                console.log(error);                
+                            
                 this.toast.showToast('Error al eliminar', 3500);
               } )
               
@@ -216,7 +205,7 @@ export class PlansPage implements OnInit {
   }
 
   async editar(plan) {
-    console.log(plan);
+    
     
     const modal = await this.modalCtrl.create({
       component: PlanEditPage,

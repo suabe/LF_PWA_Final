@@ -32,13 +32,13 @@ export class PlanEditPage implements OnInit {
 
   ngOnInit() {
     this.getPlan();
-    //this.getWallet();
+    
     
   }
 
   ionViewWillEnter() {    
     this.getPlan();
-    //this.getWallet();
+    
     
   }
 
@@ -51,16 +51,6 @@ export class PlanEditPage implements OnInit {
     })
   }
 
-  async getWallet() {
-    await this.afStore.collection('wallet', ref => ref.where('uid', '==', this._user.userID )).snapshotChanges()
-    .subscribe( data => {
-      this.wallet = data.map( result => {
-        return result.payload.doc.data()
-      })
-      this.editaPlanForm.get('tarjeta').setValue(this.customer);
-      this.editaPlanForm.get('schedule').setValue(this.schedule);
-    } )
-  }
 
   cancelar() {
     this.modalCtrl.dismiss();
@@ -68,7 +58,7 @@ export class PlanEditPage implements OnInit {
 
   async editarPlan() {
     this.presentLoading('...Procesando');
-    console.log(this.editaPlanForm.get('schedule').value);
+   
     let planActual = {
       schedule: this.editaPlanForm.get('schedule').value
     }

@@ -89,7 +89,7 @@ export class CommissionsCallsPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    //this.eligeMes()
+    
   }
 
   async getCalls() {
@@ -109,8 +109,7 @@ export class CommissionsCallsPage implements OnInit {
       });
       if (this.comissions.length > 0) {
         this.hayComision = true
-      }
-      console.log(this.totalComision);
+      }      
       
     })
   }
@@ -122,9 +121,7 @@ export class CommissionsCallsPage implements OnInit {
     this.tabla = this.data.filter( meses => {
       return meses.ano == mes
     })
-    // console.log(this.tabla);
-    
-    
+        
   }
 
 }

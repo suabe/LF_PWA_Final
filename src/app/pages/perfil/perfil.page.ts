@@ -8,7 +8,6 @@ import { ActionSheetController, ModalController, LoadingController } from '@ioni
 import { EditarPerfilPage } from '../editar-perfil/editar-perfil.page';
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core'
 import { DataUsuarioService } from '../../services/data-usuario.service';
-import { map } from 'rxjs/operators';
 import { User } from '../../interfaces/interfaces';
 const  { Camera } = Plugins;
 @Component({
@@ -70,7 +69,7 @@ export class PerfilPage implements OnInit {
       await this.fbstore.collection('perfiles').doc(this._user.userID).snapshotChanges().subscribe(perfil => {
         this.userPerfil = perfil.payload.data()
       })
-      console.log('perfil =>',this.userPerfil);
+      
       
     }catch(error) {
       this.toastservice.showToast(error.message, 2000);
@@ -83,7 +82,7 @@ export class PerfilPage implements OnInit {
     }
     try {
       await this.fbstore.doc('perfiles/'+this.uId).update(dataSpei).then(data => {
-        // console.log(data);
+        
         window.location.reload();
       })
     } catch (error) {
@@ -127,7 +126,7 @@ export class PerfilPage implements OnInit {
           icon: 'close',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            
           }
         }
       ]
@@ -149,13 +148,13 @@ export class PerfilPage implements OnInit {
     var st  = this.fbstorage.storage.ref('fotosPerfil/'+fileName).put(blob);
     st.on('state_changed', (snapshot) => {
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
+      
       this.presentLoading('Guardando...');
     }, (error) => {
 
     }, () => {
       st.snapshot.ref.getDownloadURL().then( (downloadURL) => {
-        // console.log(downloadURL);
+        
         this.guardarFoto(downloadURL);
         
       });
@@ -172,19 +171,19 @@ export class PerfilPage implements OnInit {
   async subirAlbum(event: Event) {
     const file = (event.target as HTMLInputElement).files[0];
     const reader = new FileReader();
-    // var imageUrl = await fetch(image.webPath);
+    
     const fileName = new Date().getTime() + '.jpeg';
-    // var blob = await imageUrl.blob();
+    
     var st  = this.fbstorage.storage.ref('fotosPerfil/'+fileName).put(file);
     st.on('state_changed', (snapshot) => {
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
+      
       this.presentLoading('Guardando...');
     }, (error) => {
 
     }, () => {
       st.snapshot.ref.getDownloadURL().then( (downloadURL) => {
-        // console.log(downloadURL);
+        
         this.guardarFoto(downloadURL);
         
       });
@@ -193,7 +192,7 @@ export class PerfilPage implements OnInit {
 
   async guardarFoto(url) {
     await this.fbstore.doc('perfiles/'+this._user.userID).update({foto: url}).then(() => {
-      // console.log(data);
+      
       window.location.reload();
       
     })

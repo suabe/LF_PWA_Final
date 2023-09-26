@@ -57,8 +57,6 @@ export class CalificaLlamadaPage implements OnInit {
 
   ngOnInit() {
     
-    console.log('user =>',this.user);
-    //this.llamar()
     this.getCalldetail(this.callId);
     this.lastCall(this.callId);
   }
@@ -76,14 +74,12 @@ export class CalificaLlamadaPage implements OnInit {
       impId: this.iUid,//UID del Improver
       planId: this.planID
     }).subscribe(  (data: any) => {
-      console.log('callid =>',data);
       this.callId = data.sid
     } )
   }
 
   async getCalldetail(sid) {
-    await this.fbstore.collection('calls').doc(sid).snapshotChanges().subscribe(detalle => {
-      console.log('llamada?',detalle.payload.data()['CallStatus']);
+    await this.fbstore.collection('calls').doc(sid).snapshotChanges().subscribe(detalle => {      
       this.callStatus = detalle.payload.data()['CallStatus']
       this.childCallStatus = detalle.payload.data()['ChildCallStatus']
       this.recordingStatus = detalle.payload.data()['RecordingStatus']
@@ -111,18 +107,16 @@ export class CalificaLlamadaPage implements OnInit {
         this.fbstore.collection('plans').doc(this.user.planID).update({enllamada: false})
         this.fbstore.collection('perfiles').doc(this.user.iUid).update({enllamada: false})
         this.modalCtrl.dismiss();
-        //console.log('exito?');
+        
       })
     } catch (error) {
       this.fbstore.collection('plans').doc(this.user.planID).update({enllamada: false})
       this.fbstore.collection('perfiles').doc(this.user.iUid).update({enllamada: false})
       this.modalCtrl.dismiss();
       this.toastservice.showToast(error,5000);
-      console.log(error);
+      
       
     }
-    
-    //console.log(this.calificaForm.value);
     
     
   }
@@ -188,7 +182,7 @@ export class CalificaLlamadaPage implements OnInit {
           weeks: weeks,
           minutesRemaining: minutesRemaining + weeks[week].calls[call].minutesRemaining
         }).then(() => {
-          console.log("Update weeks");
+          
         });
       }
     })
@@ -204,7 +198,6 @@ export class CalificaLlamadaPage implements OnInit {
       // Asignqr el valor de segundos
       var seconds = padLeft(tiempo.getSeconds() + "");
       
-      // console.log(minutes, seconds);
       // Restarle a la fecha actual 1000 milisegundos
       tiempo = new Date(tiempo.getTime() + 1000);
 
@@ -222,25 +215,25 @@ export class CalificaLlamadaPage implements OnInit {
 
   changefl(fl) {
     this.fl = fl
-    //console.log(fl);
+    
     this.calculateavg()
   }
 
   changepr(pr) {
     this.pr = pr
-    //console.log(pr);
+    
     this.calculateavg()
   }
 
   changegr(gr) {
     this.gr = gr
-    //console.log(gr);
+    
     this.calculateavg()
   }
 
   calculateavg() {
     this.avg = (this.fl+this.gr+this.pr)/3
-    //console.log(this.avg);
+    
   }
 
 }

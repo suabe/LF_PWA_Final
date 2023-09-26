@@ -52,7 +52,7 @@ export class SesionesPage implements OnInit {
         if (this.callList.length > 0) {
           this.hayLlamadas = true
         }
-        console.log(this.callList);
+        
       })
     } catch (error) {
       
@@ -64,7 +64,7 @@ export class SesionesPage implements OnInit {
       component: CalificaLlamadaPage
     });
     await modal.present();
-    console.log(userId);
+    
     
 
   }

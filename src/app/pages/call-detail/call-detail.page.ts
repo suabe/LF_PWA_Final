@@ -36,16 +36,14 @@ export class CallDetailPage implements OnInit {
         this.call = llamada.payload.data();
         this.call['duraRedon'] = Math.ceil(llamada.payload.data()['RecordingDuration']/60)
         this.fbstore.collection('perfiles').doc(this.call['inmpId']).snapshotChanges().subscribe( impro => {
-          this.call['improver'] = impro.payload.data()
-          console.log(this.call);
+          this.call['improver'] = impro.payload.data()          
         })
       })
       this._calls.complemento(param.id).subscribe(compe => {
         this.complemento =  compe
       })
       this._calls.recordings(param.id).subscribe(grab => {
-        this.recordings = grab
-        // console.log(this.recordings['recordings'][0]['sid']);
+        this.recordings = grab        
         this.url = "https://api.twilio.com/2010-04-01/Accounts/ACf88cd2fcc4ec6d7c79baaaf73bdf4c71/Recordings/"+this.recordings['recordings'][0]['sid']+".mp3"
       })
     })

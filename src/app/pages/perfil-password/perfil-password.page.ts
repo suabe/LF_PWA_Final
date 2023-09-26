@@ -67,11 +67,11 @@ export class PerfilPasswordPage implements OnInit {
         user.updatePassword(this.cambioPswForm.get('newPsw').value).then(
           async success => {
             this.auth.signInWithEmailAndPassword(cUser,this.cambioPswForm.get('newPsw').value)
-            console.log('cambiado');
+            
             this.loader.dismiss();
             this.route.navigateByUrl('/perfil-options')
           }, async error => {
-            console.error(error);
+            
             this.loader.dismiss();
           }
         )
@@ -85,7 +85,7 @@ export class PerfilPasswordPage implements OnInit {
             {
               text: 'Ok',
               handler: (blah) => {
-                console.log('Boton Ok');
+                
                 
               }
             }
@@ -95,7 +95,7 @@ export class PerfilPasswordPage implements OnInit {
         await alert.present();
       }
     )
-    console.log(credentials);
+    
     
   }
 
@@ -103,7 +103,7 @@ export class PerfilPasswordPage implements OnInit {
     const userNewCredential = {email: 'user-email', password: 'your-new-password'};
     this.functions.httpsCallable('resetUserPassword') 
     (userNewCredential).toPromise().then((updatedUser) => {
-      console.log(updatedUser);
+      
     }).catch((error) => console.log(error));
     let alert = await this.alertCtl.create({
       cssClass: 'my-custom-class',
@@ -114,7 +114,7 @@ export class PerfilPasswordPage implements OnInit {
         {
           text: 'Ok',
           handler: (blah) => {
-            console.log('Boton Ok');
+            
             this.route.navigate(['/perfil-options'])
           }
         }

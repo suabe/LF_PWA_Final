@@ -24,10 +24,10 @@ export class DataUsuarioService {
     public ngFireAuth: AngularFireAuth,
     private http: HttpClient
   ) { 
-    //console.log('Data User  Listo');
+    
     this.ngFireAuth.authState.subscribe((user: any) => {
       if (user) {
-        //console.log('Servicio ',user);
+        
       try {
         this.afStrore.doc('perfiles/'+user.uid).valueChanges().subscribe( result => {
           this.dataUser = result;
@@ -35,14 +35,14 @@ export class DataUsuarioService {
           this.isAuthenticated.next(true);
           this.isLogin.next(true);
           this.emailVerified = user.emailVerified;
-          // console.log(this.emailVerified);
+          
         })
       } catch (error) {
-        console.log(error.message);
+        
         this.isAuthenticated.next(false);
       }
       } else {
-        //console.log('no hau usuario');
+        
         this.isAuthenticated.next(false);
       }
       

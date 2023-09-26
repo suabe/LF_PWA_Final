@@ -48,8 +48,7 @@ export class CallsPage implements OnInit {
             this.userList[index]['country'] = perfil.payload.data()['country'];
           })
           
-        }
-        // console.log(this.userList);
+        }        
       });
       
     } catch (error) {
@@ -65,8 +64,7 @@ llamarCliente(user) {
       componentProps: user
     });
     await modal.present();
-  }, 2000);
-  // console.log(user);
+  }, 2000);  
   
 }
 

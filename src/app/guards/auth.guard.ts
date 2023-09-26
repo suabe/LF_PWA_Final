@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs';
 import { DataUsuarioService } from '../services/data-usuario.service';
 import { filter, map, take } from 'rxjs/operators';
-import { NavController } from '@ionic/angular';
+
 
 
 @Injectable({

@@ -32,12 +32,7 @@
             <h4>{{userPerfil?.name |titlecase}} {{userPerfil?.lastName | titlecase}}</h4>
             <p><span class="text-primary">{{'HOME.TOPICS' | translate}} </span>  <br> {{userPerfil?.bio | titlecase}}</p>
           </div>
-          <!-- <div class="ion-text-center">
-            <span class="text-muted ion-no-margin text-job ion-text-capitalize">{{userPerfil.role}}</span>
-          </div> -->
-          <!-- <ion-button fill="clear" class="button-vertical-align button-left">
-            <ion-icon slot="icon-only" name="chatbubbles"></ion-icon>
-          </ion-button> -->
+          
         </ion-col>
         <ion-col size="4">
           <div class="profileImg">
@@ -49,18 +44,13 @@
             <div *ngIf="!userPerfil?.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(/assets/boy.png)'}"></div>
           </div>
           <input type="file" style="display: none;" #filePicker (change)="subirAlbum($event)">   
-          <!-- <img *ngIf="userPerfil?.foto" [src]="userPerfil?.foto" class="image-round border-tertiary margin-top">
-          <img *ngIf="!userPerfil?.foto" src="/assets/boy.png" alt="" class="image-round border-tertiary margin-top"> -->
+          
           <div class="ion-text-center">
             <strong class="text-primary">LFId</strong> <br>
             <small >{{userPerfil?.LFId}}</small>
           </div>
         </ion-col>
-        <!-- <ion-col size="4" class="ion-no-padding position-relative">
-          <ion-button fill="clear" class="button-vertical-align button-right">
-            <ion-icon slot="icon-only" name="call"></ion-icon>
-          </ion-button> 
-        </ion-col> -->
+        
       </ion-row>
     </ion-grid>
     <ion-grid class="ion-padding">
@@ -95,8 +85,7 @@
               <ion-button routerLink="/plans"  fill="solid" size="small" color="naranja">
                 {{'HOME.PLANSBTN' | translate}}
               </ion-button>
-              <!-- <strong class="text-primary">{{'HOME.' | translate}}</strong> <br>
-              <small>{{userPerfil?.spei}}</small> -->
+              
             </ion-col>
           </ion-row>
     </ion-grid>
@@ -111,9 +100,7 @@
             {{'HOME.CREATEACONTBUTON' | translate}}
           </ion-button>
           <br>
-          <!-- <ion-button (click)="getFile()" expand="block" fill="clear" shape="round">
-            {{'HOME.STRIPEMANUALBTN' | translate}}
-          </ion-button> -->
+          
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -136,14 +123,7 @@
   </ion-card>
   
   <hr>
-  <!-- <ion-card color="light">
-    <ion-card-content>
-      <p>{{'HOME.CHANGETELTXT' | translate}}</p>
-      <ion-button (click)="changeTel()" expand="block" color="azul" >
-        {{'HOME.CHANGETELBTN' | translate}}
-      </ion-button>
-    </ion-card-content>
-  </ion-card> -->
+  
   
   
 </ion-content>
@@ -176,9 +156,7 @@
           <p>{{'HOME.LANGUAGE' | translate}}: {{user.plan.idioma| uppercase}}</p>
           <p>{{'HOME.SCHEDULE' | translate}}: {{user.inicio}} - {{user.fin}} Hrs</p>
           <p>{{user.timezone.nameValue}} - {{user.timeActual}} </p>
-          <p>{{'HOME.BIO' | translate}}: {{user.bio}}</p>
-          <!-- <p>{{'HOME.MINUTES' | translate}}: {{user?.minutos/60 | number : '1.2-2'}}</p> -->
-          <!-- <p>Holdovers: {{user?.weeks[user.semana].minutesRemaining}} - Available minutes: {{user?.weeks[user.semana].availableMinutesPerWeek}}</p> -->
+          <p>{{'HOME.BIO' | translate}}: {{user.bio}}</p>          
         </ion-label>
         <ion-button *ngIf="i == 0" (click)="llamarCliente(user)" slot="end"  color="azul">
           <ion-icon slot="icon-only" name="call"></ion-icon>
@@ -197,10 +175,7 @@
           <ion-button routerLink="/acount-link" expand="block" color="naranja" shape="round">
             {{'HOME.CREATEACONTBUTON' | translate}}
           </ion-button>
-          <br>
-          <!-- <ion-button (click)="getFile()" expand="block" fill="clear" shape="round">
-            {{'HOME.STRIPEMANUALBTN' | translate}}
-          </ion-button> -->
+          <br>          
         </ion-col>
       </ion-row>
     </ion-grid>

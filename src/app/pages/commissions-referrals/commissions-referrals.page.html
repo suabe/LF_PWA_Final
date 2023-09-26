@@ -6,13 +6,10 @@
       <ion-card-title>{{'COMMISSIONS.REFTOTAL' | translate}}</ion-card-title>
       <ion-card-subtitle>{{ comisionTotal/100 | currency: 'MXN' }}</ion-card-subtitle>
     </ion-card-header>
-    <!-- <ion-item>
-      <ion-label color="naranja">Ganancia total</ion-label>
-      <ion-label color="azul">{{ 0 | currency }}</ion-label>
-    </ion-item> -->
+    
     <ion-item [color]="color">
       <ion-label>{{'COMMISSIONS.REFACTIVE' | translate}}</ion-label>
-      <!-- <ion-label slot="end" class="ion-text-end">Activo</ion-label>       -->
+      
     </ion-item>
     <ion-list>
       <ion-item color="light" *ngIf="!hayReferal">
@@ -20,9 +17,7 @@
       </ion-item>      
       <ion-item color="light" detail  routerLink="/referral-detail/{{referal.uid}}" *ngFor="let referal of referals">
         <ion-label>
-          <p>{{referal.LFId}}</p>
-          <!-- <h2 *ngIf="referal?.tipo == 'price_1IiLcPFjLGC5FmHqDAZZskyw'">Plan Fluency 10/3 {{referal.language | uppercase}}</h2>
-          <h2 *ngIf="referal?.tipo == 'price_1IiLr3FjLGC5FmHq8Z2z8pnq'">Plan +Fluency {{referal.language | uppercase}}</h2> -->
+          <p>{{referal.LFId}}</p>          
           <h2>Plan {{referal?.type}} {{referal.language | uppercase}}</h2>
           <p>{{referal.user?.name}}  {{referal.user?.lastName}}</p>
         </ion-label>

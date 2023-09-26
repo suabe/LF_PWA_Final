@@ -19,8 +19,7 @@
       <ion-col size="12">
         <form [formGroup]="changeTelForm" (ngSubmit)="guardarTel()">
           <ion-item color="light">
-            <ion-icon slot="start" name="call-outline" color="azul"></ion-icon>
-            <!-- <ion-label position="floating">Telefono <ion-text color="danger">*</ion-text></ion-label> -->
+            <ion-icon slot="start" name="call-outline" color="azul"></ion-icon>            
             <ion-intl-tel-input    
               [formControl]="$any(changeTelForm).controls.tel" >
             </ion-intl-tel-input>

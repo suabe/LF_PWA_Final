@@ -31,15 +31,7 @@ export class AppComponent {
   ) {    
     this.platform.ready().then(() => {
       this.current = languageService.current 
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      // this._user.isAuthenticated.subscribe(state => {
-      //   if (state) {
-      //     this.route.navigate(['inicio'])
-      //   } else {
-      //     this.route.navigate(['login'])
-      //   }
-      // })
+      
     });
   }
 
@@ -50,11 +42,11 @@ export class AppComponent {
     })
     this.loader.present();
     return this.fbauth.signOut().then(stado => {
-      console.log('estado', stado);
+      
       
       setTimeout(() => {
         this.loadingCtrl.dismiss();
-        //this.ngroute.navigate(['/login'], { replaceUrl: true,relativeTo: this.route });
+        
         window.location.reload();
       }, 3000);
       

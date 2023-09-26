@@ -61,8 +61,7 @@ export class CommissionsReferralsPage implements OnInit {
       }
       if (this.referals.length > 0) {
         this.hayReferal = true
-      }
-      //console.log(this.referals);
+      }      
       
     })
   }
@@ -84,8 +83,7 @@ export class CommissionsReferralsPage implements OnInit {
       if (this.comissions.length > 0) {
         this.hayComision = true
       }
-      //console.log(this.comisionTotal);
-      
+            
     })
   }
 

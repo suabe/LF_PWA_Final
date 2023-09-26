@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../../services/authentication.service';
 
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-//import { Validator } from '../../helpers/validation.helpers';
 import { ToastService } from '../../services/toast.service';
-import { MenuController, NavController, LoadingController, AlertController } from '@ionic/angular';
+import { MenuController, LoadingController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClient } from '@angular/common/http';
@@ -26,19 +25,13 @@ export class LoginPage implements OnInit {
     public authService: AuthenticationService,
     public navCtrl: Router,
     public loginFormbuilder: FormBuilder,
-    //private valuechecker: Validator,
     public toastservice: ToastService,
     public menu: MenuController,
     private loadingCtrl: LoadingController,
     private alert: AlertController,
-    private afstore: AngularFirestore,
-    private http: HttpClient
+    private afstore: AngularFirestore
   ) { 
-    /*this.loginform = this.loginFormbuilder.group({
-      email: ['', Validators.required, this.valuechecker.emailCheck],
-      password: ['', Validators.required, '']
-    })*/
-    //this.menu.enable(false,'primerMenu');
+    
   }
   
   ngOnInit() {
@@ -55,17 +48,17 @@ export class LoginPage implements OnInit {
   }
 
   async doLogin() {
-    //console.log(this.loginform.get('email').value);
+    
     this.loader = await this.loadingCtrl.create({
       message: 'Procesando...',
       mode: 'ios'
     })
-    //console.log('Hola Domingo');
+    
     
     this.loader.present();
     this.authService.SignIn(this.loginform.get('email').value,this.loginform.get('password').value).then( data => {
       this.afstore.collection('perfiles').doc(data.user.uid).get().subscribe( async user =>  {
-        console.log(user.data()['status']);
+        
         if (user.data()['status'] == 'canceled') {
           this.loadingCtrl.dismiss();
           this.authService.SignOut();
@@ -78,7 +71,7 @@ export class LoginPage implements OnInit {
               {
                 text: 'Ok',
                 handler: (blah) => {
-                  console.log('Boton Ok');
+                  
                 }
               }
             ]
@@ -96,7 +89,7 @@ export class LoginPage implements OnInit {
               {
                 text: 'Ok',
                 handler: (blah) => {
-                  console.log('Boton Ok');
+                  
                 }
               }
             ]
@@ -107,7 +100,7 @@ export class LoginPage implements OnInit {
           setTimeout(() => {
             this.loadingCtrl.dismiss();
             return this.navCtrl.navigate(['/inicio']).then(nav => {
-              console.log(nav);
+              
               
               if (nav == false) {
                 this.navCtrl.navigate(['/inicio'])
@@ -132,7 +125,7 @@ export class LoginPage implements OnInit {
           {
             text: 'Ok',
             handler: (blah) => {
-              console.log('Boton Ok');
+              
             }
           }
         ]
@@ -145,7 +138,7 @@ export class LoginPage implements OnInit {
   }
 
   getError(code) {
-    console.log(ErrorFirebase[code]);
+    
     return ErrorFirebase[code]
     
   }

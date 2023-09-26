@@ -13,10 +13,7 @@
       <div *ngIf="user.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(' + user.foto + ')'}" ></div>
       <div *ngIf="!user.foto" class="lf-profile-picture" [ngStyle]="{'background-image': 'url(/assets/boy.png)'}"></div>
     </div>
-    <!-- <div class="ion-text-center image-over-div">
-      <img *ngIf="user.foto" [src]="user.foto" alt="" class="image-round ">
-      <img *ngIf="!user.foto" src="/assets/boy.png" alt="" class="image-round ">
-    </div> -->
+
 
     <div class="ion-text-center">
       <h4>{{user.name}} {{user.lastName}} </h4>
@@ -46,17 +43,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <!-- <div class="ion-text-center">
-    <ion-chip color="success">
-      <ion-label color="success">Default</ion-label>
-    </ion-chip>
-  </div> -->
-  <!-- <ion-button (click)="contador()" expand="block" fill="clear" shape="round">
-    Iniciar
-  </ion-button>
-  <ion-button (click)="stopContador()" expand="block" fill="clear" shape="round">
-    Detener
-  </ion-button> -->
+
   
 
   <div class="ion-padding" id="califica" *ngIf="callStatus == 'completed' && childCallStatus == 'completed'">
@@ -94,13 +81,7 @@
       <ion-item color="light">
         <ion-label slot="start">{{'CALIFICALLAMADA.TOTALPOINT' | translate}}  </ion-label>
         <ion-label><span *ngIf="avg > 0">{{avg | number : '1.2-2'}}</span> <ion-icon *ngIf="avg > 0" name="custom-icono-speaker" color="azul" id="iconAVG"></ion-icon></ion-label>
-        <!-- <ngb-rating [rate]="avg"  formControlName="avg" [max]="5" [readonly]="true">
-          <ng-template let-fill="fill">
-            <span class="star" [class.full]="fill === 100">
-              <span class="half" [style.width.%]="fill"><ion-icon name="custom-icono-speaker"></ion-icon></span><ion-icon name="custom-icono-speaker"></ion-icon>
-            </span>
-          </ng-template>
-        </ngb-rating> -->
+
       </ion-item>
       <ion-button type="submit" expand="block" color="azul" [disabled]="calificaForm.invalid">
         {{'CALIFICALLAMADA.RATEBTN' | translate}}

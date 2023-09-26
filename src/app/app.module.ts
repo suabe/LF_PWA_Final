@@ -20,7 +20,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IonIntlTelInputModule } from 'ion-intl-tel-input';
-import { CustomScrollDirective } from './directives/custom-scroll.directive';
 import { MomentTimezonePickerModule } from 'moment-timezone-picker';
 
 

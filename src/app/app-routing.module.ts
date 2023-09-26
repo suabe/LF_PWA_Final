@@ -206,11 +206,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'registro-plan',
-    loadChildren: () => import('./pages/registro-plan/registro-plan.module').then( m => m.RegistroPlanPageModule),
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'acount-conect',
     loadChildren: () => import('./pages/acount-conect/acount-conect.module').then( m => m.AcountConectPageModule),
     canActivate: [AuthGuard]
@@ -230,7 +225,8 @@ const routes: Routes = [
   {
     path: 'call-rate-improver',
     loadChildren: () => import('./pages/call-rate-improver/call-rate-improver.module').then( m => m.CallRateImproverPageModule)
-  },  {
+  },
+  {
     path: 'add-plan103',
     loadChildren: () => import('./pages/add-plan103/add-plan103.module').then( m => m.AddPlan103PageModule)
   },

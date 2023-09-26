@@ -165,7 +165,7 @@
   <ion-toolbar color="azul">
     <ion-item slot="start" color="azul">
       <!-- <ion-label>Language</ion-label> -->
-      <ion-select [value]="current" name="lang" interface="popover" (ionChange)="setLanguage($event)" placeholder="{{'MENU.LANGUAGE' | translate}}">
+      <ion-select [value]="current" name="lang" interface="alert" (ionChange)="setLanguage($event)" placeholder="{{'MENU.LANGUAGE' | translate}}">
         <ion-select-option *ngFor="let item of listLang"
         [value]="item.lang">
         {{item.text}}</ion-select-option>

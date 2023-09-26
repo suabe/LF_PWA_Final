@@ -101,11 +101,6 @@ export class RatingComponent implements OnInit {
     } else {
       this.rating = id + 1;
     }
-    
-    // subscribe this event to get the changed value in your parent compoanent 
-    //this.events.publish(`star-rating:changed`, this.rating); //common event for all instances included for backwards compatibility
-    //this.events.publish(this.eventInfo.topic, this.rating); //common event for all instances
-    // unique event
     this.ratingChanged.emit(this.rating)
   }
 

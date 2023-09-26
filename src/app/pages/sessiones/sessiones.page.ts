@@ -23,7 +23,7 @@ export class SessionesPage implements OnInit {
       component: CalificaLlamadaPage
     });
     await modal.present();
-    console.log(userId);
+    
     
 
   }

@@ -1,15 +1,7 @@
 <app-header titulo="{{'RECORDS.TITLE' | translate}}" color="azul"></app-header>
 
 <ion-content class="ion-padding">
-  <!-- <ion-row>
-    <ion-col>
-      <ion-slides mode="ios" pager="ios">
-        <ion-slide>
-          <img src="/assets/Banner_Pantalla_08.png" alt="">
-        </ion-slide>
-      </ion-slides>
-    </ion-col>
-  </ion-row> -->
+  
   <ion-list>
     <ion-list-header color="azul">
       <ion-label>{{'RECORDS.SUBTITLE' | translate}}</ion-label>
@@ -24,7 +16,7 @@
         <p>
           <ion-badge color="success" *ngIf="user?.CallStatus == 'completed'">{{ user?.CallStatus | titlecase }}</ion-badge>
           <ion-badge color="warning" *ngIf="user?.CallStatus != 'completed'">{{ user?.CallStatus | titlecase }}</ion-badge>
-          <!-- <ion-badge color="danger" *ngIf="user?.CallStatus == ''">{{ user?.CallStatus | titlecase }}</ion-badge> -->
+          
         </p>
       </ion-label>
       <ion-label slot="end">

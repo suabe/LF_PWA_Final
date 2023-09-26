@@ -55,7 +55,7 @@ export class PerfilDeletePage implements OnInit {
 
   async delete() {
     let data = this.deleteForm.value
-    console.log('formulari =>', data);
+    
     
     let cUser = (await this.auth.currentUser).email
     this.loader = await this.loading.create({
@@ -81,11 +81,11 @@ export class PerfilDeletePage implements OnInit {
               name: this._user.dataUser.name+' '+this._user.dataUser.lastName,
               email: this._user.dataUser.email
             }).subscribe(data => {
-              console.log(data);
+              
               
             })
           }, error => {
-            console.log('error al guarda');
+            
             
           }
         )
@@ -120,7 +120,7 @@ export class PerfilDeletePage implements OnInit {
             {
               text: 'Ok',
               handler: (blah) => {
-                console.log('Boton Ok');
+               
                 
               }
             }

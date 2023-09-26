@@ -25,7 +25,7 @@ export class NotificacionesPage implements OnInit {
       this.color = 'naranja'
     }
     this.getNotifications()
-    console.log(new Date(this._user.dataUser.creado));
+    
     
   }
 
@@ -34,7 +34,7 @@ export class NotificacionesPage implements OnInit {
       let day = hoy.getDate()
       let month = hoy.getMonth() + 1
       let year = hoy.getFullYear()
-      console.log('fecha', year+'-'+month+'-'+day);
+      
     if (this._user.dataUser.role === 'cliente') {
       const grupo = 'imp';
       await this.afstore.collection('notifications', ref => ref.where('grupo','in',[grupo,'all']).where('created','>=',this._user.dataUser.creado).orderBy('created','desc')).snapshotChanges()
@@ -50,7 +50,7 @@ export class NotificacionesPage implements OnInit {
         if (this.notifications.length > 0) {
           this.hayNotificaciones = true
         }
-        console.log(this.notifications);
+        
         
       })
     } if (this._user.dataUser.role === 'conversador') {

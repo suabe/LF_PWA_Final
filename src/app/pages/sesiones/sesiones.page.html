@@ -16,7 +16,7 @@
         <p>
           <ion-badge color="success" *ngIf="user?.CallStatus == 'completed'">{{ user?.CallStatus | titlecase }}</ion-badge>
           <ion-badge color="warning" *ngIf="user?.CallStatus != 'completed'">{{ user?.CallStatus | titlecase }}</ion-badge>
-          <!-- <ion-badge color="danger" *ngIf="user?.CallStatus == ''">{{ user?.CallStatus | titlecase }}</ion-badge> -->
+          
         </p>
       </ion-label>
       <ion-label slot="end">

@@ -21,16 +21,7 @@ export class AuthenticationService {
     public ngZone: NgZone,
     private toastservice: ToastService
   ) {
-    // this.ngFireAuth.authState.subscribe((user: any) => {
-    //   if (user) {
-    //     this.userData = user;
-    //     localStorage.setItem('user', JSON.stringify(this.userData));
-    //     //JSON.parse(localStorage.getItem('user'));
-    //   } else {
-    //     localStorage.setItem('user', null);
-    //     //JSON.parse(localStorage.getItem('user'));
-    //   }
-    // })
+   
   }
 
   // Login in with email/password
@@ -47,7 +38,7 @@ export class AuthenticationService {
   async SendVerificationMail() {
     return (await this.ngFireAuth.currentUser).sendEmailVerification()
     .then(() => {
-      //this.router.navigate(['verify-email']);
+      
     })
   }
 
@@ -80,36 +71,18 @@ export class AuthenticationService {
        this.ngZone.run(() => {
           this.router.navigate(['dashboard']);
         })
-      //this.SetUserData(result.user);
+      
     }).catch((error) => {
       window.alert(error)
     })
   }
 
-  // Store user in localStorage
-  /*SetUserData(user) {
-    const userRef: AngularFirestoreDocument<any> = this.afStore.doc(`users/${user.uid}`);
-    const userData: User = {
-      //uid: user.uid,
-      email: user.email,
-      //displayName: user.displayName,
-      //fristName: user.fristName,
-      lastName: user.lastName,
-      gender: user.gender,
-      birthDate: user.birthDate,
-      phone: user.phone,
-      emailVerified: user.emailVerified
-    }
-    return userRef.set(userData, {
-      merge: true
-    })
-  }*/
+ 
 
   // Sign-out 
   SignOut() {
     return this.ngFireAuth.signOut().then(() => {
-      //localStorage.removeItem('user');
-      //localStorage.removeItem('perfil');
+      
       this.router.navigate(['/login']);
     })
   }
@@ -117,7 +90,7 @@ export class AuthenticationService {
   getUserPerfil(uid: string) {
     try{
       this.afStore.doc('perfiles/'+uid).valueChanges().subscribe(  result => {
-        //console.log('perfil', uid);
+        
         
         const userData: User ={
           birthDate: result['birthDtate'],
@@ -141,7 +114,5 @@ export class AuthenticationService {
   }
 
 }
-function thisLogin(arg0: any) {
-  throw new Error('Function not implemented.');
-}
+
 

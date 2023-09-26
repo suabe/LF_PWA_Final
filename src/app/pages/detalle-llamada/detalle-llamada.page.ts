@@ -38,20 +38,20 @@ export class DetalleLlamadaPage implements OnInit {
         this.call['duraRedon'] = Math.ceil(llamada.payload.data()['RecordingDuration']/60)
         this.fbstore.collection('perfiles').doc(this.call['speId']).snapshotChanges().subscribe( speak => {
           this.call['speaker'] = speak.payload.data()
-           console.log(this.call);
+           
         })
       })
       this._calls.complemento(param.id).subscribe(compe => {
         this.complemento =  compe
-        //console.log(this.complemento);
+        
       })
       
       this._calls.childCall(param.id).subscribe((child:any) => {
-        //console.log(child.calls[0]);
+        
         this.callChild = child.calls[0]
         this._calls.recordings(this.callChild['sid']).subscribe(grab => {
           this.recordings2 = grab          
-          //console.log(this.recordings['recordings'][0]['sid']);
+          
          
           this.url2 = "https://api.twilio.com/2010-04-01/Accounts/ACf88cd2fcc4ec6d7c79baaaf73bdf4c71/Recordings/"+this.recordings['recordings'][0]['sid']+".mp3"
         })
@@ -59,9 +59,7 @@ export class DetalleLlamadaPage implements OnInit {
 
       this._calls.recordings(param.id).subscribe(grab => {
         this.recordings = grab          
-        //console.log(this.recordings['recordings'][0]['sid']);
-       
-       
+        
         this.url = "https://api.twilio.com/2010-04-01/Accounts/ACf88cd2fcc4ec6d7c79baaaf73bdf4c71/Recordings/"+this.recordings['recordings'][0]['sid']+".mp3"
       })
 
@@ -70,8 +68,7 @@ export class DetalleLlamadaPage implements OnInit {
   }
 
   async calificaSpeker() {
-    console.log(this.call);
-    
+        
     const modal = await this.modal.create({
       component: CallRatePage,
       componentProps: this.call

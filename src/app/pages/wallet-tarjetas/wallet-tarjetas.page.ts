@@ -36,7 +36,7 @@ export class WalletTarjetasPage implements OnInit {
       this.wallet = data.map( result => {
         return result.payload.doc.data()
       })
-      // console.log(this.wallet);
+      
       
     } )
   }
@@ -52,8 +52,7 @@ export class WalletTarjetasPage implements OnInit {
     await modal.present();
 
     const {data} = await modal.onDidDismiss();
-    // console.log('Datos a guardar', data);
-    // window.location.reload();
+    
   }
 
   async borraTarjeta(card) {
@@ -69,7 +68,7 @@ export class WalletTarjetasPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (cancel) => {
-            console.log('Cancelado');
+           
             
           }
         },{
@@ -80,7 +79,7 @@ export class WalletTarjetasPage implements OnInit {
             await this.afStore.collection('plans', ref => ref.where('customer','==',card.customer).where('status','==','active')).get().subscribe(async plans => {
               if (!plans.empty) {
                 plans.forEach(doc => {
-                  console.log(doc.id, '=>', doc.data());
+                  
                   this.http.post('https://us-central1-pwa-lf.cloudfunctions.net/deletePlan',{
                     plan: doc.data()['plan']
                   }).subscribe( async (data:any) => {
@@ -109,7 +108,7 @@ export class WalletTarjetasPage implements OnInit {
                 this.toast.showToast('Tarjeta eliminada', 3500);
               })
             })
-            console.log(card);
+            
           }
         }
       ]

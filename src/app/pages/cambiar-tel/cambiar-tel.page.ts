@@ -54,7 +54,6 @@ export class CambiarTelPage implements OnInit {
   }
 
   async guardarTel() {
-    console.log(this.changeTelForm.value);
     this.loader = await this.loading.create({
       message: this.translate.instant('EDITPERFIL.LOADING'),
       mode: 'ios',
@@ -77,7 +76,7 @@ export class CambiarTelPage implements OnInit {
             {
               text: this.translate.instant('EDITPERFIL.ALERTEDITBTNOK'),
               handler: (blah) => {
-                console.log('Boton Ok');
+                
                 this.modalCtr.dismiss();
               }
             }
@@ -94,8 +93,7 @@ export class CambiarTelPage implements OnInit {
           buttons: [
             {
               text: this.translate.instant('EDITPERFIL.ALERTEDITBTNOK'),
-              handler: (blah) => {
-                console.log('Boton Ok');
+              handler: (blah) => {                
                 
               }
             }

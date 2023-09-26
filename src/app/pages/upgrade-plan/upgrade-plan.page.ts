@@ -30,8 +30,7 @@ export class UpgradePlanPage implements OnInit {
           layout: 'horizontal',
           label: 'subscribe'
         }, onInit: (data, actions) => { 
-          // Disable the buttons
-          //actions.disable();
+          
 
         
         }, onClick: () => {
@@ -47,11 +46,11 @@ export class UpgradePlanPage implements OnInit {
           this.addplan(data)
         }, onError: (err) => {
           // For example, redirect to a specific error page
-          console.log('errorPayPal =>', err);
+          
           
         }, onCancel: (data) => {
           // Show a cancel page, or return to cart
-          console.log('cancelo');
+          
           this.cancelado()
         }
       }).render('#paypal-button-container-P-8LD78680P96382408MOCRTYY'); // Renders the PayPal button
@@ -62,7 +61,7 @@ export class UpgradePlanPage implements OnInit {
   }
 
   async addplan(data) {
-    console.log('aqui =>', data);
+    
     let plans = {
       plan: data.subscriptionID,
       activa: true,

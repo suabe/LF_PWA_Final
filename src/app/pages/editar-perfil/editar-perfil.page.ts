@@ -25,8 +25,7 @@ export class EditarPerfilPage implements OnInit {
   }
   color = 'azul';
   countryCode = '';
-  registroForm = new FormGroup({
-    //email: new FormControl( '',[Validators.required,Validators.email]),
+  registroForm = new FormGroup({    
     name: new FormControl('',Validators.required),
     lastName: new FormControl('',Validators.required),
     gender: new FormControl('',Validators.required),
@@ -39,7 +38,6 @@ export class EditarPerfilPage implements OnInit {
     },[Validators.required,Validators.minLength(10),IonIntlTelInputValidators.phone])
   });
   improForm = new FormGroup({
-    //email: new FormControl( '',[Validators.required,Validators.email]),
     name: new FormControl('',Validators.required),
     lastName: new FormControl('',Validators.required),
     gender: new FormControl('',Validators.required),
@@ -81,16 +79,12 @@ export class EditarPerfilPage implements OnInit {
     if (this._user.dataUser.role === 'cliente') {
       this.color = 'naranja';
       
-    } 
-    
-    console.log(this._user.dataUser);
-    
+    }            
   }
 
   ngOnInit() {
     if (this._user.dataUser.role === 'cliente') {
       this.improForm.setValue({
-        //email: this._user.dataUser.email,
         name: this._user.dataUser.name,
         lastName: this._user.dataUser.lastName,
         gender: this._user.dataUser.gender,
@@ -111,7 +105,6 @@ export class EditarPerfilPage implements OnInit {
       })
     } else {
       this.registroForm.setValue({
-        //email: this._user.dataUser.email,
         name: this._user.dataUser.name,
         lastName: this._user.dataUser.lastName,
         gender: this._user.dataUser.gender,
@@ -144,13 +137,12 @@ export class EditarPerfilPage implements OnInit {
           text: this.translate.instant('EDITPERFIL.ALERTCANCEL'),
           role: 'cancel',
           handler: data => {
-            console.log('Cancel clicked');
+            
           }
         },
         {
           text: this.translate.instant('EDITPERFIL.ALERTSAVE'),
           handler: async data => {
-            console.log(data);
             let cUser = (await this.auth.currentUser).email
             this.loader = await this.loading.create({
               message: this.translate.instant('EDITPERFIL.LOADING'),
@@ -172,7 +164,7 @@ export class EditarPerfilPage implements OnInit {
                   country: this.improForm.get('phone').value['isoCode'],
                   timezone: this.improForm.get('timezone').value
                 };
-                console.log(user);
+                
                 await this.fbstore.collection('perfiles').doc(this._user.userID).update(user).then(
                   async success => {
                     let alert = await this.alerCtrl.create({
@@ -184,8 +176,7 @@ export class EditarPerfilPage implements OnInit {
                         {
                           text: this.translate.instant('EDITPERFIL.ALERTEDITBTNOK'),
                           handler: (blah) => {
-                            console.log('Boton Ok');
-                            
+                                                        
                           }
                         }
                       ]
@@ -202,8 +193,7 @@ export class EditarPerfilPage implements OnInit {
                         {
                           text: this.translate.instant('EDITPERFIL.ALERTEDITBTNOK'),
                           handler: (blah) => {
-                            console.log('Boton Ok');
-                            
+                                                        
                           }
                         }
                       ]
@@ -222,8 +212,7 @@ export class EditarPerfilPage implements OnInit {
                     {
                       text: this.translate.instant('EDITPERFIL.ALERTEDITBTNOK'),
                       handler: (blah) => {
-                        console.log('Boton Ok');
-                        
+                                                
                       }
                     }
                   ]
@@ -258,7 +247,7 @@ export class EditarPerfilPage implements OnInit {
           text: this.translate.instant('EDITPERFIL.ALERTCANCEL'),
           role: 'cancel',
           handler: data => {
-            console.log('Cancel clicked');
+            
           }
         },
         {
@@ -285,7 +274,7 @@ export class EditarPerfilPage implements OnInit {
                   code: this.registroForm.get('phone').value['internationalNumber'],
                   country: this.registroForm.get('phone').value['isoCode']
                 };
-                console.log(user);
+                
                 await this.fbstore.collection('perfiles').doc(this._user.userID).update(user).then(
                   async success => {
                     let alert = await this.alerCtrl.create({
@@ -297,8 +286,7 @@ export class EditarPerfilPage implements OnInit {
                         {
                           text: this.translate.instant('EDITPERFIL.ALERTEDITBTNOK'),
                           handler: (blah) => {
-                            console.log('Boton Ok');
-                            
+                                                        
                           }
                         }
                       ]
@@ -315,8 +303,7 @@ export class EditarPerfilPage implements OnInit {
                         {
                           text: this.translate.instant('EDITPERFIL.ALERTEDITBTNOK'),
                           handler: (blah) => {
-                            console.log('Boton Ok');
-                            
+                                                        
                           }
                         }
                       ]
@@ -335,8 +322,7 @@ export class EditarPerfilPage implements OnInit {
                     {
                       text: this.translate.instant('EDITPERFIL.ALERTEDITBTNOK'),
                       handler: (blah) => {
-                        console.log('Boton Ok');
-                        
+                                                
                       }
                     }
                   ]
@@ -359,26 +345,24 @@ export class EditarPerfilPage implements OnInit {
   }
 
   telInputObject(obj) {
-    console.log('telInputObject',obj);
-    // obj.intlTelInput('setCountry', 'mx');
+      
   }
   onCountryChange(obj) {
-    console.log('onCountryChange',obj);
-   //this.countryCode = obj.dialCode
+   
   }
   hasError(obj) {
-    //console.log('hasError',obj);
+    
     if (obj) {
-      console.log('sin error');
+      
       this.registroForm.controls['phone'].setErrors(null)
     } else {
-      console.log('hay error');
+      
       this.registroForm.controls['phone'].setErrors({'incorrect': true})
     }
   }
 
   getNumber(obj) {
-    console.log('getNumber',obj);
+    
     this.countryCode = obj
   }
 

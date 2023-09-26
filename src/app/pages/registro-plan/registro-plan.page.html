@@ -44,8 +44,7 @@
             <td>
               <ion-item color="light">
                 <ion-select  placeholder="{{'ADDPLANS.SELECT' |  translate}}" mode="ios" formControlName="plan" [value]="planSelect" >
-                  <!-- <ion-select-option value="price_1IiLcPFjLGC5FmHqDAZZskyw">Fluency 10/3</ion-select-option>
-                  <ion-select-option value="price_1IiLr3FjLGC5FmHq8Z2z8pnq">+ Fluency</ion-select-option> -->
+                  
                   <ion-select-option *ngFor="let precio of precios" [value]="precio.price">{{precio.type}} {{precio.mount | currency:precio.currency:false}}</ion-select-option>
                 </ion-select>
               </ion-item>

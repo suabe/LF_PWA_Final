@@ -54,14 +54,9 @@ export class MenuComponent implements OnInit {
     await popover.present();
     const {data} = await popover.onWillDismiss();
     if (data.salir) {
-      console.log('salir');
-      //this.menu.close();
-      // await this.fbauth.signOut().then(() => {
-      //   this.ngroute.navigate(['/login'], { replaceUrl: true });
-      // });
+      
       this.doLogout()
     }
-    //console.log('Padre:', data);
   }
 
   async doLogout() {

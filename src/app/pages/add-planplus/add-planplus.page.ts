@@ -46,7 +46,7 @@ export class AddPlanplusPage implements OnInit {
 
           // Enable or disable the button when it is checked or unchecked
           this.addplanForm.valueChanges.subscribe(valor => {
-            console.log('es valido',this.addplanForm.valid);
+            
                         
             if (this.addplanForm.valid) {
               actions.enable();
@@ -69,11 +69,11 @@ export class AddPlanplusPage implements OnInit {
           this.addplan(data)
         }, onError: (err) => {
           // For example, redirect to a specific error page
-          console.log('errorPayPal =>', err);
+          
           
         }, onCancel: (data) => {
           // Show a cancel page, or return to cart
-          console.log('cancelo');
+          
           this.cancelado()
         }
       }).render('#paypal-button-container-P-8LD78680P96382408MOCRTYY'); // Renders the PayPal button
@@ -88,7 +88,7 @@ export class AddPlanplusPage implements OnInit {
   }
 
   async addplan(data) {
-    console.log('aqui =>', data);
+    
     let plans = {
       plan: data.subscriptionID,
       activa: true,
@@ -144,14 +144,14 @@ export class AddPlanplusPage implements OnInit {
             
           //this.addPlans.get('planes.'+plan.idioma+'.ln').disable()
           //this.filtrados =this.languages.filter( lang => lang.ln != plan.idioma )
-          //console.log(this.filtrados);
+          
           
         });
-        console.log('planes', this.planes);
+        
         
       } )      
     } catch (error) {
-      console.log('erro');
+      
       
     }
   }

@@ -13,8 +13,7 @@ export class CallRateImproverPage implements OnInit {
   calificaForm = new FormGroup({
     fluency: new FormControl (null, [Validators.required]),
     pronunciation: new FormControl (null, [Validators.required]),
-    grammar: new FormControl (null, [Validators.required]),
-    //avg: new FormControl (null, [Validators.required])
+    grammar: new FormControl (null, [Validators.required])
   });
   @Input() sid;
   fl
@@ -41,7 +40,7 @@ export class CallRateImproverPage implements OnInit {
     try {
       await this.fbstore.collection('calls').doc(this.sid).update({calImp: califica,calificoImpr: true}).then(data=>{
         this.modalCtrl.dismiss();
-        //console.log('exito?');
+        
         
       })  
     } catch (error) {
@@ -51,7 +50,7 @@ export class CallRateImproverPage implements OnInit {
       
     }
     
-    //console.log(this.calificaForm.value);
+    
     
     
   }
@@ -62,25 +61,25 @@ export class CallRateImproverPage implements OnInit {
 
   changefl(fl) {
     this.fl = fl
-    //console.log(fl);
+    
     this.calculateavg()
   }
 
   changepr(pr) {
     this.pr = pr
-    //console.log(pr);
+    
     this.calculateavg()
   }
 
   changegr(gr) {
     this.gr = gr
-    //console.log(gr);
+    
     this.calculateavg()
   }
 
   calculateavg() {
     this.avg = (this.fl+this.gr+this.pr)/3
-    //console.log(this.avg);
+    
   }
 
 }
