@@ -16,7 +16,7 @@ Este proyecto ha sido generado con [Ionic Framework](https://github.com/ionic-te
 ### NPM Package
 Si no se tiene instalado Ionic, lo puede hacer desde: [Instalar Ionic](https://ionicframework.com/docs/intro/cli)
 
-Unaves Ionic y sus dependencias esten instalados, se tienen que reconstruir los paquetes de Node, mediante `NPM`.
+Una ves Ionic y sus dependencias esten instalados, se tienen que reconstruir los paquetes de Node, mediante `NPM`.
 
 ```bash
 npm install
@@ -31,14 +31,14 @@ ionic serve
 ## Generar Componentes
 Para crear un componente ejecuta `ionic g component component-name`. Se puede usar para `ionic g page|service|guard|interface|module`.
 
-## Build(Produccion)
+# Build(Produccion)
 Para generar el build de produccion vasta con ejecutar.
 
 ```bash
 ionic build --prod --service-worker
 ```
 
-## Publicar
+# Publicar
 Para publidar la PWA, hay que subir por FTP el contenido de la carpeta `www`.
 
 ## Observaciones
